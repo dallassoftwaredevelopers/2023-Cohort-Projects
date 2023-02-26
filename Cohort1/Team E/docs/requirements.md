@@ -23,6 +23,8 @@ Track that schedule
 
 Reminders
 
+Confirmation of medication taken for the day
+
 To submit to dev branch - Vinod
 
 Make a change - Ricardo
