@@ -1,10 +1,6 @@
 # Medication Tracker for patients at-risk of over-medicating or forgetting to take medication
 
 
-Frontend
-Backend
-Database
-
 
 # Part 1 User
 
@@ -28,4 +24,13 @@ Track that schedule
 
 
 Reminders
+
+
+
+
+
+Frontend
+Backend
+Database
+
 
