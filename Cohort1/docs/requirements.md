@@ -4,18 +4,19 @@
 
 # Part 1 User
 
-Login
-Register for an account
-
+- Login
+- Register for an account
 
 
 # Part 2 Medication
 
-## Add medication/prescription
+## Add medication names
+- Add one or more medication
 
 ## Add medication doses 
 
 - No of times a day
+- Amount (how much in quantity)
 - By what time you should take it
 
 
