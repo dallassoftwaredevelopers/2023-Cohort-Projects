@@ -19,15 +19,14 @@
 
 # Part 3 Tracker
 
-Track that schedule
+- Track that schedule
+- send reminders as on screen pop up alerts
 
-Reminders
 
 Confirmation of medication taken for the day
 
 To submit to dev branch - Vinod
 
-Make a change - Ricardo
 
 Frontend
 Backend
