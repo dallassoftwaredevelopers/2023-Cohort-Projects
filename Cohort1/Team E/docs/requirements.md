@@ -23,7 +23,7 @@ Track that schedule
 
 Reminders
 
-To submit to dev branch
+To submit to dev branch - Vinod
 
 Make a change - Ricardo
 
