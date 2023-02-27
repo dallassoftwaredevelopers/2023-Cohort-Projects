@@ -10,8 +10,8 @@ Backend -
 
 
 Frontend - 
-1. The project is built with Vite and React v18 is installed 
-2. React Router is installed and imported in the App.js file 
+1. The project is built with Vite and React v18
+2. React Router is installed and imported in the App.js file but no other libraries have been installed yet
 3. `cd frontend` and run `npm install`
 4. `npm run dev` to run the frontend
 5. Frontend has a proxy defined to bypass CORS errors during development
