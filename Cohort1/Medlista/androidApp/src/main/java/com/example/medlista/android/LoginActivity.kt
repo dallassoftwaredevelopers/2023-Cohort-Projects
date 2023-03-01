@@ -1,23 +1,18 @@
 package com.example.medlista.android
 
-import android.media.Image
+import android.inputmethodservice.Keyboard
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -28,11 +23,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.medlista.android.ui.theme.MedlistaTheme
+import com.example.medlista.android.ui.theme.darkgray
+import com.example.medlista.android.ui.theme.primary
 
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +52,14 @@ class LoginActivity : ComponentActivity() {
 
 @Composable
 fun Login() {
+
+    var username by remember {
+        mutableStateOf("")
+    }
+    var password by remember {
+        mutableStateOf("")
+    }
+
     Box(modifier = Modifier.fillMaxSize()) {
         androidx.compose.foundation.Image(
             painter = painterResource(id = R.drawable.pills),
@@ -67,7 +73,7 @@ fun Login() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(28.dp)
+                .padding(16.dp)
                 .alpha(0.5f)
                 .clip(
                     CutCornerShape(
@@ -84,29 +90,87 @@ fun Login() {
             Modifier
                 .fillMaxSize()
                 .padding(48.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceAround
         ) {
             LoginHeader()
-            LoginFields()
-            LoginFooter()
+            LoginFields(username, password,
+                onUsernameChange = {
+                    username = it
+                }, onPasswordChange = {
+                    password = it
+                }, onForgotPasswordClick = {
+
+                })
+
+            LoginFooter(
+                onSignInClick = {},
+                onSignUpClick = {}
+            )
         }
     }
 }
 
 @Composable
 fun LoginHeader() {
-    Text(text = "Welcome Back", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold)
-    Text(text = "Sign in to continue", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = "Welcome Back", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold, color = primary)
+        Text(text = "Sign in to continue", fontSize = 18.sp, fontWeight = FontWeight.SemiBold, color = darkgray)
+    }
 }
 
 @Composable
-fun LoginFields() {
-
+fun ColumnScope.LoginFields(
+    username: String,
+    password: String,
+    onUsernameChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onForgotPasswordClick: () -> Unit
+) {
+    Column() {
+        InputField(
+            value = username,
+            label = "Username",
+            placeholder = "Enter your email address",
+            onValueChange = onUsernameChange,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
+            leadingIcon = {
+                Icon(Icons.Default.Email, contentDescription = "Email")
+            }
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        InputField(
+            value = password,
+            label = "Password",
+            placeholder = "Enter your password",
+            onValueChange = onPasswordChange,
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Go),
+            leadingIcon = {
+                Icon(Icons.Default.Lock, contentDescription = "Password")
+            }
+        )
+        TextButton(onClick = onForgotPasswordClick, modifier = Modifier.align(Alignment.End)) {
+            Text(text = "Forgot Password?")
+        }
+    }
 }
 
 @Composable
-fun LoginFooter() {
+fun LoginFooter(
+    onSignInClick: () -> Unit,
+    onSignUpClick: () -> Unit
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Button(onClick = onSignInClick, modifier = Modifier.fillMaxWidth()) {
+            Text(text = "Sign In")
+        }
+        TextButton(onClick = onSignUpClick) {
+            Text(text = "Don't have an account, click here")
+        }
+        Spacer(modifier = Modifier.padding(bottom = 50.dp))
 
+    }
 }
 
 // making a reusable component so we can use it for any field
@@ -117,7 +181,7 @@ fun InputField(
     placeholder: String,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    leadingIcon : @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     onValueChange: (String) -> Unit
 ) {
@@ -134,14 +198,9 @@ fun InputField(
         keyboardOptions = keyboardOptions,
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon
-        )
+    )
 }
 
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
 
 @Preview(showBackground = true)
 @Composable
