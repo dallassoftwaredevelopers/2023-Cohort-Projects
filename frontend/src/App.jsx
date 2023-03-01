@@ -8,26 +8,19 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+     <Routes>
+      <Route path="/" element={<h1>Home</h1>} />
+      <Route path="/login" element={<h1>login</h1>} />
+      <Route path="/signup" element={<h1>signup</h1>} />
+      <Route path="/search" element={<h1>Search</h1>} />
+      <Route path="/add" element={<h1>Add recipe</h1>} />
+      <Route path="/recipe/:recipeId" element={<h1>recipe page</h1>} />
+      <Route path="/dashboard" element={<h1>dashboard</h1>} />
+      <Route path="/*" element={<h1>404 no page</h1>} />
+
+      
+
+     </Routes>
     </div>
   )
 }
