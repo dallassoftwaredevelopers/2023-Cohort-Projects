@@ -2,10 +2,7 @@ import React from "react";
 
 const SignupButton = () => {
   return (
-    <div>
-
-    </div>
-
+    <button>SignUp</button>
   )
 }
 

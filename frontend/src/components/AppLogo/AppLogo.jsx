@@ -1,12 +1,9 @@
 import React from "react";
+import Spoon from '../../assets/Spoon.png';
 
 const AppLogo = () => {
   return (
-    <div>
-      <p>
-        LOGO HERE
-      </p>
-    </div>
+    <img src={Spoon} alt="spoon logo" style={{ width: '50px', }} />
   )
 }
 
