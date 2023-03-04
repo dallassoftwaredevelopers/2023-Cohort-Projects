@@ -6,6 +6,7 @@ export default function Signup() {
         password = "",
         confirmPassword = "",
         email = "";
+    let error = "";
 
     let validEmail = false;
     let passwordsMatch = false;
@@ -14,15 +15,34 @@ export default function Signup() {
     );
 
     async function handleSignUp() {
-        console.log(username, password, email, confirmPassword);
-        console.log("valid email? ", validEmail);
-        console.log("passwords match ? ", passwordsMatch);
+        if (!validEmail && email) {
+            error = "email format is invalid";
+            console.log("email invalid");
+            return;
+        }
+        if (password !== confirmPassword) {
+            error = "passwords do not match";
+            console.log("passwords dont match");
+            return;
+        }
 
-        // const result = await fetch(API_URL, {
-        //     method: "post",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify({ TEST: "OBJECT" }),
-        // });
+        console.log(
+            "sending post ",
+            email,
+            username,
+            password,
+            confirmPassword
+        );
+        const result = await fetch("/api/signup", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email,
+                username,
+                password,
+                confirmPassword,
+            }),
+        });
     }
 
     return (
