@@ -75,7 +75,7 @@ class RealmRepo {
         return flowOf(appService.currentUser != null)
     }
 
-    suspend fun saveUserInfo(name: String, orgName: String, phoneNumber: String) {
+    suspend fun saveUserInfo(name: String) {
         withContext(Dispatchers.Default) {
             if (appService.currentUser != null) {
                 val userId = appService.currentUser!!.id

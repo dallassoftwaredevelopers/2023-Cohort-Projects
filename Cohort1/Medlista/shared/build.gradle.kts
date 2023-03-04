@@ -21,7 +21,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-                implementation("io.realm.kotlin:library-sync:1.4.0")
+                implementation("io.realm.kotlin:library-sync:1.6.0")
             }
         }
         val commonTest by getting {
@@ -57,7 +57,7 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
     }
 }
 dependencies {
