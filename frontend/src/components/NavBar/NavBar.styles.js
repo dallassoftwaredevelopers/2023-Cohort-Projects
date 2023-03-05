@@ -1,3 +1,11 @@
+import styled from 'styled-components';
+
+export const Nav = styled.nav`
+
+display: flex;
+justify-content: space-between;
+align-items: center;
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -7,13 +15,6 @@
 
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
 }
 
 nav .navigation {
@@ -41,3 +42,6 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+`;
+
