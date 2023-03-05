@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { StyledSignup } from "./Signup.styles";
 
 export default function Signup() {
-    let username = "",
-        password = "",
-        confirmPassword = "",
-        email = "";
+    const usernameRef = useRef("");
+    const passwordRef = useRef("");
+    const confirmPasswordRef = useRef("");
+    const emailRef = useRef("");
+
+    let username = usernameRef.current.value || "",
+        password = passwordRef.current.value || "",
+        confirmPassword = confirmPasswordRef.current.value || "",
+        email = emailRef.current.value || "";
 
     let validEmail = false;
     let passwordsMatch = false;
@@ -81,6 +86,7 @@ export default function Signup() {
                     </div>
                     <div>
                         <input
+                            ref={emailRef}
                             onChange={(event) => {
                                 email = event.target.value;
                                 validEmail = emailRegex.test(email);
@@ -93,6 +99,7 @@ export default function Signup() {
 
                     <div>
                         <input
+                            ref={usernameRef}
                             onChange={(event) => {
                                 username = event.target.value;
                             }}
@@ -105,6 +112,7 @@ export default function Signup() {
 
                     <div>
                         <input
+                            ref={passwordRef}
                             onChange={(event) => {
                                 password = event.target.value;
                                 passwordsMatch = confirmPassword === password;
@@ -118,6 +126,7 @@ export default function Signup() {
 
                     <div>
                         <input
+                            ref={confirmPasswordRef}
                             onChange={(event) => {
                                 confirmPassword = event.target.value;
                                 passwordsMatch = confirmPassword === password;
