@@ -22,6 +22,13 @@ export default function Signup() {
         setErrorDesc(error);
         setErrorFlag(false);
 
+        if (!username) {
+            error = "username cannot be blank";
+            setErrorFlag(true);
+            setErrorDesc(error);
+            return;
+        }
+
         if (!validEmail && email) {
             error = "email format is invalid";
             console.log("email invalid");
