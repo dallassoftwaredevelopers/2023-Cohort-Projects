@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledSignup = styled.section`
     background-color: gray;
     width: max(50vw, 400px);
+    /* width: 100%; */
     padding: 10%;
     border-radius: 20px;
 
@@ -26,8 +27,8 @@ export const StyledSignup = styled.section`
     }
 
     & form div {
-        width: 80%;
-        border: solid black 1px;
+        width: 90%;
+        /* border: solid black 1px; */
     }
 
     & form input {
@@ -61,10 +62,18 @@ export const StyledSignup = styled.section`
         background-color: #095509;
     }
 
-    & .submit-btn {
+    & .submit-btn button {
         position: absolute;
-        bottom: -5%;
+        bottom: -6%;
         right: 15%;
+        font-size: 1.2rem;
+        padding: 2%;
+    }
+    & .submit-btn button {
+        background: green;
+    }
+    & .submit-btn button:hover {
+        background: #095509;
     }
 
     & .goto-btn {
@@ -72,5 +81,9 @@ export const StyledSignup = styled.section`
         width: 40%;
         margin-top: 5%;
         font-size: 1rem;
+    }
+
+    & .error-container {
+        background: red;
     }
 `;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyledSignup } from "./Signup.styles";
 
 export default function Signup() {
@@ -6,23 +6,39 @@ export default function Signup() {
         password = "",
         confirmPassword = "",
         email = "";
-    let error = "";
 
     let validEmail = false;
     let passwordsMatch = false;
+
     const emailRegex = new RegExp(
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     );
 
+    const [errorFlag, setErrorFlag] = useState(false);
+    const [errorDesc, setErrorDesc] = useState("no error");
+
     async function handleSignUp() {
+        let error = "no error";
+        setErrorDesc(error);
+        setErrorFlag(false);
+
         if (!validEmail && email) {
             error = "email format is invalid";
             console.log("email invalid");
+            setErrorFlag(true);
+            setErrorDesc(error);
             return;
         }
-        if (password !== confirmPassword) {
-            error = "passwords do not match";
-            console.log("passwords dont match");
+        if (password !== confirmPassword || (!password && !confirmPassword)) {
+            if (password !== confirmPassword) {
+                error = "passwords do not match";
+            }
+            if (!password && !confirmPassword) {
+                error = "password or confirmPassword cannot be blank";
+            }
+            console.log(error, password, confirmPassword);
+            setErrorFlag(true);
+            setErrorDesc(error);
             return;
         }
 
@@ -106,15 +122,25 @@ export default function Signup() {
                         />
                     </div>
 
-                    <div className="submit-btn btn">
-                        <span>submit</span>
+                    <div className="submit-btn">
+                        <button>Signup</button>
                     </div>
                 </form>
             </section>
 
             <div className="btn goto-btn">
-                <a href="">Already signed up login here</a>
+                <a href="">
+                    Already signed<br></br>up login here
+                </a>
             </div>
+            {errorFlag && (
+                <section className="error-container">
+                    <div>
+                        <h4>Please correct following errors</h4>
+                        <span>{errorDesc}</span>
+                    </div>
+                </section>
+            )}
         </StyledSignup>
     );
 }
