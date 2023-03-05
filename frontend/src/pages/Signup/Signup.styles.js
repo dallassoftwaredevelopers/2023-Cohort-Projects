@@ -5,35 +5,72 @@ export const StyledSignup = styled.section`
     width: max(50vw, 400px);
     padding: 10%;
     border-radius: 20px;
+
     & a {
         text-decoration: none;
         color: inherit;
     }
     & h2 {
-        background-color: red;
         color: black;
+        width: 90%;
+        margin: 0 auto;
     }
     & form {
+        position: relative;
         display: flex;
         flex-direction: column;
+        align-items: center;
+        border: solid black 2px;
+        padding: 10%;
+        border-radius: 20px;
     }
-    & input {
+
+    & form div {
+        width: 80%;
+        border: solid black 1px;
+    }
+
+    & form input {
         text-align: center;
         margin: 2% 0;
         font-size: 1.5rem;
         border-radius: 10px;
+        width: 90%;
+    }
+
+    & form div.title {
+        border-color: red;
+        position: absolute;
+        top: -8%;
+        background-color: green;
+        border-radius: 5px;
+        padding: 1%;
     }
 
     & .btn {
         padding: 10px;
-        background-color: green;
         color: #000000;
         width: 25%;
+        border: 2px solid green;
+        background-color: green;
         border-radius: 20px;
         font-size: 10px;
     }
     & .btn:hover {
         cursor: pointer;
         background-color: #095509;
+    }
+
+    & .submit-btn {
+        position: absolute;
+        bottom: -5%;
+        right: 15%;
+    }
+
+    & .goto-btn {
+        padding: 0;
+        width: 40%;
+        margin-top: 5%;
+        font-size: 1rem;
     }
 `;

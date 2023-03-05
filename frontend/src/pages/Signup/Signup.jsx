@@ -47,70 +47,72 @@ export default function Signup() {
 
     return (
         <StyledSignup>
-            <div className="title">
-                <h2>Welcome to the app</h2>
-            </div>
-            <form
-                action="#"
-                onSubmit={() => {
-                    handleSignUp();
-                }}>
-                <div>
-                    <input
-                        onChange={(event) => {
-                            email = event.target.value;
-                            validEmail = emailRegex.test(email);
-                        }}
-                        id="email"
-                        type="text"
-                        placeholder="Email@email.com"
-                    />
-                </div>
+            <section className="form-sect">
+                <form
+                    action="#"
+                    onSubmit={() => {
+                        handleSignUp();
+                    }}>
+                    <div className="title">
+                        <h2>Welcome to the app</h2>
+                    </div>
+                    <div>
+                        <input
+                            onChange={(event) => {
+                                email = event.target.value;
+                                validEmail = emailRegex.test(email);
+                            }}
+                            id="email"
+                            type="text"
+                            placeholder="Email@email.com"
+                        />
+                    </div>
 
-                <div>
-                    <input
-                        onChange={(event) => {
-                            username = event.target.value;
-                        }}
-                        id="username"
-                        type="text"
-                        placeholder="Username"
-                        required
-                    />
-                </div>
+                    <div>
+                        <input
+                            onChange={(event) => {
+                                username = event.target.value;
+                            }}
+                            id="username"
+                            type="text"
+                            placeholder="Username"
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <input
-                        onChange={(event) => {
-                            password = event.target.value;
-                            passwordsMatch = confirmPassword === password;
-                        }}
-                        id="password"
-                        type="password"
-                        placeholder="Password"
-                        required
-                    />
-                </div>
+                    <div>
+                        <input
+                            onChange={(event) => {
+                                password = event.target.value;
+                                passwordsMatch = confirmPassword === password;
+                            }}
+                            id="password"
+                            type="password"
+                            placeholder="Password"
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <input
-                        onChange={(event) => {
-                            confirmPassword = event.target.value;
-                            passwordsMatch = confirmPassword === password;
-                        }}
-                        id="confirmpassword"
-                        type="password"
-                        placeholder="Confirm Password"
-                        required
-                    />
-                </div>
+                    <div>
+                        <input
+                            onChange={(event) => {
+                                confirmPassword = event.target.value;
+                                passwordsMatch = confirmPassword === password;
+                            }}
+                            id="confirmpassword"
+                            type="password"
+                            placeholder="Confirm Password"
+                            required
+                        />
+                    </div>
 
-                <div className="submit-btn">
-                    <input type="submit" />
-                </div>
-            </form>
+                    <div className="submit-btn btn">
+                        <span>submit</span>
+                    </div>
+                </form>
+            </section>
 
-            <div className="btn">
+            <div className="btn goto-btn">
                 <a href="">Already signed up login here</a>
             </div>
         </StyledSignup>
