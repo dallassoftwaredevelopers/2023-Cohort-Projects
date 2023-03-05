@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const StyledSignup = styled.section`
     background-color: gray;
-    width: max(50vw, 400px);
-    /* width: 100%; */
+    width: max(50%, 400px);
     padding: 10%;
     border-radius: 20px;
 
@@ -15,6 +14,9 @@ export const StyledSignup = styled.section`
         color: black;
         width: 90%;
         margin: 0 auto;
+    }
+    & .form-sect {
+        width: 100%;
     }
     & form {
         position: relative;
