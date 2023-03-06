@@ -1,28 +1,56 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { StyledSignup } from "./Signup.styles";
 
 export default function Signup() {
-    let username = "",
-        password = "",
-        confirmPassword = "",
-        email = "";
-    let error = "";
+    const usernameRef = useRef("");
+    const passwordRef = useRef("");
+    const confirmPasswordRef = useRef("");
+    const emailRef = useRef("");
+
+    let username = usernameRef.current.value,
+        password = passwordRef.current.value,
+        confirmPassword = confirmPasswordRef.current.value,
+        email = emailRef.current.value;
 
     let validEmail = false;
     let passwordsMatch = false;
+
     const emailRegex = new RegExp(
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     );
 
+    const [errorFlag, setErrorFlag] = useState(false);
+    const [errorDesc, setErrorDesc] = useState("no error");
+
     async function handleSignUp() {
+        let error = "no error";
+        setErrorDesc(error);
+        setErrorFlag(false);
+
+        if (!username) {
+            error = "username cannot be blank";
+            setErrorFlag(true);
+            setErrorDesc(error);
+            return;
+        }
+
         if (!validEmail && email) {
             error = "email format is invalid";
             console.log("email invalid");
+            setErrorFlag(true);
+            setErrorDesc(error);
             return;
         }
-        if (password !== confirmPassword) {
-            error = "passwords do not match";
-            console.log("passwords dont match");
+        if (password !== confirmPassword || (!password && !confirmPassword)) {
+            if (password !== confirmPassword) {
+                error = "passwords do not match";
+            }
+            if (!password && !confirmPassword) {
+                error = "password or confirmPassword cannot be blank";
+            }
+            console.log(error, password, confirmPassword);
+            setErrorFlag(true);
+            setErrorDesc(error);
             return;
         }
 
@@ -47,72 +75,88 @@ export default function Signup() {
 
     return (
         <StyledSignup>
-            <div className="title">
-                <h2>Welcome to the app</h2>
+            <section className="form-sect">
+                <form
+                    action="#"
+                    onSubmit={() => {
+                        handleSignUp();
+                    }}>
+                    <div className="title">
+                        <h2>Welcome to the app</h2>
+                    </div>
+                    <div>
+                        <input
+                            ref={emailRef}
+                            onChange={(event) => {
+                                email = event.target.value;
+                                validEmail = emailRegex.test(email);
+                            }}
+                            id="email"
+                            type="text"
+                            placeholder="Email@email.com"
+                        />
+                    </div>
+
+                    <div>
+                        <input
+                            ref={usernameRef}
+                            onChange={(event) => {
+                                username = event.target.value;
+                            }}
+                            id="username"
+                            type="text"
+                            placeholder="Username"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <input
+                            ref={passwordRef}
+                            onChange={(event) => {
+                                password = event.target.value;
+                                passwordsMatch = confirmPassword === password;
+                            }}
+                            id="password"
+                            type="password"
+                            placeholder="Password"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <input
+                            ref={confirmPasswordRef}
+                            onChange={(event) => {
+                                confirmPassword = event.target.value;
+                                passwordsMatch = confirmPassword === password;
+                            }}
+                            id="confirmpassword"
+                            type="password"
+                            placeholder="Confirm Password"
+                            required
+                        />
+                    </div>
+
+                    <div className="submit-btn">
+                        <button>Signup</button>
+                    </div>
+                </form>
+            </section>
+
+            <div className="btn goto-btn">
+                <a href="">
+                    Already signed<br></br>up login here
+                </a>
             </div>
-            <form
-                action="#"
-                onSubmit={() => {
-                    handleSignUp();
-                }}>
-                <div>
-                    <input
-                        onChange={(event) => {
-                            email = event.target.value;
-                            validEmail = emailRegex.test(email);
-                        }}
-                        id="email"
-                        type="text"
-                        placeholder="Email@email.com"
-                    />
-                </div>
-
-                <div>
-                    <input
-                        onChange={(event) => {
-                            username = event.target.value;
-                        }}
-                        id="username"
-                        type="text"
-                        placeholder="Username"
-                        required
-                    />
-                </div>
-
-                <div>
-                    <input
-                        onChange={(event) => {
-                            password = event.target.value;
-                            passwordsMatch = confirmPassword === password;
-                        }}
-                        id="password"
-                        type="password"
-                        placeholder="Password"
-                        required
-                    />
-                </div>
-
-                <div>
-                    <input
-                        onChange={(event) => {
-                            confirmPassword = event.target.value;
-                            passwordsMatch = confirmPassword === password;
-                        }}
-                        id="confirmpassword"
-                        type="password"
-                        placeholder="Confirm Password"
-                        required
-                    />
-                </div>
-
-                <div className="submit-btn">
-                    <input type="submit" />
-                </div>
-            </form>
-
-            <div className="btn">
-                <a href="">Already signed up login here</a>
-            </div>
+            {errorFlag && (
+                <section className="error-container">
+                    <div>
+                        <h4>Please correct following errors</h4>
+                        <span>{errorDesc}</span>
+                    </div>
+                </section>
+            )}
         </StyledSignup>
     );
 }
