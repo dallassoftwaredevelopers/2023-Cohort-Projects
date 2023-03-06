@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("io.realm.kotlin")
 }
 
 kotlin {
@@ -17,7 +18,12 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+                implementation("io.realm.kotlin:library-sync:1.6.0")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -48,9 +54,12 @@ kotlin {
 
 android {
     namespace = "com.example.medlista"
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
     }
+}
+dependencies {
+    implementation("androidx.core:core-ktx:+")
 }

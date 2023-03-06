@@ -1,6 +1,5 @@
 package com.example.medlista.android
 
-import android.inputmethodservice.Keyboard
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -42,7 +41,7 @@ class LoginActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Login()
+                    LoginView()
                 }
             }
         }
@@ -51,7 +50,7 @@ class LoginActivity : ComponentActivity() {
 
 
 @Composable
-fun Login() {
+fun LoginView() {
 
     var username by remember {
         mutableStateOf("")
@@ -206,6 +205,6 @@ fun InputField(
 @Composable
 fun DefaultPreview2() {
     MedlistaTheme {
-        Login()
+        LoginView()
     }
 }
