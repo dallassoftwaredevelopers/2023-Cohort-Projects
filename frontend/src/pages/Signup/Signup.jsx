@@ -7,10 +7,10 @@ export default function Signup() {
     const confirmPasswordRef = useRef("");
     const emailRef = useRef("");
 
-    let username = usernameRef.current.value || "",
-        password = passwordRef.current.value || "",
-        confirmPassword = confirmPasswordRef.current.value || "",
-        email = emailRef.current.value || "";
+    let username = usernameRef.current.value,
+        password = passwordRef.current.value,
+        confirmPassword = confirmPasswordRef.current.value,
+        email = emailRef.current.value;
 
     let validEmail = false;
     let passwordsMatch = false;
