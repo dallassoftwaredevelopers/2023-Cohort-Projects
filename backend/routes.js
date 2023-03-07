@@ -24,7 +24,6 @@ router.get("/searchbyingredient", async (req, res) => {
     //get data from api
     try {
         const response = await API.searchRecipeByIngredients(ingredientsList);
-        const recipes = await response.json();
         res.status(200).json(recipes);
     } catch (error) {
         res.status(400).json({
