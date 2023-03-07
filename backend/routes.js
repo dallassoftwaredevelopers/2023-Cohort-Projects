@@ -2,15 +2,13 @@ const express = require('express');
 const router = express.Router();
 const User = require('./models/userModel.js');
 const { createUser,login } = require('./controllers/userController.js');
-const bcrypt = require('bcrypt');
-const saltRounds = 12;
 
 
-router.post('/newUser', async (req, res) => {
+
+router.post('/signup', async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    const encryptedPassword = await bcrypt.hash(password, saltRounds);
-    const newUser = new User({ username, email, password: encryptedPassword });
+    const newUser = new User({ username, email, password });
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
   } catch (error) {
