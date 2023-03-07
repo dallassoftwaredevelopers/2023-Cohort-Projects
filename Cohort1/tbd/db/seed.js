@@ -1,5 +1,7 @@
-const mongoose = require("./connection");
-const Recipe = require("./recipes");
+const mongoose = require("../server/models/connection");
+// require("./connection");
+const Recipe = require("../server/models/recipes");
+// require("./recipes");
 
 const db = mongoose.connection;
 
