@@ -1,6 +1,8 @@
-const mongoose = require("mongoose");
+const mongoose = require("./connection");
 
-const recipeSchema = new mongoose.Schema({
+const { Schema, model } = mongoose;
+
+const recipeSchema = new Schema({
     title: {type: String, required: true},
     description: String,
     ingredientsList: {type: [{String, String}], required: true},

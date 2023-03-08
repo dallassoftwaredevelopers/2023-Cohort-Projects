@@ -7,8 +7,19 @@ const app = express();
 const recipesController = require("./controllers/recipe")
 const mongoose = require('mongoose');
 
+// useNewUrlParser: true,
+// useUnifiedTopology: true
+// fix deprecation warnings
+  mongoose.connect(process.env.MONGO_URI,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  
+  mongoose.connection.once('open', ()=> {
+    console.log('connected to mongo')
+  })
 
-app.use("/api/recipes", recipesController);
+  app.use("/recipes", recipesController);
 
 // this will be removed once the endpoints are being created
 // it is just with the initial creation of the express app to test that it is running
