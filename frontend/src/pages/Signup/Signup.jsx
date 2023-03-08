@@ -25,6 +25,7 @@ export default function Signup() {
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
 
+    ///CHECK FORM FOR ERRORS
     function checkFormForErrors() {
         let errors = [];
 
@@ -82,7 +83,7 @@ export default function Signup() {
                     </div>
                     <div>
                         <input
-                            className={emailError && "error-container"}
+                            className={emailError ? "error-container" : ""}
                             ref={emailRef}
                             onChange={(event) => {
                                 email = event.target.value;
@@ -97,7 +98,7 @@ export default function Signup() {
 
                     <div>
                         <input
-                            className={usernameError && "error-container"}
+                            className={usernameError ? "error-container" : ""}
                             ref={usernameRef}
                             onChange={(event) => {
                                 username = event.target.value;
@@ -111,7 +112,7 @@ export default function Signup() {
 
                     <div>
                         <input
-                            className={passwordError && "error-container"}
+                            className={passwordError ? "error-container" : ""}
                             ref={passwordRef}
                             onChange={(event) => {
                                 password = event.target.value;
@@ -126,7 +127,7 @@ export default function Signup() {
 
                     <div>
                         <input
-                            className={passwordError && "error-container"}
+                            className={passwordError ? "error-container" : ""}
                             ref={confirmPasswordRef}
                             onChange={(event) => {
                                 confirmPassword = event.target.value;
@@ -155,8 +156,8 @@ export default function Signup() {
                     <div>
                         <h4>Please correct following errors</h4>
                         <ul>
-                            {errorDesc.map((str) => {
-                                return <li>{str}</li>;
+                            {errorDesc.map((str, index) => {
+                                return <li key={index}>{str}</li>;
                             })}
                         </ul>
                     </div>
