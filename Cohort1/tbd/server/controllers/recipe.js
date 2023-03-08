@@ -7,8 +7,8 @@ const router = express.Router();
 router.get("/", async (req, res) => {
     try {
         const recipes = await Recipe.find({});
-        console.log('search terms are: ' + req.query.q);
-        console.log(typeof(req.query.q))
+        // console.log('search terms are: ' + req.query.q);
+        // console.log(typeof(req.query.q))
         res.json(recipes);
 
     } catch (err) {
