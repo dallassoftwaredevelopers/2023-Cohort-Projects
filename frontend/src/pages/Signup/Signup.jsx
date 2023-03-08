@@ -18,50 +18,42 @@ export default function Signup() {
     );
 
     const [errorFlag, setErrorFlag] = useState(false);
-    const [errorDesc, setErrorDesc] = useState("no error");
+    const [errorDesc, setErrorDesc] = useState([]);
 
     // individual error flags
     const [usernameError, setUsernameError] = useState(false);
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
 
-    useEffect(() => {
-        console.log("username error", usernameError);
-        console.log("emailError error", emailError);
-        console.log("passwordError error", passwordError);
-        // console.log("valid email ", validEmail);
-    });
+    function checkFormForErrors() {
+        let errors = [];
+
+        //check email exists and is valid format
+        if (!emailFormatValid(email) && email) {
+            setEmailError(true);
+            errors.push("email format invalid");
+        }
+
+        //passwords match check
+        if (password !== confirmPassword) {
+            setPasswordError(true);
+            errors.push("passwords do not match");
+        }
+
+        if (errors.length > 0) {
+            setErrorFlag(true);
+            return errors;
+        }
+
+        return [];
+    }
 
     async function handleSignUp() {
-        console.log(username, password, email);
-        let error = "no error";
-        setErrorDesc(error);
         setErrorFlag(false);
-        let validEmail = emailFormatValid(email);
+        const formErrors = checkFormForErrors();
 
-        if (!username) {
-            error = "username cannot be blank";
-            setUsernameError(true);
-            setErrorDesc(error);
-            return;
-        }
-        if (!validEmail && email) {
-            error = "email format is invalid";
-            setEmailError(true);
-            setErrorDesc(error);
-            return;
-        }
-
-        if (password !== confirmPassword || (!password && !confirmPassword)) {
-            if (password !== confirmPassword) {
-                error = "passwords do not match";
-            }
-            if (!password && !confirmPassword) {
-                error = "password or confirmPassword cannot be blank";
-            }
-            setPasswordError(true);
-            setErrorFlag(true);
-            setErrorDesc(error);
+        if (formErrors.length > 0) {
+            setErrorDesc(formErrors);
             return;
         }
 
@@ -162,7 +154,11 @@ export default function Signup() {
                 <section className="error-container error-desc">
                     <div>
                         <h4>Please correct following errors</h4>
-                        <span>{errorDesc}</span>
+                        <ul>
+                            {errorDesc.map((str) => {
+                                return <li>{str}</li>;
+                            })}
+                        </ul>
                     </div>
                 </section>
             )}

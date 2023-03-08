@@ -44,6 +44,7 @@ export const StyledSignup = styled.section`
     }
 
     & form div.title {
+        text-align: center;
         border-color: red;
         position: absolute;
         top: -8%;
@@ -81,10 +82,11 @@ export const StyledSignup = styled.section`
     }
 
     & .goto-btn {
-        padding: 0;
+        padding: 1%;
         width: 40%;
         margin-top: 5%;
         font-size: 1rem;
+        text-align: center;
     }
 
     & .error-container {
@@ -93,6 +95,8 @@ export const StyledSignup = styled.section`
     }
 
     & .error-desc {
+        position: absolute;
+        top: 0;
         border-radius: 10px;
         padding: 10px;
     }
