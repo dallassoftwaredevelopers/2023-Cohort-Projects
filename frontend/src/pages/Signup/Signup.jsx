@@ -81,7 +81,8 @@ export default function Signup() {
                     <div className="title">
                         <h2>Welcome to the app</h2>
                     </div>
-                    <div>
+                    <div className="input-container">
+                        {emailError && <span className="error-marker">*</span>}
                         <input
                             className={emailError ? "error-container" : ""}
                             ref={emailRef}
@@ -94,9 +95,13 @@ export default function Signup() {
                             type="text"
                             placeholder="Email@email.com"
                         />
+                        {emailError && <span className="error-marker">*</span>}
                     </div>
 
-                    <div>
+                    <div className="input-container">
+                        {usernameError && (
+                            <span className="error-marker">*</span>
+                        )}
                         <input
                             className={usernameError ? "error-container" : ""}
                             ref={usernameRef}
@@ -108,9 +113,15 @@ export default function Signup() {
                             placeholder="Username"
                             required
                         />
+                        {usernameError && (
+                            <span className="error-marker">*</span>
+                        )}
                     </div>
 
-                    <div>
+                    <div className="input-container">
+                        {passwordError && (
+                            <span className="error-marker">*</span>
+                        )}
                         <input
                             className={passwordError ? "error-container" : ""}
                             ref={passwordRef}
@@ -123,9 +134,15 @@ export default function Signup() {
                             placeholder="Password"
                             required
                         />
+                        {passwordError && (
+                            <span className="error-marker">*</span>
+                        )}
                     </div>
 
-                    <div>
+                    <div className="input-container">
+                        {passwordError && (
+                            <span className="error-marker">*</span>
+                        )}
                         <input
                             className={passwordError ? "error-container" : ""}
                             ref={confirmPasswordRef}
@@ -138,12 +155,27 @@ export default function Signup() {
                             placeholder="Confirm Password"
                             required
                         />
+                        {passwordError && (
+                            <span className="error-marker">*</span>
+                        )}
                     </div>
 
                     <div className="submit-btn">
                         <button>Signup</button>
                     </div>
                 </form>
+                {errorFlag && (
+                    <section className="error-container error-desc">
+                        <div>
+                            <h4>Please correct following errors</h4>
+                            <ul>
+                                {errorDesc.map((str, index) => {
+                                    return <li key={index}>{str}</li>;
+                                })}
+                            </ul>
+                        </div>
+                    </section>
+                )}
             </section>
 
             <div className="btn goto-btn">
@@ -151,18 +183,6 @@ export default function Signup() {
                     Already signed<br></br>up login here
                 </a>
             </div>
-            {errorFlag && (
-                <section className="error-container error-desc">
-                    <div>
-                        <h4>Please correct following errors</h4>
-                        <ul>
-                            {errorDesc.map((str, index) => {
-                                return <li key={index}>{str}</li>;
-                            })}
-                        </ul>
-                    </div>
-                </section>
-            )}
         </StyledSignup>
     );
 }

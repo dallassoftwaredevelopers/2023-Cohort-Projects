@@ -35,12 +35,17 @@ export const StyledSignup = styled.section`
         /* border: solid black 1px; */
     }
 
+    & .input-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     & form input {
         text-align: center;
         margin: 2% auto;
         font-size: 1.5rem;
         border-radius: 10px;
-        width: 100%;
+        width: 80%;
     }
 
     & form div.title {
@@ -95,9 +100,12 @@ export const StyledSignup = styled.section`
     }
 
     & .error-desc {
-        position: absolute;
-        top: 0;
         border-radius: 10px;
         padding: 10px;
+    }
+
+    & .error-marker {
+        font-size: 2rem;
+        color: black;
     }
 `;
