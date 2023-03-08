@@ -8,7 +8,7 @@ const recipesController = require("./controllers/recipe")
 const mongoose = require('mongoose');
 
 
-app.use("/recipes", recipesController);
+app.use("/api/recipes", recipesController);
 
 // this will be removed once the endpoints are being created
 // it is just with the initial creation of the express app to test that it is running
