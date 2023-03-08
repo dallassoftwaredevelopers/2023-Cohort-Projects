@@ -6,14 +6,12 @@ export default function Signup() {
     const passwordRef = useRef("");
     const confirmPasswordRef = useRef("");
     const emailRef = useRef("");
+    // const [validEmail, setValidEmail] = useState(false);
 
     let username = usernameRef.current.value,
         password = passwordRef.current.value,
         confirmPassword = confirmPasswordRef.current.value,
         email = emailRef.current.value;
-
-    let validEmail = false;
-    let passwordsMatch = false;
 
     const emailRegex = new RegExp(
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
@@ -22,25 +20,38 @@ export default function Signup() {
     const [errorFlag, setErrorFlag] = useState(false);
     const [errorDesc, setErrorDesc] = useState("no error");
 
+    // individual error flags
+    const [usernameError, setUsernameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+
+    useEffect(() => {
+        console.log("username error", usernameError);
+        console.log("emailError error", emailError);
+        console.log("passwordError error", passwordError);
+        // console.log("valid email ", validEmail);
+    });
+
     async function handleSignUp() {
+        console.log(username, password, email);
         let error = "no error";
         setErrorDesc(error);
         setErrorFlag(false);
+        let validEmail = emailFormatValid(email);
 
         if (!username) {
             error = "username cannot be blank";
-            setErrorFlag(true);
+            setUsernameError(true);
+            setErrorDesc(error);
+            return;
+        }
+        if (!validEmail && email) {
+            error = "email format is invalid";
+            setEmailError(true);
             setErrorDesc(error);
             return;
         }
 
-        if (!validEmail && email) {
-            error = "email format is invalid";
-            console.log("email invalid");
-            setErrorFlag(true);
-            setErrorDesc(error);
-            return;
-        }
         if (password !== confirmPassword || (!password && !confirmPassword)) {
             if (password !== confirmPassword) {
                 error = "passwords do not match";
@@ -48,19 +59,12 @@ export default function Signup() {
             if (!password && !confirmPassword) {
                 error = "password or confirmPassword cannot be blank";
             }
-            console.log(error, password, confirmPassword);
+            setPasswordError(true);
             setErrorFlag(true);
             setErrorDesc(error);
             return;
         }
 
-        console.log(
-            "sending post ",
-            email,
-            username,
-            password,
-            confirmPassword
-        );
         const result = await fetch("/api/signup", {
             method: "post",
             headers: { "Content-Type": "application/json" },
@@ -86,10 +90,12 @@ export default function Signup() {
                     </div>
                     <div>
                         <input
+                            className={emailError && "error-container"}
                             ref={emailRef}
                             onChange={(event) => {
                                 email = event.target.value;
-                                validEmail = emailRegex.test(email);
+                                // setValidEmail(emailRegex.test(email));
+                                setEmailError(false);
                             }}
                             id="email"
                             type="text"
@@ -99,6 +105,7 @@ export default function Signup() {
 
                     <div>
                         <input
+                            className={usernameError && "error-container"}
                             ref={usernameRef}
                             onChange={(event) => {
                                 username = event.target.value;
@@ -112,10 +119,11 @@ export default function Signup() {
 
                     <div>
                         <input
+                            className={passwordError && "error-container"}
                             ref={passwordRef}
                             onChange={(event) => {
                                 password = event.target.value;
-                                passwordsMatch = confirmPassword === password;
+                                setPasswordError(false);
                             }}
                             id="password"
                             type="password"
@@ -126,10 +134,11 @@ export default function Signup() {
 
                     <div>
                         <input
+                            className={passwordError && "error-container"}
                             ref={confirmPasswordRef}
                             onChange={(event) => {
                                 confirmPassword = event.target.value;
-                                passwordsMatch = confirmPassword === password;
+                                setPasswordError(false);
                             }}
                             id="confirmpassword"
                             type="password"
@@ -150,7 +159,7 @@ export default function Signup() {
                 </a>
             </div>
             {errorFlag && (
-                <section className="error-container">
+                <section className="error-container error-desc">
                     <div>
                         <h4>Please correct following errors</h4>
                         <span>{errorDesc}</span>
@@ -159,4 +168,12 @@ export default function Signup() {
             )}
         </StyledSignup>
     );
+}
+
+function emailFormatValid(emailStr) {
+    const emailRegex = new RegExp(
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    );
+
+    return emailRegex.test(emailStr);
 }

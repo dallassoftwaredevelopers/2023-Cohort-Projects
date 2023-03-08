@@ -88,6 +88,12 @@ export const StyledSignup = styled.section`
     }
 
     & .error-container {
-        background: red;
+        background: #ce4d4d;
+        border: solid 2px red;
+    }
+
+    & .error-desc {
+        border-radius: 10px;
+        padding: 10px;
     }
 `;
