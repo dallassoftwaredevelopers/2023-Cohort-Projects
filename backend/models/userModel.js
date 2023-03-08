@@ -24,3 +24,10 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
+
+
+/*{
+"username": "testUser",
+"email": "email@123.test",
+"password": "12345"
+}*/
