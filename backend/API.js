@@ -22,8 +22,9 @@ module.exports = {
         }
     },
     searchRecipeByIngredients: async(req, res) => {
+        let ingredientsList = ingredientsList
         try{
-            const res = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${process.env.API_KEY}`)
+            const res = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?${ingredientsList}&apiKey=${process.env.API_KEY}`)
             const data = await res.json()
             res.status(200).json(data);
     
