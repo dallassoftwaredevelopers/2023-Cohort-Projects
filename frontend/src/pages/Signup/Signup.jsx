@@ -6,24 +6,30 @@ export default function Signup() {
     const passwordRef = useRef("");
     const confirmPasswordRef = useRef("");
     const emailRef = useRef("");
-    // const [validEmail, setValidEmail] = useState(false);
 
+    //get inputs values from userefs
     let username = usernameRef.current.value,
         password = passwordRef.current.value,
         confirmPassword = confirmPasswordRef.current.value,
         email = emailRef.current.value;
 
-    const emailRegex = new RegExp(
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-    );
-
+    //error description box states
     const [errorFlag, setErrorFlag] = useState(false);
     const [errorDesc, setErrorDesc] = useState([]);
 
-    // individual error flags
+    // individual error flags for inputs
     const [usernameError, setUsernameError] = useState(false);
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+
+    ///EMAIL TEST
+    function emailFormatValid(emailStr) {
+        const emailRegex = new RegExp(
+            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        );
+        //test email string with regex
+        return emailRegex.test(emailStr);
+    }
 
     ///CHECK FORM FOR ERRORS
     function checkFormForErrors() {
@@ -49,10 +55,12 @@ export default function Signup() {
         return [];
     }
 
+    ///SUBMIT FORM
     async function handleSignUp() {
         setErrorFlag(false);
         const formErrors = checkFormForErrors();
 
+        ///form had errors set message to display to user
         if (formErrors.length > 0) {
             setErrorDesc(formErrors);
             return;
@@ -81,6 +89,7 @@ export default function Signup() {
                     <div className="title">
                         <h2>Welcome to the app</h2>
                     </div>
+
                     <div className="input-container">
                         {emailError && <span className="error-marker">*</span>}
                         <input
@@ -88,7 +97,6 @@ export default function Signup() {
                             ref={emailRef}
                             onChange={(event) => {
                                 email = event.target.value;
-                                // setValidEmail(emailRegex.test(email));
                                 setEmailError(false);
                             }}
                             id="email"
@@ -185,12 +193,4 @@ export default function Signup() {
             </div>
         </StyledSignup>
     );
-}
-
-function emailFormatValid(emailStr) {
-    const emailRegex = new RegExp(
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-    );
-
-    return emailRegex.test(emailStr);
 }

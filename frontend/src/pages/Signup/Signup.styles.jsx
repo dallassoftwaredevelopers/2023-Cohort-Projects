@@ -86,6 +86,16 @@ export const StyledSignup = styled.section`
         background: #095509;
     }
 
+    & .input-container {
+        position: relative;
+    }
+
+    & .input-tag {
+        color: #570f0f;
+        position: absolute;
+        bottom: 0px;
+        right: 0;
+    }
     & .goto-btn {
         padding: 1%;
         width: 40%;
