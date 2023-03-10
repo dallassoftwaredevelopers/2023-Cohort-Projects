@@ -7,60 +7,65 @@ export default function Signup() {
     const confirmPasswordRef = useRef("");
     const emailRef = useRef("");
 
+    //get inputs values from userefs
     let username = usernameRef.current.value,
         password = passwordRef.current.value,
         confirmPassword = confirmPasswordRef.current.value,
         email = emailRef.current.value;
 
-    let validEmail = false;
-    let passwordsMatch = false;
-
-    const emailRegex = new RegExp(
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-    );
-
+    //error description box states
     const [errorFlag, setErrorFlag] = useState(false);
-    const [errorDesc, setErrorDesc] = useState("no error");
+    const [errorDesc, setErrorDesc] = useState([]);
 
-    async function handleSignUp() {
-        let error = "no error";
-        setErrorDesc(error);
-        setErrorFlag(false);
+    // individual error flags for inputs
+    const [usernameError, setUsernameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
 
-        if (!username) {
-            error = "username cannot be blank";
-            setErrorFlag(true);
-            setErrorDesc(error);
-            return;
-        }
-
-        if (!validEmail && email) {
-            error = "email format is invalid";
-            console.log("email invalid");
-            setErrorFlag(true);
-            setErrorDesc(error);
-            return;
-        }
-        if (password !== confirmPassword || (!password && !confirmPassword)) {
-            if (password !== confirmPassword) {
-                error = "passwords do not match";
-            }
-            if (!password && !confirmPassword) {
-                error = "password or confirmPassword cannot be blank";
-            }
-            console.log(error, password, confirmPassword);
-            setErrorFlag(true);
-            setErrorDesc(error);
-            return;
-        }
-
-        console.log(
-            "sending post ",
-            email,
-            username,
-            password,
-            confirmPassword
+    ///EMAIL TEST
+    function emailFormatValid(emailStr) {
+        const emailRegex = new RegExp(
+            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         );
+        //test email string with regex
+        return emailRegex.test(emailStr);
+    }
+
+    ///CHECK FORM FOR ERRORS
+    function checkFormForErrors() {
+        let errors = [];
+
+        //check email exists and is valid format
+        if (!emailFormatValid(email) && email) {
+            setEmailError(true);
+            errors.push("email format invalid");
+        }
+
+        //passwords match check
+        if (password !== confirmPassword) {
+            setPasswordError(true);
+            errors.push("passwords do not match");
+        }
+
+        if (errors.length > 0) {
+            setErrorFlag(true);
+            return errors;
+        }
+
+        return [];
+    }
+
+    ///SUBMIT FORM
+    async function handleSignUp() {
+        setErrorFlag(false);
+        const formErrors = checkFormForErrors();
+
+        ///form had errors set message to display to user
+        if (formErrors.length > 0) {
+            setErrorDesc(formErrors);
+            return;
+        }
+
         const result = await fetch("/api/signup", {
             method: "post",
             headers: { "Content-Type": "application/json" },
@@ -84,21 +89,29 @@ export default function Signup() {
                     <div className="title">
                         <h2>Welcome to the app</h2>
                     </div>
-                    <div>
+
+                    <div className="input-container">
+                        {emailError && <span className="error-marker">*</span>}
                         <input
+                            className={emailError ? "error-container" : ""}
                             ref={emailRef}
                             onChange={(event) => {
                                 email = event.target.value;
-                                validEmail = emailRegex.test(email);
+                                setEmailError(false);
                             }}
                             id="email"
                             type="text"
                             placeholder="Email@email.com"
                         />
+                        {emailError && <span className="error-marker">*</span>}
                     </div>
 
-                    <div>
+                    <div className="input-container">
+                        {usernameError && (
+                            <span className="error-marker">*</span>
+                        )}
                         <input
+                            className={usernameError ? "error-container" : ""}
                             ref={usernameRef}
                             onChange={(event) => {
                                 username = event.target.value;
@@ -108,40 +121,69 @@ export default function Signup() {
                             placeholder="Username"
                             required
                         />
+                        {usernameError && (
+                            <span className="error-marker">*</span>
+                        )}
                     </div>
 
-                    <div>
+                    <div className="input-container">
+                        {passwordError && (
+                            <span className="error-marker">*</span>
+                        )}
                         <input
+                            className={passwordError ? "error-container" : ""}
                             ref={passwordRef}
                             onChange={(event) => {
                                 password = event.target.value;
-                                passwordsMatch = confirmPassword === password;
+                                setPasswordError(false);
                             }}
                             id="password"
                             type="password"
                             placeholder="Password"
                             required
                         />
+                        {passwordError && (
+                            <span className="error-marker">*</span>
+                        )}
                     </div>
 
-                    <div>
+                    <div className="input-container">
+                        {passwordError && (
+                            <span className="error-marker">*</span>
+                        )}
                         <input
+                            className={passwordError ? "error-container" : ""}
                             ref={confirmPasswordRef}
                             onChange={(event) => {
                                 confirmPassword = event.target.value;
-                                passwordsMatch = confirmPassword === password;
+                                setPasswordError(false);
                             }}
                             id="confirmpassword"
                             type="password"
                             placeholder="Confirm Password"
                             required
                         />
+                        {passwordError && (
+                            <span className="error-marker">*</span>
+                        )}
                     </div>
 
                     <div className="submit-btn">
                         <button>Signup</button>
                     </div>
                 </form>
+                {errorFlag && (
+                    <section className="error-container error-desc">
+                        <div>
+                            <h4>Please correct following errors</h4>
+                            <ul>
+                                {errorDesc.map((str, index) => {
+                                    return <li key={index}>{str}</li>;
+                                })}
+                            </ul>
+                        </div>
+                    </section>
+                )}
             </section>
 
             <div className="btn goto-btn">
@@ -149,14 +191,6 @@ export default function Signup() {
                     Already signed<br></br>up login here
                 </a>
             </div>
-            {errorFlag && (
-                <section className="error-container">
-                    <div>
-                        <h4>Please correct following errors</h4>
-                        <span>{errorDesc}</span>
-                    </div>
-                </section>
-            )}
         </StyledSignup>
     );
 }

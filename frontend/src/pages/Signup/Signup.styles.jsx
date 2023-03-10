@@ -35,15 +35,21 @@ export const StyledSignup = styled.section`
         /* border: solid black 1px; */
     }
 
+    & .input-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     & form input {
         text-align: center;
         margin: 2% auto;
         font-size: 1.5rem;
         border-radius: 10px;
-        width: 100%;
+        width: 80%;
     }
 
     & form div.title {
+        text-align: center;
         border-color: red;
         position: absolute;
         top: -8%;
@@ -80,14 +86,36 @@ export const StyledSignup = styled.section`
         background: #095509;
     }
 
+    & .input-container {
+        position: relative;
+    }
+
+    & .input-tag {
+        color: #570f0f;
+        position: absolute;
+        bottom: 0px;
+        right: 0;
+    }
     & .goto-btn {
-        padding: 0;
+        padding: 1%;
         width: 40%;
         margin-top: 5%;
         font-size: 1rem;
+        text-align: center;
     }
 
     & .error-container {
-        background: red;
+        background: #ce4d4d;
+        border: solid 2px red;
+    }
+
+    & .error-desc {
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    & .error-marker {
+        font-size: 2rem;
+        color: black;
     }
 `;
