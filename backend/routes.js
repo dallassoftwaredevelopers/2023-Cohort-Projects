@@ -6,7 +6,8 @@ const { createUser,login } = require('./controllers/userController.js');
 
 
 router.get("/searchbyingredient", async (req, res) => {
-    const ingredientsList = req.body.ingredients;
+    const ingredientsList = req.query.ingredients;
+    console.log(req.query);
 
     //verify ingredients exist
     if (!ingredientsList) {
@@ -16,8 +17,9 @@ router.get("/searchbyingredient", async (req, res) => {
 
     //get data from api
     try {
-        const recipes = await API.searchRecipeByIngredients(ingredientsList);
-        res.status(200).json(recipes);
+        let ingredientsListApi = encodeURIComponent(ingredientsList.replace(/,/g, ',+'))
+        const recipes = await API.searchRecipeByIngredients(ingredientsListApi);
+        res.status(200).json("Good Call")
     } catch (error) {
         res.status(400).json({
             message: "recipe search by ingredient error",

@@ -1,4 +1,5 @@
 require('dotenv').config();
+const axios = require('axios');
 
 module.exports = {
     searchRecipe: async(req, res) => {
@@ -21,13 +22,13 @@ module.exports = {
             res.status(400).json(error);
         }
     },
-    searchRecipeByIngredients: async(req, res) => {
-        let ingredientsList = ingredientsList
+    searchRecipeByIngredients: async(ingredientsListApi) => {
         try{
-            const res = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?${ingredientsList}&apiKey=${process.env.API_KEY}`)
-            const data = await res.json()
-            res.status(200).json(data);
-    
+            // console.log(encodeURIComponent(ingredientsListApi));
+            const res = await axios.get(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsListApi}&apiKey=${process.env.API_KEY}`)
+            // console.log(res)
+            // console.log(res.status);
+            return res
         }catch(error){
             res.status(400).json(error);
         }  

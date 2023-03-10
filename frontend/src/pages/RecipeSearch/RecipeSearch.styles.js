@@ -17,13 +17,19 @@ export const StyledRecipeSearch = styled.section`
             flex-direction: column;
         }
     }
-    & input {
+    & form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+    }
+    & form input {
         background-color: white;
         color: #242424;
         border-radius: 2em;
         border: 1px solid #242424;
         padding: 1em;
-        width: 30%;
+        width: 100%;
         @media (max-width: 768px){
             width: 50%;
         }
