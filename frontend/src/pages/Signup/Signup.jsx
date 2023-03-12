@@ -76,7 +76,6 @@ export default function Signup() {
                 password,
             }),
         });
-
     }
 
     return (
