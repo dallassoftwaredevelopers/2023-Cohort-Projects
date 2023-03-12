@@ -34,6 +34,9 @@ Description: Method to validate (username & password) and return true or false
         - if matched then return true
         - else return false
 
+- addMedication(medication & currentUser)
+  - add medication to database medicationType table
+  - add remiders to database reminder table
 
 # Database
 
