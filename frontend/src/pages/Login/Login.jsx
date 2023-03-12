@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { StyledSignup } from "./Login.styles.jsx";
+import Cookies from "js-cookie";
 
 function LoginScreen() {
   const usernameRef = useRef(null);
@@ -30,7 +31,8 @@ function LoginScreen() {
       })
       .then((data) => {
         console.log("Login successful:", data);
-        // TODO: navigate to the main app screen
+        Cookies.set("token", data.token);
+        window.location.href = "/search";
       })
       .catch((error) => {
         console.error("Login failed:", error);
