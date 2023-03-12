@@ -8,6 +8,7 @@ const cors = require('cors')
 const app = express();
 app.use(cors())
 
+
 // assign a piece of middleware that will fire anytime a request comes in to the server
 app.use(express.json());
 app.use((req, res, next) => {

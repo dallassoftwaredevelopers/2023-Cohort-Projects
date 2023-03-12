@@ -66,16 +66,17 @@ export default function Signup() {
             return;
         }
 
-        const result = await fetch("/api/signup", {
+        //check if the passwords match before sending
+        const result = await fetch("http://localhost:4000/api/signup", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 email,
                 username,
                 password,
-                confirmPassword,
             }),
         });
+
     }
 
     return (
