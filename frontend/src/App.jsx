@@ -5,6 +5,7 @@ import NavBar from './components/NavBar/NavBar';
 import Home from './pages/Home/Home';
 import Signup from './pages/Signup/Signup';
 import RecipeSearch from './pages/RecipeSearch/RecipeSearch';
+import Login from './pages/Login/Login';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<RecipeSearch />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/*" element={<h1>404 no page</h1>} />
 
         </Routes>

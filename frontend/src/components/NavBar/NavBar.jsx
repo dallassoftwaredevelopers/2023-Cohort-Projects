@@ -17,6 +17,7 @@ const NavBar = () => {
         <NavLink to='/saved'>Saved</NavLink>
         <NavLink to='/profile'>Profile</NavLink>
         <NavLink to='/signup'>SignUp</NavLink>
+        <NavLink to='/login'>Login</NavLink>
       </div>
     </Nav>
 
