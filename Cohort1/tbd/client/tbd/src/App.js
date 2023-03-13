@@ -1,13 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
 
+
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <h1>Recipe</h1>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          You can make 764 Recipes
         </p>
         <a
           className="App-link"
@@ -15,8 +17,12 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Recipe
         </a>
+
+           <body>
+             <input type="text" placeholder="Find..."></input>
+       </body>
       </header>
     </div>
   );

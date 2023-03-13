@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+body{
+  background-color: #fff;
+}
+
+input{
+  padding: 10px;
+  outline: none;
+  width: 800px;
+}
