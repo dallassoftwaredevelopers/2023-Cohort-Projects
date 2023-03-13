@@ -55,6 +55,7 @@ kotlin {
 android {
     namespace = "com.example.medlista"
     compileSdk = 33
+    compileSdkPreview = "UpsideDownCake"
     defaultConfig {
         minSdk = 21
         targetSdk = 33
