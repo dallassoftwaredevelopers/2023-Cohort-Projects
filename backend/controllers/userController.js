@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 const User = require('../models/userModel.js');
 
 const bcrypt = require('bcrypt');
@@ -21,17 +22,19 @@ const login = async (req, res) => {
   try {
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid username or password' });
+      return res.status(401).json({ message: 'User Doesnt Exist' });
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
-    res.status(200).json({ message: 'Login successful' });
+    const token = jwt.sign({ username: username, password: password }, process.env.JWT_SECRET);
+    res.status(200).json({ message: 'Login successful', token });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 module.exports = {
     createUser,
