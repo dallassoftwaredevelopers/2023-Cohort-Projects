@@ -5,31 +5,31 @@ import axios from 'axios';
 
 export default function RecipeSearch() {
     // State for Ingredient
-    const [ingredients, setIngredients] = useState("")
-
+    const [ingredients, setIngredients] = useState("");
+    const [ recipeList, setRecipeList ] = useState([]);
     // List of Ingredients
-    const ingredientRef = useRef("")
-    // let Ingredients = ingredientRef.current.value
+    const ingredientRef = useRef("");
 
     async function handleSubmit() {
         try {
+            debugger;
             const result = await axios.get('http://localhost:4000/api/searchbyingredient', {
                 params: {
                     ingredients: ingredients
                 }
-            })
-            const data = result.data
-            console.log(data);
+            });
+
+            if(result?.data) {
+                setRecipeList(result.data);
+            }
             
         }catch(err){
             console.log(err);
         }
-
     }
 
     return (
     <StyledRecipeSearch>
-        
         <div className='title'>
             <h1>Recipe Search</h1>
         </div>
@@ -53,7 +53,7 @@ export default function RecipeSearch() {
             </div>
 
             <div>
-                {ingredients}
+                { ingredients }
             </div>
            
             <div className='filter'>
@@ -65,6 +65,11 @@ export default function RecipeSearch() {
 
         <div className='searchResults'>
             <h2>Results go here...</h2>
+            
+            {/* testing recipeList results */}
+            { recipeList ? recipeList.map(recipe => (
+                <div> {recipe.title}</div>
+            )): null }
             
         </div>
     </StyledRecipeSearch>

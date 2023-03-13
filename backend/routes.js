@@ -1,13 +1,12 @@
 const express = require("express");
+const { send } = require("process");
 const API = require("./API");
 const router = express.Router();
-const User = require('./models/userModel.js');
-const { createUser,login } = require('./controllers/userController.js');
+const { createUser, login } = require('./controllers/userController.js');
 
 
 router.get("/searchbyingredient", async (req, res) => {
     const ingredientsList = req.query.ingredients;
-    console.log(req.query);
 
     //verify ingredients exist
     if (!ingredientsList) {
@@ -17,9 +16,9 @@ router.get("/searchbyingredient", async (req, res) => {
 
     //get data from api
     try {
-        let ingredientsListApi = encodeURIComponent(ingredientsList.replace(/,/g, ',+'))
+        let ingredientsListApi = encodeURIComponent(ingredientsList.replace(/,/g, ',+'));
         const recipes = await API.searchRecipeByIngredients(ingredientsListApi);
-        res.status(200).json("Good Call")
+        res.status(200).json(recipes);
     } catch (error) {
         res.status(400).json({
             message: "recipe search by ingredient error",
@@ -31,4 +30,15 @@ router.get("/searchbyingredient", async (req, res) => {
 router.post('/signup', createUser);
 
 router.post('/login', login);
+
+//test route to localhost:4000/api/
+router.get('/', (req, res) => {
+    try {
+        res.json({msg: 'test GET request working'});
+    } catch(error) {
+        res.status(400).json({error: 'something went wrong'});
+    }
+});
+
+
 module.exports = router;
