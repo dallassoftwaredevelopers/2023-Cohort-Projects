@@ -1,7 +1,7 @@
 import 'search.css';
 
-function inputSearch() { 
-    return (
+export default function SearchPage() {
+	 return (
             <div id="search-bg">
                     <h1>Super Cook</h1>
                  <p>
