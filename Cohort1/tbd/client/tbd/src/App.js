@@ -3,6 +3,7 @@ import SearchPage from './search/SearchPage';
 import RecipePage from './recipe/RecipePage';
 import { Routes, Route } from 'react-router-dom';
 
+
 function App() {
   return (
     <div className="App">
@@ -12,7 +13,7 @@ function App() {
 				<Route path="/recipe/:id" element={<RecipePage />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
-    </div>
+     </div>
   );
 }
 
