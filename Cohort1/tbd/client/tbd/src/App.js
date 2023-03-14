@@ -1,22 +1,28 @@
-import './index.css'; 
 import './App.css';
+import SearchPage from './search/SearchPage';
+import RecipePage from './recipe/RecipePage';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-            <div id="search-bg">
-                  <h1>Recipe</h1>
-                 <p>
-                    You can make 764 Recipes
-                </p>
-             <input type="text" placeholder="Find..."></input>
-            </div>
-                <div id="root"></div>
-       
-      </header>
+			<h1>TBD Recipe App</h1>
+			<Routes>
+				<Route path="/" element={<SearchPage/>} />
+				<Route path="/recipe/:id" element={<RecipePage />} />
+				<Route path="*" element={<NotFound />} />
+			</Routes>
     </div>
   );
+}
+
+function NotFound() {
+	return (
+		<>
+			<h1>Page not found</h1>
+			<p>That page doesn't exist yet.</p>
+		</>
+	);
 }
 
 export default App;
