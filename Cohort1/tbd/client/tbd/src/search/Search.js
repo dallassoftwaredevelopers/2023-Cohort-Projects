@@ -7,7 +7,7 @@ export default function SearchPage() {
                  <p>
                     You can make 764 Recipes
                 </p>
-             <input type="text" placeholder="Recipe Search..."></input>
+             <input type="text" placeholder="Recipe search..."></input>
             </div>
     )
 }
