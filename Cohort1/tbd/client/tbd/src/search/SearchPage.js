@@ -1,4 +1,4 @@
-import 'search.css'
+import 'search.css';
 
 export default function SearchPage() {
 	return (
