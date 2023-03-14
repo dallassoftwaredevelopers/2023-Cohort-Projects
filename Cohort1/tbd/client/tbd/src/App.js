@@ -25,4 +25,8 @@ function NotFound() {
 	);
 }
 
+<<<<<<< HEAD
 export default App;
+=======
+export default App;
+>>>>>>> 4d558ca (adjusting back to original code for app.js)
