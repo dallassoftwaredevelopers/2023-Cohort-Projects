@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Medication Tracker - Medications</title>
+</head>
+<body>
+<h1>List of Medications</h1>
+<hr/>
+<div>
+    <a th:href="@{/logout}">Logout</a>
+</div>
+<table>
+    <thead>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Dosage Amount</th>
+    <th>Dosage Frequency</th>
+    <th>Actions</th>
+    </thead>
+    <tbody>
+    <tr th:each="med : ${medications}">
+        <td th:text="${med.medicationName}"></td>
+        <td th:text="${med.medicationType}"></td>
+        <td th:text="${med.dosageAmount}"></td>
+        <td th:text="${med.dosageFrequency}"></td>
+        <td>
+            <button type="button">View</button>
+            <button type="button">Update</button>
+            <button type="button">Delete</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
