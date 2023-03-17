@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .and()
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/user-dashboard")
+                        .defaultSuccessUrl("/medication-list")
                         .failureUrl("/login?error=true")
                         .usernameParameter("email")
                         .passwordParameter("password")
