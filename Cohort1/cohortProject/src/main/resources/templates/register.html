@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - Medication Tracker</title>
+</head>
+<body>
+<h1>Register New User</h1>
+<hr/>
+<form th:object="${user}" th:action="@{/register}" method="POST">
+  <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+  <input type="text" placeholder="Enter first name" th:field="*{firstName}"  />
+  <br/><br/>
+  <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+  <input type="text" placeholder="Enter last name" th:field="*{lastName}"  />
+  <br/><br/>
+  <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+  <input type="text" placeholder="Enter email address" th:field="*{email}"  />
+  <br/><br/>
+  <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+  <input type="password" placeholder="Enter password" th:field="*{password}"  />
+  <br/><br/>
+  <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></p>
+  <input type="password" placeholder="Confirm password" th:field="*{confirmPassword}"  />
+  <br/><br/>
+  <button type="submit">Submit</button>
+</form>
+</body>
+</html>

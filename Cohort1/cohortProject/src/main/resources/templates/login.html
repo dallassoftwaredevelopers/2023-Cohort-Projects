@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  <title>Login Page - Medication Tracker</title>
+</head>
+<body>
+<h1 class="header">Login</h1>
+<hr/>
+<div th:if="${param.registration}">
+  <h2>Success!</h2>
+  <p>Thanks for registering your account. Please log in.</p>
+</div>
+<div>
+  <form id="loginForm" th:action="@{/login}" method="POST">
+    <div th:if="${param.error}">
+      <p class="text-danger">Invalid username or password</p>
+    </div>
+    <div th:if="${param.logout}">
+      <p>You have been logged out successfully</p>
+    </div>
+    <input type="text" name="email" placeholder="Enter email address" required />
+    <br/><br/>
+    <input type="password" name="password" placeholder="Enter password" required />
+    <br/><br/>
+    <button type="submit">Login</button>
+  </form>
+</div>
+</body>
+</html>
