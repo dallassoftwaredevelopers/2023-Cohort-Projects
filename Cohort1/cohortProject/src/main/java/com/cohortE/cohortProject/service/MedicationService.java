@@ -7,4 +7,5 @@ import java.util.List;
 public interface MedicationService {
 
     List<Medication> getAllUserMedications();
+    void deleteMedicationById(Long id);
 }

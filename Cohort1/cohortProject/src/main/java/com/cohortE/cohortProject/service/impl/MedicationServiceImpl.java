@@ -25,4 +25,9 @@ public class MedicationServiceImpl implements MedicationService {
         User user = userService.getCurrentUser();
         return medicationRepository.findByUserId(user.getId());
     }
+
+    @Override
+    public void deleteMedicationById(Long id) {
+        medicationRepository.deleteById(id);
+    }
 }

@@ -4,6 +4,7 @@ import com.cohortE.cohortProject.service.MedicationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class MedicationController {
@@ -23,5 +24,11 @@ public class MedicationController {
     @GetMapping("/medications/new")
     public String showAddMedicationForm() {
         return "medication/add-medication";
+    }
+
+    @GetMapping("/medications/{id}/delete")
+    public String deleteMedication(@PathVariable Long id) {
+        medicationService.deleteMedicationById(id);
+        return "redirect:/medications";
     }
 }
