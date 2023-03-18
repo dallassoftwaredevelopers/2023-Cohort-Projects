@@ -17,6 +17,11 @@ public class MedicationController {
     @GetMapping("/medications")
     public String showMedicationList(Model model) {
         model.addAttribute("medications", medicationService.getAllUserMedications());
-        return "medication-list";
+        return "medication/medication-list";
+    }
+
+    @GetMapping("/medications/new")
+    public String showAddMedicationForm() {
+        return "medication/add-medication";
     }
 }
