@@ -10,9 +10,12 @@
         <module name="medicalTrackerApp" />
       </profile>
     </annotationProcessing>
+<<<<<<< HEAD
     <bytecodeTargetLevel>
       <module name="medicalTrackerApp" target="11" />
     </bytecodeTargetLevel>
+=======
+>>>>>>> a7b282b30a26515b9d123ff23e62bdf2e27d8f5d
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
