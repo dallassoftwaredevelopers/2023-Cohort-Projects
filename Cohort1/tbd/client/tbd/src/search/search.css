@@ -5,10 +5,9 @@ body {
 input {
     outline: none;
     position: relative;
-    top: -1.1rem;
     left: 1rem;
     width: 900px;
-    padding: 12px;
+    padding: 10px;
 }
 
 .App-header {
@@ -34,7 +33,15 @@ input {
 
 #search-bg {
     background-color: #DC143C;
-    width: 1000px;
+    /* width: 1000px; */
     height: 150px;
-    margin: -29rem 0 0 250px;
+    /* margin: -29rem 0 0 250px; */
+}
+
+#search-bg h1{
+    color: #fff;
+}
+
+#search-bg p{
+    color: #fff;
 }

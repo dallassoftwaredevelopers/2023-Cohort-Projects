@@ -1,5 +1,6 @@
 import './search.css';
 
+
 export default function SearchPage() {
 	return (
 		<div id="search-bg">
