@@ -1,5 +1,6 @@
 package com.example.medlista.android
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -71,7 +72,8 @@ fun LoginView() {
     }
 
     var showProgress by remember { mutableStateOf(false) }
-//        val context = LocalContext.current
+
+    val context = LocalContext.current
 
     val loginViewModel = viewModel<LoginViewModel>()
 
@@ -137,7 +139,7 @@ fun LoginView() {
                     loginViewModel.doLogin(username, password)
                 },
                 onSignUpClick = {
-
+                    navigateToRegister(context)
                 }
             )
         }
@@ -238,4 +240,8 @@ fun InputField(
 fun NavigateToHome() {
     val context = LocalContext.current
     context.startActivity(Intent(context, HomeScreen::class.java))
+}
+
+fun navigateToRegister(context: Context) {
+    context.startActivity(Intent(context, RegisterActivity::class.java))
 }
