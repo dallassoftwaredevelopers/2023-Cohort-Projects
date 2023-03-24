@@ -54,7 +54,7 @@ class LoginActivity : ComponentActivity() {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview2() {
+fun LoginViewPreview() {
     MedlistaTheme {
         LoginView()
     }
@@ -136,7 +136,9 @@ fun LoginView() {
                     showProgress = true
                     loginViewModel.doLogin(username, password)
                 },
-                onSignUpClick = {}
+                onSignUpClick = {
+
+                }
             )
         }
     }

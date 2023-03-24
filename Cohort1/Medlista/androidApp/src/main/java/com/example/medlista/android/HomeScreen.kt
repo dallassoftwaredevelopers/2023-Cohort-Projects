@@ -58,7 +58,7 @@ fun HomeView() {
 
 @Preview
 @Composable
-fun DefaultPreview3() {
+fun HomeViewPreview() {
     MyApplicationTheme {
         HomeView()
     }
