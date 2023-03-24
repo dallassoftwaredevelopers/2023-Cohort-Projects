@@ -89,14 +89,14 @@ fun LoginView() {
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
-//        androidx.compose.foundation.Image(
-//            painter = painterResource(id = R.drawable.pills),
-//            contentDescription = "Image of medication pills.",
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .blur(4.dp),
-//            contentScale = ContentScale.Crop
-//        )
+        androidx.compose.foundation.Image(
+            painter = painterResource(id = R.drawable.pills),
+            contentDescription = "Image of medication pills.",
+            modifier = Modifier
+                .fillMaxSize()
+                .blur(4.dp),
+            contentScale = ContentScale.Crop
+        )
 
         Box(
             modifier = Modifier
@@ -136,7 +136,9 @@ fun LoginView() {
                     showProgress = true
                     loginViewModel.doLogin(username, password)
                 },
-                onSignUpClick = {}
+                onSignUpClick = {
+                    showProgress = true
+                }
             )
         }
     }
@@ -192,11 +194,16 @@ fun LoginFooter(
     onSignInClick: () -> Unit,
     onSignUpClick: () -> Unit
 ) {
+    val context = LocalContext.current
+
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Button(onClick = onSignInClick, modifier = Modifier.fillMaxWidth()) {
             Text(text = "Sign In")
         }
-        TextButton(onClick = onSignUpClick) {
+        TextButton(onClick = {
+            val intent = Intent(context, RegisterActivity::class.java)
+            context.startActivity(intent)
+        }) {
             Text(text = "Don't have an account, click here")
         }
         Spacer(modifier = Modifier.padding(bottom = 50.dp))
