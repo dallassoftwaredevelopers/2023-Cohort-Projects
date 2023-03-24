@@ -1,5 +1,7 @@
 package com.example.medlista.android
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -25,6 +27,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.medlista.android.ui.theme.MedlistaTheme
 import com.example.medlista.android.ui.theme.darkgray
 import com.example.medlista.android.ui.theme.primary
@@ -39,7 +42,7 @@ class RegisterActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    RegisterView("Android")
+                    RegisterView()
                 }
             }
         }
@@ -47,7 +50,7 @@ class RegisterActivity : ComponentActivity() {
 }
 
 @Composable
-fun RegisterView(name: String) {
+fun RegisterView() {
 
     var username by remember {
         mutableStateOf("")
@@ -97,9 +100,8 @@ fun RegisterView(name: String) {
                 onUsernameChange = { username = it },
                 onPasswordChange = { password = it },
                 onUsernameConfirmChange = { usernameConfirm = it },
-                onPasswordConfirmChange = { passwordConfirm = it }) {
-
-            }
+                onPasswordConfirmChange = { passwordConfirm = it }
+            )
         }
 
     }
@@ -128,9 +130,10 @@ fun ColumnScope.RegisterFields(
     onUsernameChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onUsernameConfirmChange: (String) -> Unit,
-    onPasswordConfirmChange: (String) -> Unit,
-    registerClick: () -> Unit
+    onPasswordConfirmChange: (String) -> Unit
 ) {
+    val registerViewModel = viewModel<RegisterViewModel>()
+
     Column() {
         InputField(
             value = username,
@@ -193,8 +196,9 @@ fun ColumnScope.RegisterFields(
 
         val context = LocalContext.current
         Button(onClick = {
-            Toast.makeText(context, "You have registered", Toast.LENGTH_LONG).show()
-
+            Toast.makeText(context, "You have registered. Please login.", Toast.LENGTH_LONG).show()
+            registerViewModel.register(username, password)
+            navigateToLoginView(context)
         }, modifier = Modifier.align(Alignment.End)) {
             Text(text = "Register")
         }
@@ -202,15 +206,14 @@ fun ColumnScope.RegisterFields(
     }
 }
 
-fun registerClick() {
-
+private fun navigateToLoginView(context: Context) {
+    context.startActivity(Intent(context, LoginActivity::class.java))
 }
-
 
 @Preview(showBackground = true)
 @Composable
 fun RegisterViewPreview() {
     MedlistaTheme {
-        RegisterView("Android")
+        RegisterView()
     }
 }

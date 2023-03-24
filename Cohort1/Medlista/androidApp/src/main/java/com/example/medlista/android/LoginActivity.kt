@@ -91,14 +91,14 @@ fun LoginView() {
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        androidx.compose.foundation.Image(
-            painter = painterResource(id = R.drawable.pills),
-            contentDescription = "Image of medication pills.",
-            modifier = Modifier
-                .fillMaxSize()
-                .blur(4.dp),
-            contentScale = ContentScale.Crop
-        )
+//        androidx.compose.foundation.Image(
+//            painter = painterResource(id = R.drawable.pills),
+//            contentDescription = "Image of medication pills.",
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .blur(4.dp),
+//            contentScale = ContentScale.Crop
+//        )
 
         Box(
             modifier = Modifier
