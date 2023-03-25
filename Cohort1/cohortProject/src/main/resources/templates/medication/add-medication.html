@@ -37,26 +37,26 @@
 
   <div class="container mt-5">
     <div class="text-center">
-      <form>
+      <form th:action="@{/medications/add}" th:object="${medication}" method="post">
         <div class="form-group col-sm-3">
           <label for="medication-name">Medication Name</label>
           <input type="text" class="form-control" id="medication-name" placeholder="Enter medication name">
         </div>
         <div class="form-group col-sm-3">
-          <label for="dosage">Dosage</label>
-          <input type="text" class="form-control" id="dosage" placeholder="Enter dosage">
+          <label for="medication-name">Medication Type</label>
+          <input type="text" class="form-control" id="medication-type" placeholder="Enter medication type">
         </div>
         <div class="form-group col-sm-3">
-          <label for="frequency">Frequency</label>
-          <input type="text" class="form-control" id="frequency" placeholder="Enter frequency">
+          <label for="dosage">Dosage Amount</label>
+          <input type="text" class="form-control" id="dosage" placeholder="Enter dosage amount">
         </div>
         <div class="form-group col-sm-3">
-          <label for="start-date">Start Date</label>
-          <input type="date" class="form-control" id="start-date">
+          <label for="frequency">Dosage Frequency</label>
+          <input type="text" class="form-control" id="frequency" placeholder="Enter dosage frequency">
         </div>
         <div class="form-group col-sm-3">
-          <label for="end-date">End Date</label>
-          <input type="date" class="form-control" id="end-date">
+          <label for="dosage-time">Dosage Time</label>
+          <input type="time" class="form-control" id="dosage-time">
         </div>
         <br>
         <div class="form-group col-sm-3">
