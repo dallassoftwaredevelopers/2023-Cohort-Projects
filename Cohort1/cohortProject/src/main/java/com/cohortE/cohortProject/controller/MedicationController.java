@@ -1,10 +1,13 @@
 package com.cohortE.cohortProject.controller;
 
+import com.cohortE.cohortProject.dto.MedicationDto;
+import com.cohortE.cohortProject.entity.Medication;
 import com.cohortE.cohortProject.service.MedicationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class MedicationController {
@@ -22,7 +25,8 @@ public class MedicationController {
     }
 
     @GetMapping("/medications/new")
-    public String showAddMedicationForm() {
+    public String showAddMedicationForm(Model model) {
+        model.addAttribute("medication", new MedicationDto());
         return "medication/add-medication";
     }
 
@@ -30,5 +34,10 @@ public class MedicationController {
     public String deleteMedication(@PathVariable Long id) {
         medicationService.deleteMedicationById(id);
         return "redirect:/medications";
+    }
+
+    @PostMapping("/medication/new")
+    public Medication addMedication(MedicationDto medicationDto) {
+        return medicationService.addMedication(medicationDto);
     }
 }

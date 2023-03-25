@@ -29,4 +29,5 @@ public class Medication {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
 }
