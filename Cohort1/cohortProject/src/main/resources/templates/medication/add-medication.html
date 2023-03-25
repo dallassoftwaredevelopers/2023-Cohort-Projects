@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
   <title>MedTrakker Plus - Add Medication</title>
   <meta charset="utf-8">
@@ -37,26 +37,26 @@
 
   <div class="container mt-5">
     <div class="text-center">
-      <form th:action="@{/medications/add}" th:object="${medication}" method="post">
+      <form th:action="@{/medications/new}" th:object="${medication}" method="post">
         <div class="form-group col-sm-3">
           <label for="medication-name">Medication Name</label>
-          <input type="text" class="form-control" id="medication-name" placeholder="Enter medication name">
+          <input type="text" th:field="*{medicationName}" class="form-control" id="medication-name" placeholder="Enter medication name">
         </div>
         <div class="form-group col-sm-3">
           <label for="medication-name">Medication Type</label>
-          <input type="text" class="form-control" id="medication-type" placeholder="Enter medication type">
+          <input type="text" th:field="*{medicationType}" class="form-control" id="medication-type" placeholder="Enter medication type">
         </div>
         <div class="form-group col-sm-3">
           <label for="dosage">Dosage Amount</label>
-          <input type="text" class="form-control" id="dosage" placeholder="Enter dosage amount">
+          <input type="text" th:field="*{dosageAmount}" class="form-control" id="dosage" placeholder="Enter dosage amount">
         </div>
         <div class="form-group col-sm-3">
           <label for="frequency">Dosage Frequency</label>
-          <input type="text" class="form-control" id="frequency" placeholder="Enter dosage frequency">
+          <input type="text" th:field="*{dosageFrequency}" class="form-control" id="frequency" placeholder="Enter dosage frequency">
         </div>
         <div class="form-group col-sm-3">
           <label for="dosage-time">Dosage Time</label>
-          <input type="time" class="form-control" id="dosage-time">
+          <input type="time" th:field="*{dosageTime}" class="form-control" id="dosage-time">
         </div>
         <br>
         <div class="form-group col-sm-3">

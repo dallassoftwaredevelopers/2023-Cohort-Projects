@@ -36,8 +36,9 @@ public class MedicationController {
         return "redirect:/medications";
     }
 
-    @PostMapping("/medication/new")
-    public Medication addMedication(MedicationDto medicationDto) {
-        return medicationService.addMedication(medicationDto);
+    @PostMapping("/medications/new")
+    public String addMedication(MedicationDto medicationDto) {
+        medicationService.addMedication(medicationDto);
+        return "redirect:/medications";
     }
 }

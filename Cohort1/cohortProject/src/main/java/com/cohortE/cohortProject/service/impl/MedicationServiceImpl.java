@@ -5,6 +5,7 @@ import com.cohortE.cohortProject.entity.Medication;
 import com.cohortE.cohortProject.entity.User;
 import com.cohortE.cohortProject.repository.MedicationRepository;
 import com.cohortE.cohortProject.service.MedicationService;
+import com.cohortE.cohortProject.service.ReminderService;
 import com.cohortE.cohortProject.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,12 @@ public class MedicationServiceImpl implements MedicationService {
 
     private final MedicationRepository medicationRepository;
     private final UserService userService;
+    private final ReminderService reminderService;
 
-    public MedicationServiceImpl(MedicationRepository medicationRepository, UserService userService) {
+    public MedicationServiceImpl(MedicationRepository medicationRepository, UserService userService, ReminderService reminderService) {
         this.medicationRepository = medicationRepository;
         this.userService = userService;
+        this.reminderService = reminderService;
     }
 
     @Override
@@ -30,7 +33,9 @@ public class MedicationServiceImpl implements MedicationService {
     public Medication addMedication(MedicationDto medicationDto) {
         Medication medication = mapDtoToEntity(medicationDto);
         medication.setUser(userService.getCurrentUser());
-        return medicationRepository.save(medication) ;
+        Medication newMedication = medicationRepository.save(medication);
+        reminderService.addReminder(newMedication, medicationDto.getDosageTime());
+        return newMedication;
     }
     @Override
     public void deleteMedicationById(Long id) {
