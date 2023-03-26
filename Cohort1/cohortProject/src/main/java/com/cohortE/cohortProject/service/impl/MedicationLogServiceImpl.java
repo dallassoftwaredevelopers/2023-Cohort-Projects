@@ -37,18 +37,6 @@ public class MedicationLogServiceImpl implements MedicationLogService {
         return medicationLogDtos;
     }
 
-    public void addNewDailyMedicationLog(){
-       List<Reminder> listOfDailyReminders  =  reminderService.getAllDailyReminders();
-       for(Reminder reminder : listOfDailyReminders) {
-           MedicationLog medicationLog = new MedicationLog();
-           medicationLog.setLogDate(LocalDate.now());
-           medicationLog.setTaken(false);
-           medicationLog.setReminder(reminder);
-           medicationLogRepository.save(medicationLog);
-       }
-    }
-
-
     private MedicationLogDto mapEntityToDto(MedicationLog medicationLog) {
         MedicationLogDto medicationLogDto = new MedicationLogDto();
         medicationLogDto.setMedicationName(medicationLog.getReminder().getMedication().getMedicationName());

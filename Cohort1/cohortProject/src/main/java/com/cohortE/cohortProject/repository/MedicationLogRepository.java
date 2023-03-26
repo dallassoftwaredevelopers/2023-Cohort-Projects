@@ -8,4 +8,5 @@ import java.util.List;
 public interface MedicationLogRepository extends JpaRepository<MedicationLog, Long> {
 
     List<MedicationLog>findByReminderMedicationUserId(Long id);
+
 }

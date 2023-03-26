@@ -8,5 +8,4 @@ public interface MedicationLogService {
 
     public List<MedicationLogDto> getDailyUsersMedicationLogs();
 
-    void addNewDailyMedicationLog();
 }
