@@ -5,10 +5,11 @@ import com.cohortE.cohortProject.entity.MedicationLog;
 import com.cohortE.cohortProject.repository.MedicationLogRepository;
 import com.cohortE.cohortProject.service.MedicationLogService;
 import com.cohortE.cohortProject.service.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class MedicationLogServiceImpl implements MedicationLogService {
     private final MedicationLogRepository medicationLogRepository;
     private final UserService userService;
