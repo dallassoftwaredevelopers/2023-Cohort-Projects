@@ -9,8 +9,6 @@ public interface MedicationLogService {
 
     public List<MedicationLogDto> getDailyUsersMedicationLogs();
 
-<<<<<<< HEAD
-=======
     void addMedicationLog(Reminder reminder);
->>>>>>> origin/ricardo
+
 }

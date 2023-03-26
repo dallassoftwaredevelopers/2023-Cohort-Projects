@@ -1,34 +1,17 @@
 package com.cohortE.cohortProject.service.impl;
 
-import com.cohortE.cohortProject.entity.MedicationLog;
 import com.cohortE.cohortProject.entity.Reminder;
-<<<<<<< HEAD
-import com.cohortE.cohortProject.repository.MedicationLogRepository;
-import com.cohortE.cohortProject.service.DailyLogService;
-import com.cohortE.cohortProject.service.ReminderService;
-=======
 import com.cohortE.cohortProject.service.DailyLogService;
 import com.cohortE.cohortProject.service.MedicationLogService;
 import com.cohortE.cohortProject.service.ReminderService;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
->>>>>>> origin/ricardo
 
-import java.time.LocalDate;
 import java.util.List;
-
-<<<<<<< HEAD
-public class DailyLogServiceImpl implements DailyLogService {
-    private ReminderService reminderService;
-    private MedicationLogRepository medicationLogRepository;
-    public void addNewDailyMedicationLog(){
-        List<Reminder> listOfDailyReminders  =  reminderService.getAllDailyReminders();
-        for(Reminder reminder : listOfDailyReminders) {
-            MedicationLog medicationLog = new MedicationLog();
-            medicationLog.setLogDate(LocalDate.now());
-            medicationLog.setTaken(false);
-            medicationLog.setReminder(reminder);
-            medicationLogRepository.save(medicationLog);
-=======
+@Component
+@EnableScheduling
 @Service
 public class DailyLogServiceImpl implements DailyLogService {
 
@@ -39,13 +22,12 @@ public class DailyLogServiceImpl implements DailyLogService {
         this.reminderService = reminderService;
         this.medicationLogService = medicationLogService;
     }
-
+    @Scheduled(cron = "*/10 * * * * *") //runs every 10 seconds //  this code is for runs every day at midnight  "0 0 0 * * *"
     @Override
     public void addNewDailyMedicationLog() {
         List<Reminder> listOfDailyReminders  =  reminderService.getAllDailyReminders();
         for(Reminder reminder : listOfDailyReminders) {
             medicationLogService.addMedicationLog(reminder);
->>>>>>> origin/ricardo
         }
     }
 }

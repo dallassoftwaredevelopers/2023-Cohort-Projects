@@ -1,12 +1,10 @@
 package com.cohortE.cohortProject.service.impl;
 
 import com.cohortE.cohortProject.dto.MedicationLogDto;
-import com.cohortE.cohortProject.entity.Medication;
 import com.cohortE.cohortProject.entity.MedicationLog;
 import com.cohortE.cohortProject.entity.Reminder;
 import com.cohortE.cohortProject.repository.MedicationLogRepository;
 import com.cohortE.cohortProject.service.MedicationLogService;
-import com.cohortE.cohortProject.service.ReminderService;
 import com.cohortE.cohortProject.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +34,7 @@ public class MedicationLogServiceImpl implements MedicationLogService {
         return medicationLogDtos;
     }
 
-<<<<<<< HEAD
-=======
+
     @Override
     public void addMedicationLog(Reminder reminder) {
         MedicationLog medicationLog = new MedicationLog();
@@ -48,7 +45,6 @@ public class MedicationLogServiceImpl implements MedicationLogService {
     }
 
 
->>>>>>> origin/ricardo
     private MedicationLogDto mapEntityToDto(MedicationLog medicationLog) {
         MedicationLogDto medicationLogDto = new MedicationLogDto();
         medicationLogDto.setMedicationName(medicationLog.getReminder().getMedication().getMedicationName());
