@@ -17,4 +17,5 @@ public class MedicationLogDto {
     private LocalTime dosageTime;
     private boolean taken;
     private Long medicationLogId;
+    private Long medicationId;
 }

@@ -1,7 +1,7 @@
 package com.cohortE.cohortProject.controller;
 
 import com.cohortE.cohortProject.dto.MedicationDto;
-import com.cohortE.cohortProject.entity.Medication;
+import com.cohortE.cohortProject.service.MedicationLogService;
 import com.cohortE.cohortProject.service.MedicationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +13,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MedicationController {
 
     private final MedicationService medicationService;
+    private final MedicationLogService medicationLogService;
 
-    public MedicationController(MedicationService medicationService) {
+    public MedicationController(MedicationService medicationService, MedicationLogService medicationLogService) {
         this.medicationService = medicationService;
+        this.medicationLogService = medicationLogService;
     }
 
     @GetMapping("/medications")
     public String showMedicationList(Model model) {
-        model.addAttribute("medications", medicationService.getAllUserMedications());
+        //model.addAttribute("medications", medicationService.getAllUserMedications());
+        model.addAttribute("medicationLogs", medicationLogService.getDailyUsersMedicationLogs());
         return "medication/medication-list";
     }
 
