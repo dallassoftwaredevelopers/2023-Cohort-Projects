@@ -7,6 +7,7 @@ import com.cohortE.cohortProject.service.ReminderService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Service
 public class ReminderServiceImpl implements ReminderService {
@@ -23,5 +24,10 @@ public class ReminderServiceImpl implements ReminderService {
         reminder.setDosageTime(dosageTime);
         reminder.setMedication(medication);
         return reminderRepository.save(reminder);
+    }
+
+    public List<Reminder> getAllDailyReminders(){
+
+        return reminderRepository.findAllByMedicationDosageFrequency("Daily");
     }
 }

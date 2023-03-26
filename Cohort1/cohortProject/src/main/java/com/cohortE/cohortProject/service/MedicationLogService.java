@@ -7,4 +7,6 @@ import java.util.List;
 public interface MedicationLogService {
 
     public List<MedicationLogDto> getDailyUsersMedicationLogs();
+
+    void addNewDailyMedicationLog();
 }
