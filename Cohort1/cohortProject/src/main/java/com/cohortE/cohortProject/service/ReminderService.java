@@ -4,8 +4,11 @@ import com.cohortE.cohortProject.entity.Medication;
 import com.cohortE.cohortProject.entity.Reminder;
 
 import java.time.LocalTime;
+import java.util.List;
 
 public interface ReminderService {
 
     Reminder addReminder(Medication medication, LocalTime dosageTime);
+
+    public List<Reminder> getAllDailyReminders();
 }

@@ -1,7 +1,6 @@
 package com.cohortE.cohortProject.controller;
 
 import com.cohortE.cohortProject.dto.MedicationDto;
-import com.cohortE.cohortProject.entity.Medication;
 import com.cohortE.cohortProject.service.MedicationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,4 +40,6 @@ public class MedicationController {
         medicationService.addMedication(medicationDto);
         return "redirect:/medications";
     }
+
+
 }
