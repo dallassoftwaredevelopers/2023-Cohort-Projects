@@ -1,6 +1,7 @@
 package com.cohortE.cohortProject.service.impl;
 
 import com.cohortE.cohortProject.dto.MedicationLogDto;
+import com.cohortE.cohortProject.entity.Medication;
 import com.cohortE.cohortProject.entity.MedicationLog;
 import com.cohortE.cohortProject.entity.Reminder;
 import com.cohortE.cohortProject.repository.MedicationLogRepository;
@@ -17,12 +18,10 @@ import java.util.List;
 public class MedicationLogServiceImpl implements MedicationLogService {
     private final MedicationLogRepository medicationLogRepository;
     private final UserService userService;
-    private final ReminderService reminderService;
 
-    public MedicationLogServiceImpl(MedicationLogRepository medicationLogRepository, UserService userService, ReminderService reminderService) {
+    public MedicationLogServiceImpl(MedicationLogRepository medicationLogRepository, UserService userService) {
         this.medicationLogRepository = medicationLogRepository;
         this.userService = userService;
-        this.reminderService = reminderService;
     }
 
     public List<MedicationLogDto> getDailyUsersMedicationLogs(){
@@ -37,6 +36,19 @@ public class MedicationLogServiceImpl implements MedicationLogService {
         return medicationLogDtos;
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public void addMedicationLog(Reminder reminder) {
+        MedicationLog medicationLog = new MedicationLog();
+        medicationLog.setLogDate(LocalDate.now());
+        medicationLog.setTaken(false);
+        medicationLog.setReminder(reminder);
+        medicationLogRepository.save(medicationLog);
+    }
+
+
+>>>>>>> origin/ricardo
     private MedicationLogDto mapEntityToDto(MedicationLog medicationLog) {
         MedicationLogDto medicationLogDto = new MedicationLogDto();
         medicationLogDto.setMedicationName(medicationLog.getReminder().getMedication().getMedicationName());
