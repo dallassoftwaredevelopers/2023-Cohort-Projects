@@ -58,12 +58,12 @@
     </div>
     <div class="mb-3 w-25 mx-auto">
       <label for="pwd" class="form-label">Password:</label>
-      <input type="text" th:field="*{password}" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+      <input type="password" th:field="*{password}" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
       <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
     </div>
     <div class="mb-3 w-25 mx-auto">
       <label for="confirmpwd" class="form-label">Confirm Password:</label>
-      <input type="text" th:field="*{confirmPassword}" class="form-control" id="confirmpwd" placeholder="Confirm password" name="confirmpwd">
+      <input type="password" th:field="*{confirmPassword}" class="form-control" id="confirmpwd" placeholder="Confirm password" name="confirmpwd">
       <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></p>
       <br/>
 
