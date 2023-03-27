@@ -24,7 +24,7 @@ public class MedicationLogServiceImpl implements MedicationLogService {
 
     public List<MedicationLogDto> getDailyUsersMedicationLogs(){
         List<MedicationLog> medicationLogs =
-        medicationLogRepository.findByReminderMedicationUserId(userService.getCurrentUser().getId());
+        medicationLogRepository.findByLogDateAndReminderMedicationUserId(LocalDate.now(), userService.getCurrentUser().getId());
         List<MedicationLogDto> medicationLogDtos = new ArrayList<>();
 
         for(MedicationLog medicationLog : medicationLogs){
