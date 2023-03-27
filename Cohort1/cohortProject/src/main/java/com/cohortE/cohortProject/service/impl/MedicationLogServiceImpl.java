@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MedicationLogServiceImpl implements MedicationLogService {
@@ -42,6 +43,15 @@ public class MedicationLogServiceImpl implements MedicationLogService {
         medicationLog.setTaken(false);
         medicationLog.setReminder(reminder);
         medicationLogRepository.save(medicationLog);
+    }
+
+    @Override
+    public void updateTakenStatus(Long id) {
+        if (medicationLogRepository.existsById(id)) {
+            Optional<MedicationLog> medicationLog = medicationLogRepository.findById(id);
+            medicationLog.get().setTaken(true);
+            medicationLogRepository.save(medicationLog.get());
+        }
     }
 
 

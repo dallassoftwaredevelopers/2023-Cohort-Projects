@@ -59,7 +59,7 @@
                 <td th:text="${#temporals.format(med.dosageTime, 'h:mm a')}"></td>
                 <td>
                     <p class="btn btn-success disabled" th:if="${med.taken}">Taken</p>
-                    <a href="#" th:unless="${med.taken}" class="btn btn-warning">Not Taken</a>
+                    <a th:href="@{/medications/{logId}/status(logId=${med.medicationLogId})}" th:unless="${med.taken}" class="btn btn-warning">Not Taken</a>
                 </td>
                 <td>
 <!--                    <a href="#" class="btn btn-success">View</a>-->

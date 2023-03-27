@@ -11,4 +11,6 @@ public interface MedicationLogService {
 
     void addMedicationLog(Reminder reminder);
 
+    void updateTakenStatus(Long id);
+
 }

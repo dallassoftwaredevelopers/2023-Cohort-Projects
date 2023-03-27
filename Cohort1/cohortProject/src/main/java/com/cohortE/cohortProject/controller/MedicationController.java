@@ -45,5 +45,10 @@ public class MedicationController {
         return "redirect:/medications";
     }
 
+    @GetMapping("/medications/{logId}/status")
+    public String takeMedication(@PathVariable("logId") Long id) {
+        medicationLogService.updateTakenStatus(id);
+        return "redirect:/medications";
+    }
 
 }
