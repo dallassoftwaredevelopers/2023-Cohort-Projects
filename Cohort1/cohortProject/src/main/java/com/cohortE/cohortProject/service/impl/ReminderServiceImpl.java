@@ -1,5 +1,6 @@
 package com.cohortE.cohortProject.service.impl;
 
+import com.cohortE.cohortProject.dto.MedicationDto;
 import com.cohortE.cohortProject.entity.Medication;
 import com.cohortE.cohortProject.entity.Reminder;
 import com.cohortE.cohortProject.repository.ReminderRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReminderServiceImpl implements ReminderService {
@@ -29,6 +31,14 @@ public class ReminderServiceImpl implements ReminderService {
         Reminder newReminder =  reminderRepository.save(reminder);
         medicationLogService.addMedicationLog(newReminder);
         return newReminder;
+    }
+    @Override
+    public void updateDosageInfo(Long id, MedicationDto medicationDto){
+        Optional<Reminder> reminder = reminderRepository.findById(id);
+        reminder.get().setDosageTime(medicationDto.getDosageTime());
+        reminder.get().getMedication().setDosageFrequency(medicationDto.getDosageFrequency());
+        reminder.get().getMedication().setDosageAmount(medicationDto.getDosageAmount());
+        reminderRepository.save(reminder.get());
     }
 
     public List<Reminder> getAllDailyReminders(){
