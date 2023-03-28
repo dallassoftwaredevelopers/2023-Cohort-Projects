@@ -1,5 +1,6 @@
 package com.cohortE.cohortProject.service;
 
+import com.cohortE.cohortProject.dto.MedicationDto;
 import com.cohortE.cohortProject.entity.Medication;
 import com.cohortE.cohortProject.entity.Reminder;
 
@@ -14,4 +15,5 @@ public interface ReminderService {
     public List<Reminder> getAllDailyReminders();
 
     Optional<Reminder> getReminderById(Long reminderId);
+    void updateDosageInfo(Long id, MedicationDto medicationDto);
 }
