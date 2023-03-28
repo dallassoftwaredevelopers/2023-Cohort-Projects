@@ -3,21 +3,21 @@ package com.cohortE.cohortProject.controller;
 import com.cohortE.cohortProject.dto.MedicationDto;
 import com.cohortE.cohortProject.service.MedicationLogService;
 import com.cohortE.cohortProject.service.MedicationService;
+import com.cohortE.cohortProject.service.ReminderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MedicationController {
 
     private final MedicationService medicationService;
+    private final ReminderService reminderService;
     private final MedicationLogService medicationLogService;
 
-    public MedicationController(MedicationService medicationService, MedicationLogService medicationLogService) {
+    public MedicationController(MedicationService medicationService, ReminderService reminderService, MedicationLogService medicationLogService) {
         this.medicationService = medicationService;
+        this.reminderService = reminderService;
         this.medicationLogService = medicationLogService;
     }
 
@@ -55,7 +55,8 @@ public class MedicationController {
     }
 
     @PostMapping("/medications/{id}/update/{reminderId}")
-    public String updateMedication(@PathVariable("id") Long id, @PathVariable("reminderId") Long reminderId, @RequestBody MedicationDto medicationDto) {
+    public String updateMedication(@PathVariable("id") Long id, @PathVariable("reminderId") Long reminderId, @ModelAttribute("medication") MedicationDto medicationDto) {
+        reminderService.updateDosageInfo(reminderId, medicationDto);
         return "redirect:/medications";
     }
 
