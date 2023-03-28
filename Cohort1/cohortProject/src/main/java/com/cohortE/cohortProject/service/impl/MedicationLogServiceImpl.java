@@ -9,6 +9,7 @@ import com.cohortE.cohortProject.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +51,7 @@ public class MedicationLogServiceImpl implements MedicationLogService {
         if (medicationLogRepository.existsById(id)) {
             Optional<MedicationLog> medicationLog = medicationLogRepository.findById(id);
             medicationLog.get().setTaken(true);
+            medicationLog.get().setTimeTaken(LocalDateTime.now());
             medicationLogRepository.save(medicationLog.get());
         }
     }
