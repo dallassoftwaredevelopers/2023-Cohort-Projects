@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReminderServiceImpl implements ReminderService {
@@ -34,5 +35,10 @@ public class ReminderServiceImpl implements ReminderService {
     public List<Reminder> getAllDailyReminders(){
 
         return reminderRepository.findAllByMedicationDosageFrequency("Daily");
+    }
+
+    @Override
+    public Optional<Reminder> getReminderById(Long reminderId) {
+        return reminderRepository.findById(reminderId);
     }
 }

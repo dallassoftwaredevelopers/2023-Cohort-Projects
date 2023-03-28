@@ -64,6 +64,7 @@ public class MedicationLogServiceImpl implements MedicationLogService {
         medicationLogDto.setDosageTime(medicationLog.getReminder().getDosageTime());
         medicationLogDto.setTaken(medicationLog.isTaken());
         medicationLogDto.setMedicationLogId(medicationLog.getId());
+        medicationLogDto.setReminderId(medicationLog.getReminder().getId());
         medicationLogDto.setMedicationId(medicationLog.getReminder().getMedication().getId());
         return medicationLogDto;
     }

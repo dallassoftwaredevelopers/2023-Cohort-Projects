@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class MedicationController {
@@ -42,6 +43,19 @@ public class MedicationController {
     @PostMapping("/medications/new")
     public String addMedication(MedicationDto medicationDto) {
         medicationService.addMedication(medicationDto);
+        return "redirect:/medications";
+    }
+
+    @GetMapping("/medications/{id}/update/{reminderId}")
+    public String showUpdateMedicationForm(@PathVariable("id") Long id, @PathVariable("reminderId") Long reminderId, Model model) {
+        model.addAttribute("medication", medicationService.getMedicationWithReminder(id, reminderId));
+        model.addAttribute("medicationId", id);
+        model.addAttribute("reminderId", reminderId);
+        return "medication/update-medication";
+    }
+
+    @PostMapping("/medications/{id}/update/{reminderId}")
+    public String updateMedication(@PathVariable("id") Long id, @PathVariable("reminderId") Long reminderId, @RequestBody MedicationDto medicationDto) {
         return "redirect:/medications";
     }
 
