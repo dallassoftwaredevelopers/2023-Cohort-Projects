@@ -22,7 +22,7 @@ public class DailyLogServiceImpl implements DailyLogService {
         this.reminderService = reminderService;
         this.medicationLogService = medicationLogService;
     }
-    @Scheduled(cron = "*/10 * * * * *") //runs every 10 seconds //  this code is for runs every day at midnight  "0 0 0 * * *"
+    @Scheduled(cron = "0 0 0 * * *") //runs every 10 seconds "*/10 * * * * *"//  this code is for runs every day at midnight  "0 0 0 * * *"
     @Override
     public void addNewDailyMedicationLog() {
         List<Reminder> listOfDailyReminders  =  reminderService.getAllDailyReminders();
