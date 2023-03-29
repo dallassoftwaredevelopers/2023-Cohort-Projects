@@ -22,11 +22,16 @@ router.get('/', async (req, res) => {
     // after try/catch, if there are recipes, compare to saved recipes and
     // only save the ones in both for partial matching, a more complex data
     // structure would be needed
+
     try {
       const recipes = await Recipe.find({
-        'ingredientsList.ingredientName': searchIngredients[0],
+        'ingredientsList.ingredientName': { $all: searchIngredients },
       });
-      res.json(recipes);
+      if (recipes.length === 0) {
+        res.send('no recipes were found');
+      } else {
+        res.json(recipes);
+      }
     } catch (err) {
       res.json({ err });
     }
