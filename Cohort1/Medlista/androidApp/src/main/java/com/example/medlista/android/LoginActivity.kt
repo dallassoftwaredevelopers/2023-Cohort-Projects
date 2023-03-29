@@ -1,5 +1,6 @@
 package com.example.medlista.android
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -54,7 +55,7 @@ class LoginActivity : ComponentActivity() {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview2() {
+fun LoginViewPreview() {
     MedlistaTheme {
         LoginView()
     }
@@ -71,7 +72,8 @@ fun LoginView() {
     }
 
     var showProgress by remember { mutableStateOf(false) }
-//        val context = LocalContext.current
+
+    val context = LocalContext.current
 
     val loginViewModel = viewModel<LoginViewModel>()
 
@@ -89,14 +91,14 @@ fun LoginView() {
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        androidx.compose.foundation.Image(
-            painter = painterResource(id = R.drawable.pills),
-            contentDescription = "Image of medication pills.",
-            modifier = Modifier
-                .fillMaxSize()
-                .blur(4.dp),
-            contentScale = ContentScale.Crop
-        )
+//        androidx.compose.foundation.Image(
+//            painter = painterResource(id = R.drawable.pills),
+//            contentDescription = "Image of medication pills.",
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .blur(4.dp),
+//            contentScale = ContentScale.Crop
+//        )
 
         Box(
             modifier = Modifier
@@ -138,6 +140,7 @@ fun LoginView() {
                 },
                 onSignUpClick = {
                     showProgress = true
+                    navigateToRegister(context)
                 }
             )
         }
@@ -200,10 +203,7 @@ fun LoginFooter(
         Button(onClick = onSignInClick, modifier = Modifier.fillMaxWidth()) {
             Text(text = "Sign In")
         }
-        TextButton(onClick = {
-            val intent = Intent(context, RegisterActivity::class.java)
-            context.startActivity(intent)
-        }) {
+        TextButton(onClick = onSignUpClick) {
             Text(text = "Don't have an account, click here")
         }
         Spacer(modifier = Modifier.padding(bottom = 50.dp))
@@ -243,4 +243,8 @@ fun InputField(
 fun NavigateToHome() {
     val context = LocalContext.current
     context.startActivity(Intent(context, HomeScreen::class.java))
+}
+
+fun navigateToRegister(context: Context) {
+    context.startActivity(Intent(context, RegisterActivity::class.java))
 }
