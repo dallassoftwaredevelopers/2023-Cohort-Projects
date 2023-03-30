@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class MedicationLogServiceImpl implements MedicationLogService {
     private final MedicationLogRepository medicationLogRepository;
     private final UserService userService;
+    private static final ZoneId CENTRAL_TIME_ZONE = ZoneId.of("America/Chicago");
 
     public MedicationLogServiceImpl(MedicationLogRepository medicationLogRepository, UserService userService) {
         this.medicationLogRepository = medicationLogRepository;
@@ -26,7 +28,7 @@ public class MedicationLogServiceImpl implements MedicationLogService {
 
     public List<MedicationLogDto> getDailyUsersMedicationLogs(){
         List<MedicationLog> medicationLogs =
-        medicationLogRepository.findByLogDateAndReminderMedicationUserId(LocalDate.now(), userService.getCurrentUser().getId());
+        medicationLogRepository.findByLogDateAndReminderMedicationUserId(LocalDate.now(CENTRAL_TIME_ZONE), userService.getCurrentUser().getId());
         List<MedicationLogDto> medicationLogDtos = new ArrayList<>();
 
         for(MedicationLog medicationLog : medicationLogs){
@@ -40,7 +42,7 @@ public class MedicationLogServiceImpl implements MedicationLogService {
     @Override
     public void addMedicationLog(Reminder reminder) {
         MedicationLog medicationLog = new MedicationLog();
-        medicationLog.setLogDate(LocalDate.now());
+        medicationLog.setLogDate(LocalDate.now(CENTRAL_TIME_ZONE));
         medicationLog.setTaken(false);
         medicationLog.setReminder(reminder);
         medicationLogRepository.save(medicationLog);
@@ -51,7 +53,7 @@ public class MedicationLogServiceImpl implements MedicationLogService {
         if (medicationLogRepository.existsById(id)) {
             Optional<MedicationLog> medicationLog = medicationLogRepository.findById(id);
             medicationLog.get().setTaken(true);
-            medicationLog.get().setTimeTaken(LocalDateTime.now());
+            medicationLog.get().setTimeTaken(LocalDateTime.now(CENTRAL_TIME_ZONE));
             medicationLogRepository.save(medicationLog.get());
         }
     }
