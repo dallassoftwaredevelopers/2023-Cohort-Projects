@@ -8,10 +8,18 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const recipesController = require('./controllers/recipe');
 
-app.use(cors());
 app.use(helmet());
-app.use('/api/recipes', recipesController);
 
+// Add a list of allowed origins.
+// If you have more origins you would like to add, you can add them to the array below.
+const allowedOrigins = ['http://localhost:3000', 'https://dsd-teamb-tbd.netlify.app/'];
+
+const options = {
+  origin: allowedOrigins,
+};
+
+app.use(cors(options));
+app.use('/api/recipes', recipesController);
 
 // this will be removed once the endpoints are being created
 // it is just with the initial creation of the express app to test that it is running
