@@ -38,4 +38,15 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Get Receipe by ID...
+router.get('/:id', async (req, res) => {
+  try {
+    const recipe = await Recipe.findById({ _id: req.params.id });
+    res.send(recipe);
+  } catch {
+    res.status(404);
+    res.send({ error: "Recipe doesn't exist!" });
+  }
+});
+
 module.exports = router;
