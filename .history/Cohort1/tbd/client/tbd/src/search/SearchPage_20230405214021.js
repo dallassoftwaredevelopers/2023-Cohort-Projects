@@ -1,4 +1,19 @@
 import './search.css';
+<<<<<<< HEAD
+
+
+export default function SearchPage() {
+	return (
+		<div id="search-bg">
+			<h1>Super Cook</h1>
+			<p>
+				You can make 764 Recipes
+			</p>
+			<input type="text" placeholder="Recipe search..."></input>
+		</div>
+	);
+}
+=======
 import React, { useState } from 'react';
 import api from '../api';
 import SearchResult from './SearchResult';
@@ -39,3 +54,4 @@ export default function SearchPage() {
 		</>
   );
 }
+>>>>>>> 57d5a0cb8512f33f6f097e86008c69724efcaede
