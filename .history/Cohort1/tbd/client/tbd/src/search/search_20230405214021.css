@@ -33,6 +33,20 @@ input {
 
 #search-bg {
     background-color: #DC143C;
+<<<<<<< HEAD
+    /* width: 1000px; */
+    height: 150px;
+    /* margin: -29rem 0 0 250px; */
+}
+
+#search-bg h1{
+    color: #fff;
+}
+
+#search-bg p{
+    color: #fff;
+}
+=======
     height: 150px;
 }
 
@@ -64,3 +78,4 @@ input {
 	padding-top: 8px;
 	font-size: 24px;
 }
+>>>>>>> 57d5a0cb8512f33f6f097e86008c69724efcaede
