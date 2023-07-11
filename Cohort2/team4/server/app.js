@@ -8,7 +8,7 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 
-console.log(process.env.TEST);
+console.log(process.env.TEST); //dotenv test check:success
 
 const PORT = 3000;
 
