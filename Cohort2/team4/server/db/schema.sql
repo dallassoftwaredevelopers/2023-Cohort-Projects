@@ -3,7 +3,7 @@ CREATE DATABASE dsd_eventmgmt;
 USE dsd_eventmgmt;
 
 CREATE TABLE users (
-    user_id INT NOT NULL PRIMARY KEY,
+    user_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(30) UNIQUE NOT NULL,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE events (
-    event_id INT NOT NULL PRIMARY KEY,
+    event_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
     short_description VARCHAR(255),
     long_description MEDIUMTEXT,
