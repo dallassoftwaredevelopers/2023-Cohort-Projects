@@ -3,8 +3,8 @@ require('dotenv').config();
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
-  process.env.DB_USER || 'ix1v91q5n3s6myphw3hs',
-  process.env.DB_PASSWORD || 'pscale_pw_DZW0GlTvKGk9AdOofRgs85ijXXGuqTgCN1FCHmSFIDJ',
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
     host: 'aws.connect.psdb.cloud',
     dialect: 'mysql',
