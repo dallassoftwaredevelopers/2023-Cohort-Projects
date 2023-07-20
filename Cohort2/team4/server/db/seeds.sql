@@ -6,11 +6,12 @@ VALUES
     (3, 'mike@example.com', 'Mike', 'Johnson');
 
 -- Seed data for the 'events' table
-INSERT INTO events (event_id, event_name, event_short_description, event_long_description, event_city, event_state, event_country, event_address, event_date, event_host)
-VALUES
-    (1, 'Conference 2023', 'A conference for professionals', 'This conference brings together experts from various industries to discuss the latest trends and innovations.', 'New York', 'NY', 'USA', '123 Main St', '2023-10-15 09:00:00', 1),
-    (2, 'Workshop Series', 'Hands-on workshops for skill development', 'Join us for a series of workshops where you can learn practical skills and techniques.', 'San Francisco', 'CA', 'USA', '456 Elm St', '2023-09-22 14:30:00', 2),
-    (3, 'Networking Event', 'An evening of networking and socializing', 'Connect with professionals from various industries and expand your network.', 'London', 'N/A', 'UK', '789 Oak St', '2023-11-05 18:00:00', 3);
+INSERT INTO events (name, short_description, long_description, city, state, country, address, start_time, end_time, host) 
+VALUES 
+    ('Tech Conference 2023', 'Cutting-edge tech talks', 'Join us for a tech conference featuring talks on AI, blockchain, and more.', 'New York City', 'New York', 'United States', '123 Tech Street', '2023-07-20 09:00:00', '2023-07-21 18:00:00', 1),
+    ('Music Festival 2023', 'Live performances and fun', 'A weekend of live music with top bands and exciting activities.', 'Los Angeles', 'California', 'United States', '456 Music Avenue', '2023-07-28 16:00:00', '2023-07-30 23:59:00', 2),
+    ('Art Exhibition "Expressions"', 'Artworks by local artists', 'Explore various art pieces that express emotions and creativity.', 'London', NULL, 'United Kingdom', '789 Art Gallery Road', '2023-08-05 10:00:00', '2023-08-10 19:00:00', 3),
+    ('Food Festival 2023', 'Cuisine from around the world', 'Taste the finest dishes from diverse cultures in this food extravaganza.', 'Sydney', 'New South Wales', 'Australia', '10 Foodie Lane', '2023-08-15 12:00:00', '2023-08-17 22:00:00', 1);
 
 -- -- Seed data for the 'event_attendee' table
 -- INSERT INTO event_attendee (attendance_id, event_id, user_id, speaker, date_registered)
