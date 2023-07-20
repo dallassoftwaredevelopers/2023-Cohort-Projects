@@ -1,3 +1,5 @@
+// Landing Page
+
 import React from 'react';
 
 const LandingPage: React.FC = () => {
