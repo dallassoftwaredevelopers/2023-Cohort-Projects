@@ -20,9 +20,8 @@ CREATE TABLE events (
     country VARCHAR(255),
     address VARCHAR(255),
     start_time DATETIME NOT NULL,
-    end_time DATETIME NOT NULL
+    end_time DATETIME NOT NULL,
     host INT,
-    FOREIGN KEY (  host) REFERENCES users(id)
 );
 
 -- CREATE TABLE event_attendee (
