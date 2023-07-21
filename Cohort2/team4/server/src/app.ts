@@ -7,6 +7,7 @@ const sequelize = require('./config/connection');
 import * as middlewares from './middlewares';
 import api from './api';
 import MessageResponse from './interfaces/MessageResponse';
+import { any } from 'zod';
 
 require('dotenv').config();
 
@@ -19,7 +20,7 @@ app.use(express.json());
 
 app.get<{}, MessageResponse>('/', (req, res) => {
   res.json({
-    message: 'Hello World!',
+    message: 'Hello World',
   });
 });
 
