@@ -26,13 +26,8 @@
     "helmet": "^7.0.0",
     "morgan": "^1.10.0",
     "mysql2": "^3.5.1",
-<<<<<<< HEAD
-    "sequelize": "^6.32.1",
-=======
-    "reflect-metadata": "^0.1.13",
     "sequelize": "^6.32.1",
     "sequelize-typescript": "^2.1.5",
->>>>>>> 5511a0196dd7442c42878896c4a16e05aca1afe6
     "zod": "^3.21.4"
   },
   "devDependencies": {

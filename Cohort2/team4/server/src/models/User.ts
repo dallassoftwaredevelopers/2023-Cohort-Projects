@@ -23,7 +23,6 @@ class User extends Model {
     @AllowNull(false)
     @Column(DataType.STRING(255))
     auth_key!: string;
-    
 }
 
 export default User;
