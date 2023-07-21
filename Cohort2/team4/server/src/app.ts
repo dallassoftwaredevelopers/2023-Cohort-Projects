@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
 const sequelize = require('./config/connection');
+import { ParamsDictionary } from 'express-serve-static-core';
 import User from './models/User';
 
 import * as middlewares from './middlewares';
@@ -23,6 +24,22 @@ app.use(express.json());
 
 app.use('/api/v1', api);
 
+app.get<ParamsDictionary, MessageResponse>('/users/all', async (req, res) => {
+  console.info('We are at the top of the /users/all route');
+  try {
+    const response = await User.findAll();
+    if (response) {
+      res.json({ message: 'Users found', data: response });
+    } else {
+      res.status(404).json({ message: 'User not found', data: null });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error', data: {error} });
+    console.error(error);
+  } 
+});
+
+
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
 
@@ -30,10 +47,6 @@ const testConnection = async () => {
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
-
-    //Test Connection After Authentication
-    const allUser = await sequelize.query('SELECT * FROM user');
-    console.log(allUser)
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
