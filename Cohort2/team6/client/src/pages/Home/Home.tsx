@@ -1,5 +1,5 @@
-import { Box, Heading } from "@chakra-ui/react"
-import { FormExample } from "./components/FormExample/FormExample"
+import { Box, Heading } from "@chakra-ui/react";
+import { FormExample } from "./components/FormExample/FormExample";
 
 export const Home = () => {
   return (
@@ -7,5 +7,5 @@ export const Home = () => {
       <Heading>Home Page</Heading>
       <FormExample />
     </Box>
-  )
-}
+  );
+};
