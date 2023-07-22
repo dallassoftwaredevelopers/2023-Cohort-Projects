@@ -1,5 +1,5 @@
 import express from 'express';
-import User from '../models/User';
+import User from '../models/Users';
 import MessageResponse from '../interfaces/MessageResponse';
 import { ParamsDictionary } from 'express-serve-static-core';
 

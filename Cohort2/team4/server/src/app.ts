@@ -2,9 +2,9 @@ import express from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
-const sequelize = require('./config/connection');
+import sequelize from './config/connection';
 import { ParamsDictionary } from 'express-serve-static-core';
-import User from './models/User';
+import User from './models/Users';
 
 import * as middlewares from './middlewares';
 import api from './api';
@@ -47,6 +47,8 @@ const testConnection = async () => {
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
+    const response = await User.findAll();
+    console.log('response', response);
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }

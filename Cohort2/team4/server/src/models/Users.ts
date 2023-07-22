@@ -1,7 +1,7 @@
 import { Table, Column, PrimaryKey, Model, Unique, AutoIncrement, DataType, AllowNull } from 'sequelize-typescript';
 
-@Table({ tableName: 'users' })
-class User extends Model {
+@Table({ tableName: 'users', timestamps: false })
+class Users extends Model {
     @PrimaryKey
     @AutoIncrement
     @Column(DataType.INTEGER)
@@ -25,4 +25,4 @@ class User extends Model {
     auth_key!: string;
 }
 
-export default User;
+export default Users;
