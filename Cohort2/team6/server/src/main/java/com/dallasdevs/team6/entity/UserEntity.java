@@ -7,13 +7,13 @@ import jakarta.persistence.Table;
 
 @Table(name = "users")
 @Entity
-public class User {
+public class UserEntity {
     @Id
     @Column(name="uuid")
     private String uuid;
 
-    @Column(name="username")
-    private String username;
+    @Column(name="email")
+    private String email;
 
     @Column(name="password")
     private String password;
@@ -32,12 +32,12 @@ public class User {
         this.uuid = uuid;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(final String username) {
-        this.username = username;
+    public void setEmail(final String email) {
+        this.email = email;
     }
 
     public String getPassword() {
