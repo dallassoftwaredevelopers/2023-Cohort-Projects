@@ -1,5 +1,5 @@
 import express from 'express';
-import User from '../models/Users';
+import Users from '../models/Users';
 import MessageResponse from '../interfaces/MessageResponse';
 import { ParamsDictionary } from 'express-serve-static-core';
 
@@ -23,7 +23,7 @@ router.get<{}, MessageResponse>('/emojis', (req, res) => {
 //Test Route Find One
 router.get<ParamsDictionary, MessageResponse>('/users/:id', async (req, res) => {
   try {
-    const response = await User.findByPk(req.params.id);
+    const response = await Users.findByPk(req.params.id);
     if (response) {
       res.json({ message: 'User found', data: response });
     } else {
@@ -33,8 +33,6 @@ router.get<ParamsDictionary, MessageResponse>('/users/:id', async (req, res) => 
     res.status(500).json({ message: 'Internal server error', data: null });
   }
 });
-
-//Test Route Find All
 
 
 export default router;
