@@ -1,5 +1,6 @@
 {
   "name": "express-api-starter-ts",
+  "type": "module",
   "version": "1.2.0",
   "description": " A basic starter for an express.js API with Typescript",
   "main": "src/index.ts",
@@ -29,6 +30,7 @@
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.32.1",
     "sequelize-typescript": "^2.1.5",
+    "superjson": "^1.13.1",
     "zod": "^3.21.4"
   },
   "devDependencies": {

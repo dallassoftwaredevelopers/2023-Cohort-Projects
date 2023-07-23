@@ -5,7 +5,6 @@ import cors from 'cors';
 const sequelize = require('./config/connection');
 
 import * as middlewares from './middlewares';
-import api from './api';
 import MessageResponse from './interfaces/MessageResponse';
 
 require('dotenv').config();
@@ -23,7 +22,27 @@ app.get<{}, MessageResponse>('/', (req, res) => {
   });
 });
 
-app.use('/api/v1', api);
+//TRPC INIT TESTING
+
+import { inferAsyncReturnType } from '@trpc/server';
+import * as trpcExpress from '@trpc/server/adapters/express';
+import { appRouter } from './routers/_app';
+
+// created for each request
+const createContext = ({
+  req,
+  res,
+}: trpcExpress.CreateExpressContextOptions) => ({}); // no context
+type Context = inferAsyncReturnType<typeof createContext>;
+
+app.use(
+  '/trpc',
+  trpcExpress.createExpressMiddleware({
+    router: appRouter,
+    createContext,
+  }),
+);
+
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
