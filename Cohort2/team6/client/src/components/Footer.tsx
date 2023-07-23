@@ -7,7 +7,7 @@ import {
   useColorModeValue,
   VisuallyHidden,
 } from "@chakra-ui/react";
-import { FaGithub, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import { ReactNode } from "react";
 
 const SocialButton = ({
@@ -55,7 +55,7 @@ export default function SmallCentered() {
     >
       <Container
         as={Stack}
-        maxW={"6xl"}
+        maxW={"7xl"}
         py={4}
         direction={{ base: "column", md: "row" }}
         spacing={4}
