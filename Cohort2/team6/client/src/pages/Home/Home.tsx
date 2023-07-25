@@ -1,11 +1,12 @@
 import { Box, Heading } from "@chakra-ui/react";
-import { FormExample } from "./components/FormExample/FormExample";
+import Carousel from "../Home/components/Carousel/Carousel";
+import EventCardContainer from "../Home/components/EventCardContainer/EventCardContainer";
 
 export const Home = () => {
   return (
     <Box>
-      <Heading>Home Page</Heading>
-      <FormExample />
+      <Carousel />
+      <EventCardContainer />
     </Box>
   );
 };
