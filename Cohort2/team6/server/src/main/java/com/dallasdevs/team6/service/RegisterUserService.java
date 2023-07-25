@@ -11,7 +11,7 @@ import java.util.UUID;
 public class RegisterUserService {
     private final PasswordEncryptionService passwordEncryptionService;
     private final UserDao userDao;
-    private final UserMapper  userMapper;
+    private final UserMapper userMapper;
 
     public RegisterUserService(final PasswordEncryptionService passwordEncryptionService, final UserDao userDao, final UserMapper userMapper) {
         this.passwordEncryptionService = passwordEncryptionService;
