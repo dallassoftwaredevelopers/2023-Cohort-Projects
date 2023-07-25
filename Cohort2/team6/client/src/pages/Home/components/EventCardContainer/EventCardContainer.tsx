@@ -7,19 +7,48 @@ function EventCardContainer() {
     will have to have Event Card Styled and interface made that's appropriate
 
     */
-  const data = [
-    { id: 1, title: "Card 1", content: "Content of Card 1" },
-    { id: 2, title: "Card 2", content: "Content of Card 2" },
-    { id: 3, title: "Card 3", content: "Content of Card 3" },
-    { id: 4, title: "Card 4", content: "Content of Card 4" },
-    { id: 5, title: "Card 5", content: "Content of Card 5" },
-    // Add more data for additional cards...
+  const dummyData = [
+    {
+      eventId: "1",
+      userId: "user1",
+      title: "Event 1",
+      date: "2023-07-30",
+      time: "15:00",
+      description:
+        "This is Event 1 This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1",
+      price: 10,
+      location: "Sample Location 1",
+      image_url: "https://example.com/image1.jpg",
+    },
+    {
+      eventId: "2",
+      userId: "user2",
+      title: "Event 2",
+      date: "2023-08-05",
+      time: "18:30",
+      description: "This is Event 2",
+      price: 15,
+      location: "Sample Location 2",
+      image_url: "https://example.com/image2.jpg",
+    },
+    // Add more objects for the remaining 4 events...
+    {
+      eventId: "6",
+      userId: "user6",
+      title: "Event 6",
+      date: "2023-09-20",
+      time: "12:00",
+      description: "This is Event 6",
+      price: 20,
+      location: "Sample Location 6",
+      image_url: "https://example.com/image6.jpg",
+    },
   ];
   return (
     <SimpleGrid minChildWidth={{ base: "340px", md: "500px" }} spacing="4">
-      {data.map((item) => (
-        <Box key={item.id} borderRadius="lg" p="4">
-          <EventCard />
+      {dummyData.map((event) => (
+        <Box key={event.eventId} borderRadius="lg" p="4">
+          <EventCard {...event} />
         </Box>
       ))}
     </SimpleGrid>
