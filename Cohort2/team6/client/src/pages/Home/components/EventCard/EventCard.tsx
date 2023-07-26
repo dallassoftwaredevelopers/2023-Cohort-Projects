@@ -10,7 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-import { EventTypes } from "./EventCard.types";
+import { EventTypes } from "../../../../types/Event.types";
 import { ArrowRightIcon } from "@chakra-ui/icons";
 
 export default function EventCard({
