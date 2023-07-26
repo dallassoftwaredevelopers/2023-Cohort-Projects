@@ -50,8 +50,7 @@ export default function SmallCentered() {
       borderStyle={"solid"}
       borderColor={useColorModeValue("gray.200", "gray.700")}
       bottom={0}
-      position="fixed"
-      width="100%"
+      /*position="fixed"*/ width="100%"
     >
       <Container
         as={Stack}
