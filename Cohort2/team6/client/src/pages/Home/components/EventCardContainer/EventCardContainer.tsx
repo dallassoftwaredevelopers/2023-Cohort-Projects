@@ -45,7 +45,11 @@ function EventCardContainer() {
     },
   ];
   return (
-    <SimpleGrid minChildWidth={{ base: "340px", md: "500px" }} spacing="4">
+    <SimpleGrid
+      minChildWidth={{ base: "330px", lg: "400px", xl: "480px" }}
+      spacing="4"
+      mx={-4}
+    >
       {dummyData.map((event) => (
         <Box key={event.eventId} borderRadius="lg" p="4">
           <EventCard {...event} />
