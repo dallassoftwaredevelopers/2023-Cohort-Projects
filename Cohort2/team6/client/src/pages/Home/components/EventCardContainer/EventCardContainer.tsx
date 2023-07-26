@@ -18,7 +18,8 @@ function EventCardContainer() {
         "This is Event 1 This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1",
       price: 10,
       location: "111 Park Vista Blvd, Fort Worth, TX, 76244",
-      image_url: "https://example.com/image1.jpg",
+      image_url:
+        "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     },
     {
       eventId: "2",
@@ -29,7 +30,8 @@ function EventCardContainer() {
       description: "This is Event 2",
       price: 15,
       location: "111 Park Vista Blvd, Fort Worth, TX, 76244",
-      image_url: "https://example.com/image2.jpg",
+      image_url:
+        "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     },
     // Add more objects for the remaining 4 events...
     {
@@ -41,7 +43,8 @@ function EventCardContainer() {
       description: "This is Event 6",
       price: 20,
       location: "111 Park Vista Blvd, Fort Worth, TX, 76244",
-      image_url: "https://example.com/image6.jpg",
+      image_url:
+        "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     },
   ];
   return (

@@ -9,7 +9,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:react-hooks/recommended",
   ],
-  ignorePatterns: ["**/vitest.config.ts"],
+  ignorePatterns: ["**/vitest.config.ts", "setup.js", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
