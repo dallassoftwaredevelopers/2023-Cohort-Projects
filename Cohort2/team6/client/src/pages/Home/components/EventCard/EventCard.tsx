@@ -10,10 +10,10 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-import { EventCard } from "./EventCard.types";
+import { EventTypes } from "./EventCard.types";
 import { ArrowRightIcon } from "@chakra-ui/icons";
 
-export default function blogPostWithImage({
+export default function EventCard({
   eventId,
   userId,
   title,
@@ -23,7 +23,7 @@ export default function blogPostWithImage({
   price,
   location,
   image_url,
-}: EventCard) {
+}: EventTypes) {
   const truncatedDescription =
     description.length > 60 ? description.slice(0, 100) + "..." : description;
   const locationArr = location.split(",");
