@@ -1,6 +1,5 @@
 package com.dallasdevs.team6.dao;
 
-import com.dallasdevs.team6.entity.EventEntity;
 import com.dallasdevs.team6.entity.UserEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
