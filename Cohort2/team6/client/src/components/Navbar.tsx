@@ -39,7 +39,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
     rounded={"md"}
     _hover={{
       textDecoration: "none",
-      bg: "teal",
+      bg: "#149a9a",
       textColor: "white",
     }}
     href={"#"}
@@ -108,10 +108,35 @@ export default function Simple() {
                   </Box>
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>Account Info</MenuItem>
-                  <MenuItem>Events Attending</MenuItem>
+                  <MenuItem
+                    _hover={{
+                      textDecoration: "none",
+                      bg: "#149a9a",
+                      textColor: "white",
+                    }}
+                  >
+                    Account Info
+                  </MenuItem>
+                  <MenuItem
+                    _hover={{
+                      textDecoration: "none",
+                      bg: "#149a9a",
+                      textColor: "white",
+                    }}
+                  >
+                    Events Attending
+                  </MenuItem>
                   <MenuDivider />
-                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  <MenuItem
+                    _hover={{
+                      textDecoration: "none",
+                      bg: "#149a9a",
+                      textColor: "white",
+                    }}
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </MenuItem>
                 </MenuList>
               </Menu>
             </Flex>
