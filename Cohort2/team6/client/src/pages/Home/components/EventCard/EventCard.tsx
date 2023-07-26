@@ -64,23 +64,29 @@ export default function blogPostWithImage({
           direction="column"
           justifyContent="space-evenly"
         >
-          <Heading
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            color={"teal"}
-            fontSize={"2xl"}
-            fontFamily={"body"}
+          <Flex
+            direction="row"
+            justifyContent={"space-between"}
+            alignItems={"flex-end"}
           >
-            {title}
-          </Heading>
-          <Text
-            colorScheme="teal"
-            textTransform={"uppercase"}
-            fontWeight={800}
-            fontSize={"xs"}
-            letterSpacing={1.1}
-          >
-            {date} at {time}
-          </Text>{" "}
+            <Heading
+              // eslint-disable-next-line react-hooks/rules-of-hooks
+              color={"teal"}
+              fontSize={"3xl"}
+              fontFamily={"body"}
+            >
+              {title}
+            </Heading>
+            <Text
+              colorScheme="teal"
+              textTransform={"uppercase"}
+              fontWeight={800}
+              fontSize={"xs"}
+              letterSpacing={1.1}
+            >
+              {date} at {time}
+            </Text>
+          </Flex>
           <hr />
           <Text h={"50px"}>{truncatedDescription}</Text>{" "}
           <Flex
@@ -89,7 +95,9 @@ export default function blogPostWithImage({
             alignItems={"flex-end"}
             justifyContent={"space-between"}
           >
-            <Text fontWeight={600}>{cityState}</Text>
+            <Text fontWeight={600} fontSize={"1.4rem"}>
+              {cityState}
+            </Text>
             <a href="www.google.com">
               <Button
                 fontSize={{ base: "md", lg: "lg" }}
