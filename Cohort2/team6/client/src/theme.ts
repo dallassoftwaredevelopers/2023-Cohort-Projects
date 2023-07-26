@@ -5,6 +5,7 @@ const theme = extendTheme({
     customScheme: {
       darkBlue: "#23304A",
       lightBlue: "#057ADA",
+      tealHover: "45bcbc",
       // Add more shades if needed
     },
   },
