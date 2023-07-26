@@ -9,6 +9,7 @@ import {
   Heading,
   Container,
   Button,
+  Text,
 } from "@chakra-ui/react";
 // Here we have used react-icons package for the icons
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
@@ -83,7 +84,7 @@ export default function CaptionCarousel() {
       />
       {/* Left Icon */}
       <IconButton
-        colorScheme="teal"
+        color="black"
         aria-label="left-arrow"
         variant="ghost"
         position="absolute"
@@ -98,7 +99,7 @@ export default function CaptionCarousel() {
       </IconButton>
       {/* Right Icon */}
       <IconButton
-        colorScheme="teal"
+        color="black"
         aria-label="right-arrow"
         variant="ghost"
         position="absolute"
@@ -135,7 +136,15 @@ export default function CaptionCarousel() {
               zIndex={1}
             >
               <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
-                {cards[0].title}
+                Welcome to{" "}
+                <Text
+                  as={"span"}
+                  fontFamily={"Lobster"}
+                  letterSpacing={"2px"}
+                  fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
+                >
+                  Eventli
+                </Text>
               </Heading>
               <a href="www.google.com">
                 <Button
