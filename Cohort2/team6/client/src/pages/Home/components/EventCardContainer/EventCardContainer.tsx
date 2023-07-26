@@ -17,7 +17,7 @@ function EventCardContainer() {
       description:
         "This is Event 1 This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1This is Event 1",
       price: 10,
-      location: "Sample Location 1",
+      location: "111 Park Vista Blvd, Fort Worth, TX, 76244",
       image_url: "https://example.com/image1.jpg",
     },
     {
@@ -28,7 +28,7 @@ function EventCardContainer() {
       time: "18:30",
       description: "This is Event 2",
       price: 15,
-      location: "Sample Location 2",
+      location: "111 Park Vista Blvd, Fort Worth, TX, 76244",
       image_url: "https://example.com/image2.jpg",
     },
     // Add more objects for the remaining 4 events...
@@ -40,7 +40,7 @@ function EventCardContainer() {
       time: "12:00",
       description: "This is Event 6",
       price: 20,
-      location: "Sample Location 6",
+      location: "111 Park Vista Blvd, Fort Worth, TX, 76244",
       image_url: "https://example.com/image6.jpg",
     },
   ];

@@ -6,9 +6,12 @@ import {
   Stack,
   useColorModeValue,
   Image,
+  Flex,
+  Button,
 } from "@chakra-ui/react";
 
 import { EventCard } from "./EventCard.types";
+import { ArrowRightIcon } from "@chakra-ui/icons";
 
 export default function blogPostWithImage({
   eventId,
@@ -21,6 +24,11 @@ export default function blogPostWithImage({
   location,
   image_url,
 }: EventCard) {
+  const truncatedDescription =
+    description.length > 60 ? description.slice(0, 100) + "..." : description;
+  const locationArr = location.split(",");
+  const cityState = locationArr.slice(-3, -1).join(", "); // Get the last 3 elements and join them back with a comma and space
+
   return (
     <Center py={6}>
       <Box
@@ -50,27 +58,51 @@ export default function blogPostWithImage({
             alt="Example"
           />
         </Box>
-        <Stack>
+        <Flex
+          h={"auto"}
+          minH={{ base: "250px" }}
+          direction="column"
+          justifyContent="space-evenly"
+        >
           <Heading
             // eslint-disable-next-line react-hooks/rules-of-hooks
-            color={useColorModeValue("gray.700", "white")}
+            color={"teal"}
             fontSize={"2xl"}
             fontFamily={"body"}
           >
             {title}
-          </Heading>{" "}
+          </Heading>
           <Text
             colorScheme="teal"
             textTransform={"uppercase"}
             fontWeight={800}
-            fontSize={"sm"}
+            fontSize={"xs"}
             letterSpacing={1.1}
           >
             {date} at {time}
-          </Text>
-          <Text>{description}</Text> <Text fontWeight={600}>{price}</Text>
-          <Text fontWeight={600}>{location}</Text>
-        </Stack>
+          </Text>{" "}
+          <hr />
+          <Text h={"50px"}>{truncatedDescription}</Text>{" "}
+          <Flex
+            direction="row"
+            w={"100%"}
+            alignItems={"flex-end"}
+            justifyContent={"space-between"}
+          >
+            <Text fontWeight={600}>{cityState}</Text>
+            <a href="www.google.com">
+              <Button
+                fontSize={{ base: "md", lg: "lg" }}
+                colorScheme="teal"
+                zIndex={2}
+                cursor={"pointer"}
+                width={"auto"}
+              >
+                View Event <ArrowRightIcon ml={4} boxSize={3} mb={0.5} />
+              </Button>
+            </a>
+          </Flex>
+        </Flex>
       </Box>
     </Center>
   );
