@@ -20,16 +20,13 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.1",
     "react-icons": "^4.10.1",
-<<<<<<< HEAD
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.1",
     "redux": "^4.2.1",
-    "redux-persist": "^6.0.0"
-=======
+    "redux-persist": "^6.0.0",
     "react-router-dom": "^6.14.1",
     "react-slick": "^0.29.0",
     "uuidv4": "^6.2.13"
->>>>>>> ec842c591c422460b8b76436adedcb23056f9dca
   },
   "devDependencies": {
     "@types/react": "^18.2.14",
