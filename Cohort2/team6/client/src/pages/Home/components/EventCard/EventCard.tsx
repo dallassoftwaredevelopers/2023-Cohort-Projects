@@ -12,7 +12,7 @@ import {
 
 import { EventTypes } from "../../../../types/Event.types";
 import { ArrowRightIcon } from "@chakra-ui/icons";
-import { getFormattedDate } from "../../../../helpers/getFormattedData";
+import { getFormattedDate } from "../../../../helpers/getFormattedDate";
 import { convertTo12HourFormat } from "../../../../helpers/convertTo12HourTime";
 
 export default function EventCard({
