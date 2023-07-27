@@ -39,7 +39,8 @@ const NavLink = ({ children }: { children: ReactNode }) => (
     rounded={"md"}
     _hover={{
       textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
+      bg: "#149a9a",
+      textColor: "white",
     }}
     href={"#"}
   >
@@ -76,7 +77,7 @@ export default function Simple() {
             w={{ md: "100%" }}
             justifyContent={{ md: "space-between" }}
           >
-            <Text as="h1" color="customScheme.darkBlue">
+            <Text as="h1" color="teal">
               Eventli
             </Text>
             <HStack
@@ -102,18 +103,40 @@ export default function Simple() {
                   cursor={"pointer"}
                   minW={0}
                 >
-                  <Avatar
-                    size={"sm"}
-                    src={
-                      "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                    }
-                  />
+                  <Box position="relative">
+                    <Avatar size={"sm"} src={"https://bit.ly/broken-link"} />
+                  </Box>
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>Account Info</MenuItem>
-                  <MenuItem>Events Attending</MenuItem>
+                  <MenuItem
+                    _hover={{
+                      textDecoration: "none",
+                      bg: "#149a9a",
+                      textColor: "white",
+                    }}
+                  >
+                    Account Info
+                  </MenuItem>
+                  <MenuItem
+                    _hover={{
+                      textDecoration: "none",
+                      bg: "#149a9a",
+                      textColor: "white",
+                    }}
+                  >
+                    Events Attending
+                  </MenuItem>
                   <MenuDivider />
-                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  <MenuItem
+                    _hover={{
+                      textDecoration: "none",
+                      bg: "#149a9a",
+                      textColor: "white",
+                    }}
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </MenuItem>
                 </MenuList>
               </Menu>
             </Flex>
