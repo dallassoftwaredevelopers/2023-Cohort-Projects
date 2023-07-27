@@ -3,6 +3,7 @@ import Carousel from "../Home/components/Carousel/Carousel";
 import EventCardContainer from "../Home/components/EventCardContainer/EventCardContainer";
 import { EventTypes } from "../../types/Event.types";
 export const Home = () => {
+  // dummy data until redux store is setup
   const dummyData: EventTypes[] = [
     {
       eventId: "1",

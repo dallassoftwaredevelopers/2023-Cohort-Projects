@@ -12,6 +12,8 @@ import {
 
 import { EventTypes } from "../../../../types/Event.types";
 import { ArrowRightIcon } from "@chakra-ui/icons";
+import { getFormattedDate } from "../../../../helpers/getFormattedData";
+import { convertTo12HourFormat } from "../../../../helpers/convertTo12HourTime";
 
 export default function EventCard({
   eventId,
@@ -28,7 +30,8 @@ export default function EventCard({
     description.length > 60 ? description.slice(0, 100) + "..." : description;
   const locationArr = location.split(",");
   const cityState = locationArr.slice(-3, -1).join(", "); // Get the last 3 elements and join them back with a comma and space
-
+  const monthAndDay = getFormattedDate(date);
+  const convertedTime = convertTo12HourFormat(time);
   return (
     <Center py={6}>
       <Box
@@ -78,7 +81,7 @@ export default function EventCard({
               fontSize={"xs"}
               letterSpacing={1.1}
             >
-              {date} at {time}
+              {monthAndDay} at {convertedTime}
             </Text>
           </Flex>
           <hr />
