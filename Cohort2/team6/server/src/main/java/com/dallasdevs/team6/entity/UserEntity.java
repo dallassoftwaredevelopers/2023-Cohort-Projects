@@ -13,7 +13,7 @@ public class UserEntity {
     private String uuid;
 
     @Column(name="email")
-    private String email;
+    private String username;
 
     @Column(name="password")
     private String password;
@@ -32,12 +32,12 @@ public class UserEntity {
         this.uuid = uuid;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(final String email) {
-        this.email = email;
+    public void setUsername(final String email) {
+        this.username = email;
     }
 
     public String getPassword() {

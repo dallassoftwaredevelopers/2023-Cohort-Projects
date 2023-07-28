@@ -1,4 +1,4 @@
-export interface EventCard {
+export interface EventTypes {
   eventId?: string;
   userId?: string;
   title: string;
