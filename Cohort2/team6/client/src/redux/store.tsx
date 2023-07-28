@@ -13,8 +13,8 @@ const persistConfig: PersistConfig<any> = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = configureStore({
+export const store = configureStore({
   reducer: persistedReducer,
 });
 
-export { store };
+export const persistor = persistStore(store)
