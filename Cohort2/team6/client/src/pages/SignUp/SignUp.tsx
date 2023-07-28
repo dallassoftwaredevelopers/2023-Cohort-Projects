@@ -8,129 +8,102 @@ import {
   Stack,
   Image,
   Divider,
+  FormErrorMessage,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import {
+  SubmitHandler,
+  useForm,
+  Controller,
+  useFormState,
+} from "react-hook-form";
 
-interface FormData {
+type SignUpForm = {
   username: string;
   password: string;
   confirmPassword: string;
-}
+};
 
 export default function SignUp() {
-  const [formData, setFormData] = useState<FormData>({
-    username: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+    watch,
+    register,
+  } = useForm<SignUpForm>();
+  const onSubmit: SubmitHandler<SignUpForm> = (data) => console.log(data);
 
-  const handleReset = () => {
-    setFormData({
-      username: "",
-      password: "",
-      confirmPassword: "",
-    });
-  };
-  const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
+  const password = watch("password");
+  const confirmPassword = watch("confirmPassword");
 
-  const handleChange = (key: keyof FormData, value: string) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [key]: value,
-    }));
-    console.log(formData);
-  };
+  const isPasswordMatch = password === confirmPassword;
 
-  const checkPasswordsMatch = () => {
-    const passwordsMatch = formData.password === formData.confirmPassword;
-    setPasswordsMatch(passwordsMatch);
-
-    if (passwordsMatch) {
-      console.log("resetting");
-      handleReset();
-    }
-  };
-
-  const handleSubmit = () => {
-    checkPasswordsMatch();
-
-    // No need to check passwordsMatch here anymore
-    // since handleReset is already called in checkPasswordsMatch.
-
-    /* if (!passwordsMatch) {
-      // Passwords don't match, prevent form submission
-      return;
-    } */
-
-    // Perform form submission logic here
-  };
   return (
     <Stack minH={"80.8vh"} direction={{ base: "column", md: "row" }}>
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
         <Stack spacing={4} w={"full"} maxW={"md"}>
           <Heading fontSize={"2xl"}>Create an Account</Heading>
-
-          <FormControl id="username">
-            <FormLabel>Username</FormLabel>
-            <Input
-              type="text"
-              autoComplete={"off"}
-              value={formData.username}
-              onChange={(e) => handleChange("username", e.target.value)}
-            />
-          </FormControl>
-          <FormControl id="password">
-            <FormLabel>Password</FormLabel>
-            <Input
-              type="password"
-              autoComplete={"off"}
-              value={formData.password}
-              onChange={(e) => {
-                handleChange("password", e.target.value);
-              }}
-            />
-          </FormControl>
-          <FormControl id="confirmPassword">
-            <FormLabel>Confirm Password</FormLabel>
-            <Input
-              type="password"
-              autoComplete={"off"}
-              value={formData.confirmPassword}
-              onChange={(e) => {
-                handleChange("confirmPassword", e.target.value);
-              }}
-            />
-          </FormControl>
-          {!passwordsMatch && (
-            <div style={{ color: "#f73f3f", fontWeight: "600" }}>
-              Passwords do not match.
-            </div>
-          )}
-          <Divider mt={4} mb={4} />
-
-          <Flex direction={"row"} gap={3}>
-            <Button
-              type="submit"
-              colorScheme={"blue"}
-              variant={"solid"}
-              flex={1}
-              onClick={handleSubmit}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <FormControl id="username" isInvalid={!!errors.username}>
+              <FormLabel>Username</FormLabel>
+              <Input
+                {...register("username", { required: "Username is required" })}
+              />
+              <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
+            </FormControl>
+            <FormControl id="password" isInvalid={!!errors.password}>
+              <FormLabel>Password</FormLabel>
+              <Input
+                {...register("password", { required: "Password is required" })}
+              />
+              <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+            </FormControl>
+            <FormControl
+              id="confirmPassword"
+              isInvalid={!!errors.confirmPassword}
             >
-              Sign Up
-            </Button>
-            {/* navigate to sign in page */}
-            <Button
-              as="a"
-              colorScheme="teal"
-              borderRadius={"5px"}
-              textColor={"white"}
-              variant="solid"
-              flex={1}
-              href="/login"
-            >
-              Login
-            </Button>
-          </Flex>
+              <FormLabel>Confirm Password</FormLabel>
+              <Input
+                {...register("confirmPassword", {
+                  required: "Confirmation Password is required",
+                  validate: (value) =>
+                    value === password || "Passwords do not match",
+                })}
+              />
+              <FormErrorMessage>
+                {errors.confirmPassword?.message}
+              </FormErrorMessage>
+            </FormControl>
+
+            {!isPasswordMatch && (
+              <FormErrorMessage>Passwords do not match.</FormErrorMessage>
+            )}
+
+            <Divider mt={4} mb={4} />
+
+            <Flex direction={"row"} gap={3}>
+              <Button
+                type="submit"
+                colorScheme={"blue"}
+                variant={"solid"}
+                flex={1}
+              >
+                Sign Up
+              </Button>
+              {/* navigate to sign in page */}
+              <Button
+                as="a"
+                colorScheme="teal"
+                borderRadius={"5px"}
+                textColor={"white"}
+                variant="solid"
+                flex={1}
+                href="/login"
+              >
+                Login
+              </Button>
+            </Flex>
+          </form>
         </Stack>
       </Flex>
       <Flex flex={1}>
