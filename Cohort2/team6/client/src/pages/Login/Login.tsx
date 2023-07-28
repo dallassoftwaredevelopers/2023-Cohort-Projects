@@ -99,7 +99,7 @@ export default function SignUp() {
               textColor={"white"}
               variant="solid"
               flex={1}
-              href="/"
+              href="/sign-up"
             >
               Sign Up
             </Button>

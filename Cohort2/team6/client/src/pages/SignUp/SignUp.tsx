@@ -116,7 +116,7 @@ export default function SignUp() {
               flex={1}
               onClick={handleSubmit}
             >
-              Register
+              Sign Up
             </Button>
             {/* navigate to sign in page */}
             <Button
@@ -126,9 +126,9 @@ export default function SignUp() {
               textColor={"white"}
               variant="solid"
               flex={1}
-              href="/"
+              href="/login"
             >
-              Sign in
+              Login
             </Button>
           </Flex>
         </Stack>
