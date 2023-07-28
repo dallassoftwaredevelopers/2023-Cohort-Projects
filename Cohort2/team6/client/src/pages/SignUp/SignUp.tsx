@@ -23,108 +23,114 @@ export default function SignUp() {
     password: "",
     confirmPassword: "",
   });
-  const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
 
   const handleReset = () => {
-    setFormData({ username: "", password: "", confirmPassword: "" });
-    setPasswordsMatch(true);
+    setFormData({
+      username: "",
+      password: "",
+      confirmPassword: "",
+    });
   };
+  const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
+
   const handleChange = (key: keyof FormData, value: string) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [key]: value,
     }));
+    console.log(formData);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!formData.username || !formData.password || !formData.confirmPassword) {
-      return;
+  const checkPasswordsMatch = () => {
+    const passwordsMatch = formData.password === formData.confirmPassword;
+    setPasswordsMatch(passwordsMatch);
+
+    if (passwordsMatch) {
+      console.log("resetting");
+      handleReset();
     }
+  };
+
+  const handleSubmit = () => {
+    checkPasswordsMatch();
+
+    // No need to check passwordsMatch here anymore
+    // since handleReset is already called in checkPasswordsMatch.
+
     /* if (!passwordsMatch) {
       // Passwords don't match, prevent form submission
       return;
     } */
-    console.log(formData);
-    handleReset;
-    // Perform form submission logic here
-  };
 
-  // Function to check if passwords match
-  const checkPasswordsMatch = () => {
-    setPasswordsMatch(formData.password === formData.confirmPassword);
+    // Perform form submission logic here
   };
   return (
     <Stack minH={"80.8vh"} direction={{ base: "column", md: "row" }}>
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
         <Stack spacing={4} w={"full"} maxW={"md"}>
           <Heading fontSize={"2xl"}>Create an Account</Heading>
-          <form
-            onSubmit={handleSubmit}
-            style={{ display: "flex", flexDirection: "column", gap: "8px" }}
-          >
-            <FormControl id="username">
-              <FormLabel>Username</FormLabel>
-              <Input
-                type="text"
-                autoComplete={"off"}
-                value={formData.username}
-                onChange={(e) => handleChange("username", e.target.value)}
-              />
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <Input
-                type="password"
-                autoComplete={"off"}
-                value={formData.password}
-                onChange={(e) => {
-                  handleChange("password", e.target.value);
-                  checkPasswordsMatch();
-                }}
-              />
-            </FormControl>
-            <FormControl id="confirmPassword">
-              <FormLabel>Confirm Password</FormLabel>
-              <Input
-                type="password"
-                autoComplete={"off"}
-                value={formData.confirmPassword}
-                onChange={(e) => {
-                  handleChange("confirmPassword", e.target.value);
-                  checkPasswordsMatch();
-                }}
-              />
-            </FormControl>
-            {!passwordsMatch && (
-              <div style={{ color: "#f73f3f", fontWeight: "600" }}>
-                Passwords do not match.
-              </div>
-            )}
-            <Divider mt={4} mb={9} />
 
-            <Flex direction={"row"} gap={3}>
-              <Button
-                type="submit"
-                colorScheme={"blue"}
-                variant={"solid"}
-                flex={1}
-              >
-                Register
-              </Button>
-              <Button
-                as="a"
-                colorScheme="teal"
-                borderRadius={"5px"}
-                textColor={"white"}
-                variant="solid"
-                flex={1}
-                href="/"
-              >
-                Sign in
-              </Button>
-            </Flex>
-          </form>
+          <FormControl id="username">
+            <FormLabel>Username</FormLabel>
+            <Input
+              type="text"
+              autoComplete={"off"}
+              value={formData.username}
+              onChange={(e) => handleChange("username", e.target.value)}
+            />
+          </FormControl>
+          <FormControl id="password">
+            <FormLabel>Password</FormLabel>
+            <Input
+              type="password"
+              autoComplete={"off"}
+              value={formData.password}
+              onChange={(e) => {
+                handleChange("password", e.target.value);
+              }}
+            />
+          </FormControl>
+          <FormControl id="confirmPassword">
+            <FormLabel>Confirm Password</FormLabel>
+            <Input
+              type="password"
+              autoComplete={"off"}
+              value={formData.confirmPassword}
+              onChange={(e) => {
+                handleChange("confirmPassword", e.target.value);
+              }}
+            />
+          </FormControl>
+          {!passwordsMatch && (
+            <div style={{ color: "#f73f3f", fontWeight: "600" }}>
+              Passwords do not match.
+            </div>
+          )}
+          <Divider mt={4} mb={4} />
+
+          <Flex direction={"row"} gap={3}>
+            <Button
+              type="submit"
+              colorScheme={"blue"}
+              variant={"solid"}
+              flex={1}
+              onClick={handleSubmit}
+            >
+              Register
+            </Button>
+            {/* navigate to sign in page */}
+            <Button
+              as="a"
+              colorScheme="teal"
+              borderRadius={"5px"}
+              textColor={"white"}
+              variant="solid"
+              flex={1}
+              href="/"
+            >
+              Sign in
+            </Button>
+          </Flex>
         </Stack>
       </Flex>
       <Flex flex={1}>
