@@ -4,8 +4,8 @@ import { loginUserAsync, registerUserAsync } from "../../api/userApi";
 
 interface UserState {
   currentUser: User | null;
-  loading: boolean; // loading state to track the async action status
-  error: string | null; // error state to track the async action error
+  loading: boolean;
+  error: string | null;
 }
 
 const initialState: UserState = {
@@ -18,18 +18,13 @@ export const registerUserAsyncThunk = createAsyncThunk(
   "user/registerAsync",
   async (credentials: { username: string; password: string }, thunkAPI) => {
     try {
-      // Assuming registerUserAsync API function registers the user and returns the registered user data
       const registeredUser = await registerUserAsync(
         credentials.username,
         credentials.password
       );
-
-      // Return the registered user data after successful registration or whatever
+      // return whatever we decide on returning TBD
       return registeredUser;
     } catch (error) {
-      // You can handle error cases here
-      // For example, you can throw an error or return an alternative value
-      // throw new Error("Registration failed");
       return thunkAPI.rejectWithValue("Registration failed");
     }
   }
@@ -44,15 +39,9 @@ export const loginUserAsyncThunk = createAsyncThunk(
         credentials.password
       );
 
-      // Assuming the response contains the user data, including the username
-      const user: User = response; // Make sure the response has the correct user data
-
-      // Return the user data after successful login
+      const user: User = response;
       return user;
     } catch (error) {
-      // You can handle error cases here
-      // For example, you can throw an error or return an alternative value
-      // throw new Error("Login failed");
       return thunkAPI.rejectWithValue("Login failed");
     }
   }
