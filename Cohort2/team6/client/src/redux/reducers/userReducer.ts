@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { User } from "../../types/User.types";
-import { loginUserAsync } from "../../api/userApi";
+import { loginUserAsync, registerUserAsync } from "../../api/userApi";
 
 interface UserState {
   currentUser: User | null;
@@ -13,6 +13,27 @@ const initialState: UserState = {
   loading: false,
   error: null,
 };
+
+export const registerUserAsyncThunk = createAsyncThunk(
+  "user/registerAsync",
+  async (credentials: { username: string; password: string }, thunkAPI) => {
+    try {
+      // Assuming registerUserAsync API function registers the user and returns the registered user data
+      const registeredUser = await registerUserAsync(
+        credentials.username,
+        credentials.password
+      );
+
+      // Return the registered user data after successful registration or whatever
+      return registeredUser;
+    } catch (error) {
+      // You can handle error cases here
+      // For example, you can throw an error or return an alternative value
+      // throw new Error("Registration failed");
+      return thunkAPI.rejectWithValue("Registration failed");
+    }
+  }
+);
 
 export const loginUserAsyncThunk = createAsyncThunk(
   "user/loginAsync",
@@ -47,6 +68,19 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(registerUserAsyncThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(registerUserAsyncThunk.fulfilled, (state, action) => {
+        state.currentUser = action.payload;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(registerUserAsyncThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
       .addCase(loginUserAsyncThunk.pending, (state) => {
         state.loading = true;
         state.error = null;
