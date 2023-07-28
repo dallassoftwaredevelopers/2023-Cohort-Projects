@@ -8,102 +8,70 @@ import {
   Stack,
   Image,
   Divider,
+  FormErrorMessage,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 
-interface FormData {
+type LoginForm = {
   username: string;
   password: string;
-}
+};
 
 export default function Login() {
-  const [formData, setFormData] = useState<FormData>({
-    username: "",
-    password: "",
-  });
+  const {
+    handleSubmit,
+    formState: { errors },
+    register,
+  } = useForm<LoginForm>();
+  const onSubmit: SubmitHandler<LoginForm> = (data) => console.log(data);
 
-  const handleReset = () => {
-    setFormData({
-      username: "",
-      password: "",
-    });
-  };
-  const [passwordValid, setPasswordValid] = useState<boolean>(true);
-
-  const handleChange = (key: keyof FormData, value: string) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [key]: value,
-    }));
-    console.log(formData);
-  };
-
-  const handleSubmit = () => {
-    // No need to check passwordsMatch here anymore
-    // since handleReset is already called in checkPasswordsMatch.
-    /* if (!passwordsMatch) {
-        // Passwords don't match, prevent form submission
-        return;
-      } */
-    // Perform form submission logic here
-  };
   return (
     <Stack minH={"80.8vh"} direction={{ base: "column", md: "row" }}>
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
         <Stack spacing={4} w={"full"} maxW={"md"}>
           <Heading fontSize={"2xl"}>Log In</Heading>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <FormControl id="username">
+              <FormLabel>Username</FormLabel>
+              <Input
+                {...register("username", { required: "Username is required" })}
+              />
+              <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
+            </FormControl>
+            <FormControl id="password">
+              <FormLabel>Password</FormLabel>
+              <Input
+                type="password"
+                {...register("password", { required: "Password is required" })}
+              />
+              <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+            </FormControl>
 
-          <FormControl id="username">
-            <FormLabel>Username</FormLabel>
-            <Input
-              type="text"
-              autoComplete={"off"}
-              value={formData.username}
-              onChange={(e) => handleChange("username", e.target.value)}
-            />
-          </FormControl>
-          <FormControl id="password">
-            <FormLabel>Password</FormLabel>
-            <Input
-              type="password"
-              autoComplete={"off"}
-              value={formData.password}
-              onChange={(e) => {
-                handleChange("password", e.target.value);
-              }}
-            />
-          </FormControl>
+            <Divider mt={4} mb={4} />
 
-          {!passwordValid && (
-            <div style={{ color: "#f73f3f", fontWeight: "600" }}>
-              Incorrect Password
-            </div>
-          )}
-          <Divider mt={4} mb={4} />
-
-          <Flex direction={"row"} gap={3}>
-            <Button
-              type="submit"
-              colorScheme={"blue"}
-              variant={"solid"}
-              flex={1}
-              onClick={handleSubmit}
-            >
-              Login
-            </Button>
-            {/* navigate to sign in page */}
-            <Button
-              as="a"
-              colorScheme="teal"
-              borderRadius={"5px"}
-              textColor={"white"}
-              variant="solid"
-              flex={1}
-              href="/sign-up"
-            >
-              Sign Up
-            </Button>
-          </Flex>
+            <Flex direction={"row"} gap={3}>
+              <Button
+                type="submit"
+                colorScheme={"blue"}
+                variant={"solid"}
+                flex={1}
+              >
+                Login
+              </Button>
+              {/* navigate to sign in page */}
+              <Button
+                as="a"
+                colorScheme="teal"
+                borderRadius={"5px"}
+                textColor={"white"}
+                variant="solid"
+                flex={1}
+                href="/sign-up"
+              >
+                Sign Up
+              </Button>
+            </Flex>
+          </form>
         </Stack>
       </Flex>
       <Flex flex={1}>

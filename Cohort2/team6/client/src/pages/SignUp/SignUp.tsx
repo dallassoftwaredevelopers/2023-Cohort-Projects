@@ -10,12 +10,7 @@ import {
   Divider,
   FormErrorMessage,
 } from "@chakra-ui/react";
-import {
-  SubmitHandler,
-  useForm,
-  Controller,
-  useFormState,
-} from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 type SignUpForm = {
   username: string;
@@ -26,7 +21,6 @@ type SignUpForm = {
 export default function SignUp() {
   const {
     handleSubmit,
-    control,
     formState: { errors },
     watch,
     register,
@@ -54,6 +48,7 @@ export default function SignUp() {
             <FormControl id="password" isInvalid={!!errors.password}>
               <FormLabel>Password</FormLabel>
               <Input
+                type="password"
                 {...register("password", { required: "Password is required" })}
               />
               <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
