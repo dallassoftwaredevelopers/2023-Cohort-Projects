@@ -48,6 +48,8 @@ export default function Login() {
     try {
       setFakeCookie();
       // ignore error below, needs away, if you can fix the typescript error even better - Kurtis
+
+      // currently setup to bypass backend communication
       // await dispatch(loginUserAsyncThunk(data));
       const jwtToken = getJwtToken();
 
