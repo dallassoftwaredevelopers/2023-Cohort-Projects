@@ -1,6 +1,6 @@
 import { SimpleGrid, Box } from "@chakra-ui/react";
 import EventCard from "../EventCard/EventCard";
-import { EventTypes } from "../../../../types/Event.types";
+import { EventTypes } from "../../types/Event.types";
 
 interface EventCardCointainerProps {
   dummyData: EventTypes[];
@@ -20,7 +20,7 @@ function EventCardContainer({ dummyData }: EventCardCointainerProps) {
       mx={-4}
     >
       {dummyData.map((event) => (
-        <Box key={event.eventId} borderRadius="lg" p="4">
+        <Box key={event.eventId} borderRadius="lg" p="4" mx={2}>
           <EventCard {...event} />
         </Box>
       ))}
