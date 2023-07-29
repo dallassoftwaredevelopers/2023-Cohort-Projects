@@ -20,7 +20,7 @@ function EventCardContainer({ dummyData }: EventCardCointainerProps) {
       mx={-4}
     >
       {dummyData.map((event) => (
-        <Box key={event.eventId} borderRadius="lg" p="4" mx={2}>
+        <Box key={event.eventId} borderRadius="lg" p="4" mx={0}>
           <EventCard {...event} />
         </Box>
       ))}
