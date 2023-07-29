@@ -10,9 +10,6 @@ import {
   Image,
   Divider,
   FormErrorMessage,
-  Text,
-  Alert,
-  AlertIcon,
 } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 // redux
@@ -46,8 +43,7 @@ export default function SignUp() {
     try {
       // ignore the error below - Kurtis
       await dispatch(registerUserAsyncThunk(data));
-
-      //window.location.href = "/"; // homepage redirect
+      setUserCreated(true);
     } catch (err) {
       // unreachable, don't know why
       console.log("hi");
@@ -76,6 +72,18 @@ export default function SignUp() {
     }
   }, [error, dispatch]);
 
+  // sets success alert for account created
+  useEffect(() => {
+    if (userCreated) {
+      // Set a timeout to redirect after 4 seconds
+      const timeout = setTimeout(() => {
+        window.location.href = "/";
+      }, 4000);
+
+      // Clear the timeout when the component is unmounted
+      return () => clearTimeout(timeout);
+    }
+  }, [userCreated]);
   return (
     <Stack minH={"80.8vh"} direction={{ base: "column", md: "row" }}>
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
