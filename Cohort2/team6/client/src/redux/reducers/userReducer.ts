@@ -8,6 +8,11 @@ interface UserState {
   error: string | null;
 }
 
+interface Credentials {
+  username: string;
+  password: string;
+}
+
 const initialState: UserState = {
   currentUser: null,
   loading: false,
@@ -16,7 +21,7 @@ const initialState: UserState = {
 
 export const registerUserAsyncThunk = createAsyncThunk(
   "user/registerAsync",
-  async (credentials: { username: string; password: string }, thunkAPI) => {
+  async (credentials: Credentials, thunkAPI) => {
     try {
       const registeredUser = await registerUserAsync(
         credentials.username,
@@ -54,6 +59,9 @@ const userSlice = createSlice({
     logoutUser: (state) => {
       state.currentUser = null;
     },
+    resetUserError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -86,6 +94,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { logoutUser } = userSlice.actions;
+export const { logoutUser, resetUserError } = userSlice.actions;
 
 export default userSlice.reducer;

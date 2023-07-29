@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/await-thenable */
 import {
   Button,
   Flex,
@@ -9,9 +10,20 @@ import {
   Image,
   Divider,
   FormErrorMessage,
+  Text,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
-
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import {
+  registerUserAsyncThunk,
+  resetUserError,
+} from "../../redux/reducers/userReducer";
+import { UserState } from "../../types/User.types";
+import { useEffect, useState } from "react";
+import AlertBar from "../../components/Alert/AlertBar";
 type SignUpForm = {
   username: string;
   password: string;
@@ -19,18 +31,50 @@ type SignUpForm = {
 };
 
 export default function SignUp() {
+  const [userCreated, setUserCreated] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  // ignore the unsafe assignment, unless you can fix it
+  const error = useSelector((state: UserState) => state.user.error);
+
   const {
     handleSubmit,
     formState: { errors },
     watch,
     register,
   } = useForm<SignUpForm>();
-  const onSubmit: SubmitHandler<SignUpForm> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<SignUpForm> = async (data) => {
+    try {
+      // ignore the error below - Kurtis
+      await dispatch(registerUserAsyncThunk(data));
+
+      //window.location.href = "/"; // homepage redirect
+    } catch (err) {
+      // unreachable, don't know why
+      console.log("hi");
+      //console.error("Registration Failed:", err);
+    }
+  };
 
   const password = watch("password");
   const confirmPassword = watch("confirmPassword");
 
   const isPasswordMatch = password === confirmPassword;
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    dispatch(resetUserError());
+  }, []);
+
+  // resets error in redux store after failed sign up, so the alert goes away from the dom
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        dispatch(resetUserError());
+      }, 4000); // 5000ms = 5 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [error, dispatch]);
 
   return (
     <Stack minH={"80.8vh"} direction={{ base: "column", md: "row" }}>
@@ -38,6 +82,10 @@ export default function SignUp() {
         <Stack spacing={4} w={"full"} maxW={"md"}>
           <Heading fontSize={"2xl"}>Create an Account</Heading>
           <form onSubmit={handleSubmit(onSubmit)}>
+            {error && (
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              <AlertBar error={error} status="error" />
+            )}
             <FormControl id="username" isInvalid={!!errors.username}>
               <FormLabel>Username</FormLabel>
               <Input

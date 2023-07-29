@@ -10,6 +10,7 @@ export const loginUserAsync = async (
   password: string
 ): Promise<User> => {
   try {
+    //console.log(username, password);
     const response = await axios.post(LOGIN_API_URL, { username, password });
     return response.data;
   } catch (error) {
@@ -22,6 +23,7 @@ export const registerUserAsync = async (
   password: string
 ): Promise<User> => {
   try {
+    //console.log(username, password);
     const response = await axios.post(REGISTER_API_URL, { username, password });
     return response.data;
   } catch (error) {
