@@ -143,3 +143,12 @@ dist
 .svelte-kit
 
 # End of https://www.toptal.com/developers/gitignore/api/node
+Cohort1/Medlista/.gradle/7.4/gc.properties
+Cohort1/Medlista/.gradle/7.4/checksums/checksums.lock
+Cohort1/Medlista/.gradle/7.4/dependencies-accessors/dependencies-accessors.lock
+Cohort1/Medlista/.gradle/7.4/dependencies-accessors/gc.properties
+Cohort1/Medlista/.gradle/7.4/fileChanges/last-build.bin
+Cohort1/Medlista/.gradle/7.4/fileHashes/fileHashes.lock
+Cohort1/Medlista/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+Cohort1/Medlista/.gradle/buildOutputCleanup/cache.properties
+Cohort1/Medlista/.gradle/vcs-1/gc.properties

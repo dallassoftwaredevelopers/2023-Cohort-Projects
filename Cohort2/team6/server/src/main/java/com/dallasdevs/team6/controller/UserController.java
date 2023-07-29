@@ -39,6 +39,13 @@ public class UserController {
         cookie.setPath("/"); // Cookie path
         response.addCookie(cookie);
 
+        // Dear backies, could we create a custom login response so use fronties could
+        // have the username and uuid in the response body?
+        // I've included my lowly javascript attempt at java below
+        // p.s. Java seems to hate everthing that I do, so I had to comment it out
+        // -with disdain for java ~~ sincerely, Kurtis Ivey
+        // return ResponseEntity.ok(userEntity.getUsername(), userEntity.getUuid());
+
         return ResponseEntity.ok("User authenticated successfully.");
         /* return ResponseEntity.ok(new LoginResponse(token)); */
     }
