@@ -32,7 +32,7 @@ public class UserController {
         }
 
         // Generate JWT
-        String token = userLoginService.generateJwtToken(userEntity.getUsername());
+        String token = userLoginService.generateJwtToken(userEntity);
 
         // Attach JWT to Cookie
         Cookie cookie = new Cookie("jwtToken", token);
@@ -40,5 +40,6 @@ public class UserController {
         response.addCookie(cookie);
 
         return ResponseEntity.ok("User authenticated successfully.");
+        /* return ResponseEntity.ok(new LoginResponse(token)); */
     }
 }
