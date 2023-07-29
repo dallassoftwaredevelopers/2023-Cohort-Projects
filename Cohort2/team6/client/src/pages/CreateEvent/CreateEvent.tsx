@@ -65,6 +65,7 @@ export default function Login() {
   const onSubmit: SubmitHandler<CreateEventForm> = (data) => {
     try {
       console.log(data);
+      console.log(date, time, price);
     } catch (err) {
       // unreachable & don't know why. Error will be handled in redux anyways
       console.log("hi, you wont even see this console.log in the console");
@@ -142,7 +143,7 @@ export default function Login() {
                 placeholder="Select Date and Time"
                 size="md"
                 type="datetime-local"
-                onChange={(e) => setDate(e.target.value)}
+                onChange={(e) => setDateTime(e.target.value)}
               />
             </FormControl>
             <FormControl isInvalid={!!errors.address}>
