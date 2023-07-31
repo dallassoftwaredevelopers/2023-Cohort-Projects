@@ -11,7 +11,7 @@ public class EventEntity {
     @Id
     @Column(name="event_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String uuid;
 
     @Column(name="title")
     private String title;
@@ -38,8 +38,8 @@ public class EventEntity {
     public EventEntity() {
     }
 
-    public EventEntity(String id, String title, Date date, Time time, String description, Double price, String location, String image_url) {
-        this.id = id;
+    public EventEntity(String uuid, String title, Date date, Time time, String description, Double price, String location, String image_url) {
+        this.uuid = uuid;
         this.title = title;
         this.date = date;
         this.time = time;
@@ -49,12 +49,12 @@ public class EventEntity {
         this.image_url = image_url;
     }
 
-    public String getId() {
-        return id;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getTitle() {
