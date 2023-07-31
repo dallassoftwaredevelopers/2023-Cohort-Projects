@@ -1,4 +1,4 @@
-import { getFormattedDate } from "../getFormattedData";
+import { getFormattedDate } from "../getFormattedDate";
 
 describe("getFormattedDate", () => {
   it("should convert '2023-07-30' to 'July 30'", () => {

@@ -13,10 +13,10 @@ import java.util.Date;
 @Service
 public class UserLoginService {
 
-    @Value("${jwt.teamSixFtw}") // Use a secret value from your application.properties or application.yml
+    @Value("${jwt.secret}") // Use a secret value from your application.properties or application.yml
     private String jwtSecret;
 
-    @Value("${jwt.86400000}") // Use expiration time from your application.properties or application.yml
+    @Value("${jwt.expirationMs}") // Use expiration time from your application.properties or application.yml
     private long jwtExpirationMs;
 
     @Autowired
@@ -32,12 +32,15 @@ public class UserLoginService {
     }
 
     // Method to generate JWT
-    public String generateJwtToken(String email) {
+    public String generateJwtToken(UserEntity userEntity) {
+        String uuid = userEntity.getUuid();
+        String username = userEntity.getUsername();
         Date now = new Date();
         Date expirationDate = new Date(now.getTime() + jwtExpirationMs);
 
         return Jwts.builder()
-                .setSubject(email)
+                .setSubject(username)
+                .claim("uuid", uuid)
                 .setIssuedAt(now)
                 .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS256, jwtSecret)
