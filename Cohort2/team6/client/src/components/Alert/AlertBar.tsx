@@ -1,11 +1,11 @@
 import { Alert, AlertIcon } from "@chakra-ui/react";
 import "./AlertBar.css";
-type Error = {
-  error: string | null;
+type AlertBarTypes = {
+  message: string | null;
   status: "info" | "warning" | "success" | "error" | "loading" | undefined;
 };
 
-const AlertBar = ({ error, status }: Error) => {
+const AlertBar = ({ message, status }: AlertBarTypes) => {
   return (
     <div className="error-alert">
       <Alert
@@ -15,7 +15,7 @@ const AlertBar = ({ error, status }: Error) => {
         borderRadius={4}
       >
         <AlertIcon />
-        {error}
+        {message}
       </Alert>
     </div>
   );
