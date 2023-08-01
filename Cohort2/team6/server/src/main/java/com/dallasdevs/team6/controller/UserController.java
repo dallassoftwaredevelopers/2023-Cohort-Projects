@@ -1,7 +1,7 @@
 package com.dallasdevs.team6.controller;
 
 import com.dallasdevs.team6.entity.UserEntity;
-import com.dallasdevs.team6.service.CustomUserDetailsService;
+import com.dallasdevs.team6.json.LoginResponse;
 import com.dallasdevs.team6.service.UserLoginService;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.Cookie;
@@ -16,11 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
+    private final UserLoginService userLoginService;
+
     @Autowired
-    private UserLoginService userLoginService;
+    public UserController(UserLoginService userLoginService) {
+        this.userLoginService = userLoginService;
+    }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserEntity request, HttpServletResponse response) {
+    public ResponseEntity<?> login(@RequestBody UserEntity request, HttpServletResponse response) {
         if (StringUtils.isBlank(request.getUsername()) || StringUtils.isBlank(request.getPassword())) {
             return ResponseEntity.badRequest().body("Username and password cannot be blank.");
         }
@@ -31,6 +35,9 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials.");
         }
 
+        String uuid = userEntity.getUuid();
+        String username = userEntity.getUsername();
+
         // Generate JWT
         String token = userLoginService.generateJwtToken(userEntity);
 
@@ -39,14 +46,11 @@ public class UserController {
         cookie.setPath("/"); // Cookie path
         response.addCookie(cookie);
 
-        // Dear backies, could we create a custom login response so use fronties could
-        // have the username and uuid in the response body?
-        // I've included my lowly javascript attempt at java below
-        // p.s. Java seems to hate everthing that I do, so I had to comment it out
-        // -with disdain for java ~~ sincerely, Kurtis Ivey
-        // return ResponseEntity.ok(userEntity.getUsername(), userEntity.getUuid());
+        // Create the LoginResponse object with the JWT token, user UUID, and username
+        LoginResponse loginResponse = new LoginResponse(token, uuid, username);
 
-        return ResponseEntity.ok("User authenticated successfully.");
-        /* return ResponseEntity.ok(new LoginResponse(token)); */
+        // Return the LoginResponse object in the response body
+        return ResponseEntity.ok(loginResponse);
     }
 }
+
