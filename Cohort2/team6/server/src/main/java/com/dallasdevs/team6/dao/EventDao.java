@@ -20,6 +20,9 @@ public class EventDao {
         session.persist(newEvent);
     }
 
+    public EventEntity getEventById(String eventId) {
+        return entityManager.find(EventEntity.class, eventId);
+    }
 
 }
 
