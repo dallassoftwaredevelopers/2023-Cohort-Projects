@@ -31,6 +31,7 @@ export default function SignUp() {
   const [userCreated, setUserCreated] = useState<boolean>(false);
   const dispatch = useDispatch();
   // ignore the unsafe assignment, unless you can fix it
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return
   const error = useSelector((state: UserState) => state.user.error);
 
   const {
@@ -41,7 +42,7 @@ export default function SignUp() {
   } = useForm<SignUpForm>();
   const onSubmit: SubmitHandler<SignUpForm> = async (data) => {
     try {
-      // ignore the error below - Kurtis
+      // ignore the error below, needs await - Kurtis
       await dispatch(registerUserAsyncThunk(data));
       setUserCreated(true);
     } catch (err) {
@@ -90,9 +91,12 @@ export default function SignUp() {
         <Stack spacing={4} w={"full"} maxW={"md"}>
           <Heading fontSize={"2xl"}>Create an Account</Heading>
           <form onSubmit={handleSubmit(onSubmit)}>
+            {userCreated && (
+              <AlertBar message="Sign Up Successful" status="success" />
+            )}
             {error && (
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-              <AlertBar error={error} status="error" />
+              <AlertBar message={error} status="error" />
             )}
             <FormControl id="username" isInvalid={!!errors.username}>
               <FormLabel>Username</FormLabel>
