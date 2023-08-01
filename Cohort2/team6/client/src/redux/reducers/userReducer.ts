@@ -56,6 +56,10 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    loginUser: (state, action) => {
+      const payload = action.payload as User;
+      state.currentUser = payload;
+    },
     logoutUser: (state) => {
       state.currentUser = null;
     },
@@ -69,8 +73,8 @@ const userSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(registerUserAsyncThunk.fulfilled, (state, action) => {
-        state.currentUser = action.payload;
+      .addCase(registerUserAsyncThunk.fulfilled, (state) => {
+        //state.currentUser = action.payload;
         state.loading = false;
         state.error = null;
       })
@@ -82,8 +86,8 @@ const userSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(loginUserAsyncThunk.fulfilled, (state, action) => {
-        state.currentUser = action.payload;
+      .addCase(loginUserAsyncThunk.fulfilled, (state) => {
+        //state.currentUser = action.payload;
         state.loading = false;
         state.error = null;
       })
@@ -94,6 +98,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { logoutUser, resetUserError } = userSlice.actions;
+export const { loginUser, logoutUser, resetUserError } = userSlice.actions;
 
 export default userSlice.reducer;

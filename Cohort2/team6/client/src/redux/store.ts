@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import eventReducer from "./eventReducer";
 import {
   persistStore,
   persistReducer,
@@ -10,7 +11,6 @@ import {
   REGISTER,
 } from "redux-persist";
 import thunk from "redux-thunk";
-
 import storage from "redux-persist/lib/storage";
 import rootReducer from "./reducers/rootReducer";
 
@@ -24,7 +24,10 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Create the store with the persisted reducer
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    events: eventReducer,
+    persisted: persistedReducer,
+  },
   middleware: (getDefaultMiddleware) =>
     // for getting rid of non serializable check on persisted state
     getDefaultMiddleware({
@@ -39,3 +42,5 @@ export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export default store;

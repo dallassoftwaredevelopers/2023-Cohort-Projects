@@ -10,10 +10,10 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-import { EventTypes } from "../../../../types/Event.types";
+import { EventTypes } from "../../types/Event.types";
 import { ArrowRightIcon } from "@chakra-ui/icons";
-import { getFormattedDate } from "../../../../helpers/getFormattedDate";
-import { convertTo12HourFormat } from "../../../../helpers/convertTo12HourTime";
+import { getFormattedDate } from "../../helpers/getFormattedDate";
+import { convertTo12HourFormat } from "../../helpers/convertTo12HourTime";
 
 export default function EventCard({
   eventId,
@@ -33,7 +33,7 @@ export default function EventCard({
   const monthAndDay = getFormattedDate(date);
   const convertedTime = convertTo12HourFormat(time);
   return (
-    <Center py={6}>
+    <Center pt={6}>
       <Box
         maxW={"auto"}
         w={"full"}
