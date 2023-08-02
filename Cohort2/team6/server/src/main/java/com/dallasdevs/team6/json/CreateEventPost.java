@@ -1,61 +1,40 @@
-package com.dallasdevs.team6.entity;
+package com.dallasdevs.team6.json;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
 
 import java.sql.Time;
 import java.util.Date;
 
-@Table(name = "events")
-@Entity
-public class EventEntity {
-    @Id
-    @Column(name="event_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String uuid;
+public class CreateEventPost {
 
-    @Column(name="title")
+    @NotBlank
+    @Length(max=200)
     private String title;
 
-    @Column(name="date")
+    @NotBlank
+    @Length(max=200)
     private Date date;
 
-    @Column(name="time")
+    @NotBlank
+    @Length(max=200)
     private Time time;
 
-    @Column(name="description")
+    @NotBlank
+    @Length(max=1000)
     private String description;
 
-    @Column(name="price")
+    @NotBlank
+    @Length(max=200)
     private Double price;
 
-    @Column(name="location")
+    @NotBlank
+    @Length(max=200)
     private String location;
 
-    @Column(name="image_url")
+    @NotBlank
+    @Length(max=200)
     private String image_url;
-
-
-    public EventEntity() {
-    }
-
-    public EventEntity(String uuid, String title, Date date, Time time, String description, Double price, String location, String image_url) {
-        this.uuid = uuid;
-        this.title = title;
-        this.date = date;
-        this.time = time;
-        this.description = description;
-        this.price = price;
-        this.location = location;
-        this.image_url = image_url;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
 
     public String getTitle() {
         return title;

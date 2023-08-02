@@ -70,6 +70,7 @@ export default function CaptionCarousel() {
       height={"600px"}
       width={"full"}
       overflow={"hidden"}
+      mb={5}
     >
       {/* CSS files for react-slick */}
       <link
