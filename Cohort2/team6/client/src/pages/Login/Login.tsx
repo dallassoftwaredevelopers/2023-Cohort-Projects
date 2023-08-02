@@ -37,7 +37,7 @@ export default function Login() {
   const [loginSuccessful, setLoginSuccessful] = useState<boolean>(false);
   // ignore the unsafe assignment, unless you can fix it
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return
-  const error = useSelector((state: UserState) => state.user.error);
+  //const error = useSelector((state: UserState) => state.user.error);
 
   const {
     handleSubmit,
@@ -114,10 +114,10 @@ export default function Login() {
             {loginSuccessful && (
               <AlertBar message="Login Successful" status="success" />
             )}
-            {error && (
+            {/* {error && (
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               <AlertBar message={error} status="error" />
-            )}
+            )} */}
             <FormControl id="username">
               <FormLabel>Username</FormLabel>
               <Input

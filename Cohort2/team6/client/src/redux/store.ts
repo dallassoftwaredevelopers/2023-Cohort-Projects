@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import eventReducer from "./eventReducer";
+import eventReducer from "./reducers/eventsReducer";
 import {
   persistStore,
   persistReducer,
@@ -25,7 +25,6 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 // Create the store with the persisted reducer
 export const store = configureStore({
   reducer: {
-    events: eventReducer,
     persisted: persistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
