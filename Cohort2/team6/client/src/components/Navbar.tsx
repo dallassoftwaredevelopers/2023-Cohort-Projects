@@ -22,8 +22,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const links = {
   notLoggedIn: [
-    { name: "Login", url: "" },
-    { name: "Sign Up", url: "" },
+    { name: "Login", url: "/login" },
+    { name: "Sign Up", url: "/sign-up" },
   ],
   loggedIn: [
     { name: "Events", url: "" },
@@ -42,7 +42,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
       bg: "#149a9a",
       textColor: "white",
     }}
-    href={"#"}
+    href={"/login"}
   >
     {children}
   </Link>
@@ -50,7 +50,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -86,8 +86,24 @@ export default function Simple() {
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
+              {/* normal size links */}
               {(isLoggedIn ? links.loggedIn : links.notLoggedIn).map((link) => (
-                <NavLink key={uuidv4()}>{link.name}</NavLink>
+                <Link
+                key={uuidv4()}
+                textAlign={"center"}
+                px={2}
+                py={1}
+                rounded={"md"}
+                _hover={{
+                  textDecoration: "none",
+                  bg: "#149a9a",
+                  textColor: "white",
+                }}
+                href={link.url}
+               
+              >
+                {link.name}
+              </Link>
               ))}
             </HStack>
           </HStack>
@@ -147,7 +163,22 @@ export default function Simple() {
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
               {(isLoggedIn ? links.loggedIn : links.notLoggedIn).map((link) => (
-                <NavLink key={uuidv4()}>{link.name}</NavLink>
+                <Link
+                  key={uuidv4()}
+                  textAlign={"center"}
+                  px={2}
+                  py={1}
+                  rounded={"md"}
+                  _hover={{
+                    textDecoration: "none",
+                    bg: "#149a9a",
+                    textColor: "white",
+                  }}
+                  href={link.url}
+                 
+                >
+                  {link.name}
+                </Link>
               ))}
             </Stack>
           </Box>

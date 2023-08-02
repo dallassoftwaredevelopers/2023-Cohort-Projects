@@ -32,7 +32,9 @@ export default function SignUp() {
   const dispatch = useDispatch();
   // ignore the unsafe assignment, unless you can fix it
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return
-  const error = useSelector((state: UserState) => state.user.error);
+  
+  // causing error
+  //const error = useSelector((state: UserState) => state.user.error);
 
   const {
     handleSubmit,
@@ -63,15 +65,15 @@ export default function SignUp() {
   }, []);
 
   // resets error in redux store after failed sign up, so the alert goes away from the dom
-  useEffect(() => {
-    if (error) {
-      const timer = setTimeout(() => {
-        dispatch(resetUserError());
-      }, 4000); // 5000ms = 5 seconds
+  // useEffect(() => {
+  //   if (error) {
+  //     const timer = setTimeout(() => {
+  //       dispatch(resetUserError());
+  //     }, 4000); // 5000ms = 5 seconds
 
-      return () => clearTimeout(timer);
-    }
-  }, [error, dispatch]);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [error, dispatch]);
 
   // sets success alert for account created
   useEffect(() => {
@@ -94,10 +96,10 @@ export default function SignUp() {
             {userCreated && (
               <AlertBar message="Sign Up Successful" status="success" />
             )}
-            {error && (
+            {/* causing an error that crashes {error && (
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               <AlertBar message={error} status="error" />
-            )}
+            )} */}
             <FormControl id="username" isInvalid={!!errors.username}>
               <FormLabel>Username</FormLabel>
               <Input
