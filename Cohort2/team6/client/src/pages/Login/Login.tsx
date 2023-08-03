@@ -23,9 +23,10 @@ import {
   resetUserError,
   loginUser,
 } from "../../redux/reducers/userReducer";
-import { User, UserState } from "../../types/User.types";
+import { User } from "../../types/User.types";
 import { useEffect, useState } from "react";
 import AlertBar from "../../components/Alert/AlertBar";
+import { AppDispatch } from "../../redux/store";
 
 type LoginForm = {
   username: string;
@@ -33,7 +34,7 @@ type LoginForm = {
 };
 
 export default function Login() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [loginSuccessful, setLoginSuccessful] = useState<boolean>(false);
   // ignore the unsafe assignment, unless you can fix it
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return
@@ -44,13 +45,10 @@ export default function Login() {
     formState: { errors },
     register,
   } = useForm<LoginForm>();
-  const onSubmit: SubmitHandler<LoginForm> = (data) => {
+  const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     try {
-      setFakeCookie();
-      // ignore error below, needs away, if you can fix the typescript error even better - Kurtis
-
       // currently setup to bypass backend communication
-      // await dispatch(loginUserAsyncThunk(data));
+      const derp = await dispatch(loginUserAsyncThunk(data));
       const jwtToken = getJwtToken();
 
       // Check if the token exists before dispatching the action
@@ -71,15 +69,6 @@ export default function Login() {
       // unreachable & don't know why. Error will be handled in redux anyways
       console.log("hi, you wont even see this console.log in the console");
     }
-  };
-
-  // handling of fake cookie for test configuration purposes
-  const setFakeCookie = () => {
-    const jwtToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imt1cnRpcyIsInV1aWQiOiI4MDA4MTM1In0.IxsDynjEBAnZXqlPIPFlPHtLfLfaaW1GbHqJDTIqSBQ";
-
-    // Set the "jwtToken" cookie with the JWT token and an expiration date (e.g., 7 days)
-    Cookies.set("jwtToken", jwtToken, { expires: 7, path: "/" });
   };
 
   const getJwtToken = () => {
