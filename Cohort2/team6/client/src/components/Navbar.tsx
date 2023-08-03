@@ -13,7 +13,6 @@ import {
   MenuItem,
   MenuDivider,
   useDisclosure,
-  useColorModeValue,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -89,21 +88,21 @@ export default function Simple() {
               {/* normal size links */}
               {(isLoggedIn ? links.loggedIn : links.notLoggedIn).map((link) => (
                 <Link
-                key={uuidv4()}
-                textAlign={"center"}
-                px={2}
-                py={1}
-                rounded={"md"}
-                _hover={{
-                  textDecoration: "none",
-                  bg: "#149a9a",
-                  textColor: "white",
-                }}
-                href={link.url}
-               
-              >
-                {link.name}
-              </Link>
+                  key={uuidv4()}
+                  textAlign={"center"}
+                  px={2}
+                  py={1}
+                  rounded={"md"}
+                  _hover={{
+                    textDecoration: "none",
+                    bg: "#149a9a",
+                    textColor: "white",
+                  }}
+                  href={link.url}
+
+                >
+                  {link.name}
+                </Link>
               ))}
             </HStack>
           </HStack>
@@ -175,7 +174,7 @@ export default function Simple() {
                     textColor: "white",
                   }}
                   href={link.url}
-                 
+
                 >
                   {link.name}
                 </Link>
