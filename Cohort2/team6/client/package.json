@@ -339,6 +339,7 @@
     "typescript": "^5.1.6",
     "yaml": "^1.10.2"
   },
+<<<<<<< HEAD
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -346,3 +347,28 @@
   "author": "",
   "license": "ISC"
 }
+=======
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^14.0.0",
+    "@types/js-cookie": "^3.0.3",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@types/react-slick": "^0.23.10",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "@vitejs/plugin-react": "^4.0.1",
+    "eslint": "^8.44.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.1",
+    "jsdom": "^22.1.0",
+    "msw": "^1.2.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.0",
+    "vitest": "^0.33.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
+  }
+}
+>>>>>>> f922995d19671eb73a4c515236de24b18550d981

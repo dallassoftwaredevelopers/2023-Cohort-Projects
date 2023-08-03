@@ -3,7 +3,6 @@ import {
   Center,
   Heading,
   Text,
-  Stack,
   useColorModeValue,
   Image,
   Flex,
@@ -16,13 +15,10 @@ import { getFormattedDate } from "../../helpers/getFormattedDate";
 import { convertTo12HourFormat } from "../../helpers/convertTo12HourTime";
 
 export default function EventCard({
-  eventId,
-  userId,
   title,
   date,
   time,
   description,
-  price,
   location,
   image_url,
 }: EventTypes) {
