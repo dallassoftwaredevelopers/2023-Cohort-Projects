@@ -108,10 +108,10 @@ export default function Login() {
             {loginSuccessful && (
               <AlertBar message="Login Successful" status="success" />
             )}
-            {error && (
+            {error?  (
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               <AlertBar message={error} status="error" />
-            )}
+            ):""}
             <FormControl id="username">
               <FormLabel>Username</FormLabel>
               <Input

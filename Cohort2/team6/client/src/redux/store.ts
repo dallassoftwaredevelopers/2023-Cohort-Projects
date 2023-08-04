@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import eventReducer from "./reducers/eventsReducer";
 import {
   persistStore,
   persistReducer,
