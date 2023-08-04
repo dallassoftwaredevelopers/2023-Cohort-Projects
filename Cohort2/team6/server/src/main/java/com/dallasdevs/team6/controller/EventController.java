@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -49,6 +50,28 @@ public class EventController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>("Error retrieving event", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/attending/{uuid}")
+    public ResponseEntity<?> getEventsAttendedByUser(@PathVariable String uuid) {
+        try {
+            List<EventEntity> events = eventDao.getEventsAttendedByUser(uuid);
+            return new ResponseEntity<>(events, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Error retrieving events", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/upcoming")
+    public ResponseEntity<?> getUpcomingEvents() {
+        try {
+            List<EventEntity> events = eventDao.getUpcomingEvents();
+            return new ResponseEntity<>(events, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Error retrieving upcoming events", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -3,7 +3,9 @@ package com.dallasdevs.team6.entity;
 import jakarta.persistence.*;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "events")
 @Entity
@@ -34,6 +36,8 @@ public class EventEntity {
     @Column(name="image_url")
     private String image_url;
 
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserEventEntity> attendees = new ArrayList<>();
 
     public EventEntity() {
     }
@@ -111,5 +115,13 @@ public class EventEntity {
 
     public void setImage_url(String image_url) {
         this.image_url = image_url;
+    }
+
+    public List<UserEventEntity> getAttendees() {
+        return attendees;
+    }
+
+    public void setAttendees(List<UserEventEntity> attendees) {
+        this.attendees = attendees;
     }
 }
