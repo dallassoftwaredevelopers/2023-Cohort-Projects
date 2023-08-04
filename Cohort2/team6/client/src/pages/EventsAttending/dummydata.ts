@@ -1,11 +1,6 @@
-import { Box, Heading } from "@chakra-ui/react";
-import Carousel from "../Home/components/Carousel/Carousel";
-import EventCardContainer from "../../components/EventCardContainer/EventCardContainer";
 import { EventTypes } from "../../types/Event.types";
 
-export const Home = () => {
-  // dummy data until redux store is setup
-  const dummyData: EventTypes[] = [
+const dummyData: EventTypes[] = [
     {
       eventId: "1",
       userId: "user1",
@@ -46,10 +41,4 @@ export const Home = () => {
     },
   ];
 
-  return (
-    <Box>
-      <Carousel />
-      <EventCardContainer dummyData={dummyData} />
-    </Box>
-  );
-};
+  export default dummyData;
