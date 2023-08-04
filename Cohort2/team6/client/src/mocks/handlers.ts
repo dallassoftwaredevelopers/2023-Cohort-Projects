@@ -10,7 +10,7 @@ export const handlers = [
       ctx.delay(1000),
       ctx.status(200),
       ctx.json({
-        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imt1cnRpcyIsInV1aWQiOiI4MDA4MTM1In0.IxsDynjEBAnZXqlPIPFlPHtLfLfaaW1GbHqJDTIqSBQ',
+       // token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNrdXJ0aXNzIiwidXVpZCI6IjgwMDgxMzU1In0.coMHzXuBk7X62w_XUTWtSVMwX6vkSXHCvtlg8oz5Peo',
         uuid: 'de1c8818-8ff1-439c-a62a-ce2e22a612af',
         username,
       }))

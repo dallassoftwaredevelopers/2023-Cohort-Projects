@@ -86,13 +86,16 @@ const userSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(loginUserAsyncThunk.fulfilled, (state) => {
+      .addCase(loginUserAsyncThunk.fulfilled, (state, action) => {
         state.loading = false;
+        state.currentUser = action.payload;
         state.error = null;
       })
       .addCase(loginUserAsyncThunk.rejected, (state, action) => {
         state.loading = false;
+        state.currentUser = null;
         state.error = action.payload as string;
+        
       });
   },
 });

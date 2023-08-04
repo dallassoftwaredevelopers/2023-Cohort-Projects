@@ -23,10 +23,10 @@ import {
   resetUserError,
   loginUser,
 } from "../../redux/reducers/userReducer";
-import { User } from "../../types/User.types";
+import { User, UserState } from "../../types/User.types";
 import { useEffect, useState } from "react";
 import AlertBar from "../../components/Alert/AlertBar";
-import { AppDispatch } from "../../redux/store";
+import { AppDispatch, RootState } from "../../redux/store";
 
 type LoginForm = {
   username: string;
@@ -38,7 +38,7 @@ export default function Login() {
   const [loginSuccessful, setLoginSuccessful] = useState<boolean>(false);
   // ignore the unsafe assignment, unless you can fix it
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return
-  //const error = useSelector((state: UserState) => state.user.error);
+  const error = useSelector((state: RootState) => state.persisted.user.error);
 
   const {
     handleSubmit,
@@ -49,28 +49,33 @@ export default function Login() {
     try {
       // currently setup to bypass backend communication
       const derp = await dispatch(loginUserAsyncThunk(data));
-      const jwtToken = getJwtToken();
-
-      // Check if the token exists before dispatching the action
-      if (jwtToken) {
-        setLoginSuccessful(true);
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-        const decodedToken = jwt_decode(jwtToken) as User;
-        // Now you can dispatch the action with the correct payload
-        dispatch(
-          loginUser({
-            username: decodedToken.username,
-            uuid: decodedToken.uuid,
-            isLoggedIn: true,
-          })
-        );
-      }
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      if(derp.response.status === 200) setLoginSuccessful(true)
+        
+      
+      
+      
+      // const jwtToken = getJwtToken();
+      // // Check if the token exists before dispatching the action
+      // if (jwtToken) {
+      //   setLoginSuccessful(true);
+      //   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+      //   const decodedToken = jwt_decode(jwtToken) as User;
+      //   // Now you can dispatch the action with the correct payload
+      //   dispatch(
+      //     loginUser({
+      //       username: decodedToken.username,
+      //       uuid: decodedToken.uuid,
+      //       isLoggedIn: true,
+      //     })
+      //   );
+      // }
     } catch (err) {
-      // unreachable & don't know why. Error will be handled in redux anyways
-      console.log("hi, you wont even see this console.log in the console");
+      console.log(error)
+      
     }
   };
-
+  // used once cookies are enabled through backend
   const getJwtToken = () => {
     const token = Cookies.get("jwtToken");
     return token;
@@ -103,10 +108,10 @@ export default function Login() {
             {loginSuccessful && (
               <AlertBar message="Login Successful" status="success" />
             )}
-            {/* {error && (
+            {error && (
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               <AlertBar message={error} status="error" />
-            )} */}
+            )}
             <FormControl id="username">
               <FormLabel>Username</FormLabel>
               <Input
