@@ -4,6 +4,15 @@ import { API_URL } from '../constants/api-constants'
 
 
 export const handlers = [
+  rest.post(`${API_URL}/register`, async (req, res, ctx) => {
+    const response = await req.json<{ username: string, password: string }>();
+    return res(
+      ctx.delay(1000),
+      ctx.status(200),
+      ctx.json({
+       message: 'user created'
+      }))
+  }),
   rest.post(`${API_URL}/login`, async (req, res, ctx) => {
     const { username } = await req.json<{ username: string, password: string }>();
     return res(

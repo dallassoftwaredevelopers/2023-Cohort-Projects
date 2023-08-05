@@ -21,6 +21,7 @@ import {
 import { UserState } from "../../types/User.types";
 import { useEffect, useState } from "react";
 import AlertBar from "../../components/Alert/AlertBar";
+import { AppDispatch, RootState } from "../../redux/store";
 type SignUpForm = {
   username: string;
   password: string;
@@ -29,12 +30,12 @@ type SignUpForm = {
 
 export default function SignUp() {
   const [userCreated, setUserCreated] = useState<boolean>(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   // ignore the unsafe assignment, unless you can fix it
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return
   
-  // causing error
-  //const error = useSelector((state: UserState) => state.user.error);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return
+  const error = useSelector((state: RootState) => state.root.user.error);
 
   const {
     handleSubmit,
@@ -43,14 +44,16 @@ export default function SignUp() {
     register,
   } = useForm<SignUpForm>();
   const onSubmit: SubmitHandler<SignUpForm> = async (data) => {
+    
     try {
-      // ignore the error below, needs await - Kurtis
-      await dispatch(registerUserAsyncThunk(data));
-      setUserCreated(true);
+      const res = await dispatch(registerUserAsyncThunk(data));
+      if (res) {
+        setUserCreated(true);
+      }
+      
     } catch (err) {
-      // unreachable, don't know why
-      console.log("hi");
-      //console.error("Registration Failed:", err);
+      console.log(err);
+      // Handle the error if needed
     }
   };
 
@@ -77,10 +80,10 @@ export default function SignUp() {
 
   // sets success alert for account created
   useEffect(() => {
-    if (userCreated) {
+    if (userCreated && !error) {
       // Set a timeout to redirect after 4 seconds
       const timeout = setTimeout(() => {
-        window.location.href = "/";
+        window.location.href = "/login";
       }, 4000);
 
       // Clear the timeout when the component is unmounted
@@ -96,10 +99,10 @@ export default function SignUp() {
             {userCreated && (
               <AlertBar message="Sign Up Successful" status="success" />
             )}
-            {/* causing an error that crashes {error && (
+            {error?  (
               // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               <AlertBar message={error} status="error" />
-            )} */}
+            ):""}
             <FormControl id="username" isInvalid={!!errors.username}>
               <FormLabel>Username</FormLabel>
               <Input

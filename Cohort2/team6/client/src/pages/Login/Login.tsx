@@ -36,9 +36,8 @@ type LoginForm = {
 export default function Login() {
   const dispatch = useDispatch<AppDispatch>();
   const [loginSuccessful, setLoginSuccessful] = useState<boolean>(false);
-  // ignore the unsafe assignment, unless you can fix it
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return
-  const error = useSelector((state: RootState) => state.persisted.user.error);
+  const error = useSelector((state: RootState) => state.root.user.error);
 
   const {
     handleSubmit,
@@ -48,9 +47,12 @@ export default function Login() {
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     try {
       // currently setup to bypass backend communication
-      const derp = await dispatch(loginUserAsyncThunk(data));
+      const res = await dispatch(loginUserAsyncThunk(data));
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      if(derp.response.status === 200) setLoginSuccessful(true)
+      if(res){
+        console.log(res)
+        setLoginSuccessful(true)
+      }
         
       
       
@@ -88,7 +90,7 @@ export default function Login() {
   }, []);
 
   useEffect(() => {
-    if (loginSuccessful) {
+    if (loginSuccessful && !error) {
       // Set a timeout to redirect after 4 seconds
       const timeout = setTimeout(() => {
         window.location.href = "/";

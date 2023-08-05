@@ -12,7 +12,7 @@ const persistConfig: PersistConfig<any> = {
   whitelist: ["user"],
 };
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   user: userReducer,
   events: evenstReducer
   // Add other reducers here if you have more
