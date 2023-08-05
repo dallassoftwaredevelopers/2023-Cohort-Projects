@@ -19,6 +19,9 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { v4 as uuidv4 } from "uuid";
 
+import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
+
 const links = {
   notLoggedIn: [
     { name: "Login", url: "/login" },
@@ -139,7 +142,9 @@ export default function Simple() {
                       textColor: "white",
                     }}
                   >
-                    Events Attending
+                    <Link as={ReactRouterLink} to="/events-attending">
+                      Events Attending
+                    </Link>
                   </MenuItem>
                   <MenuDivider />
                   <MenuItem
