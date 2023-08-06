@@ -2,6 +2,8 @@
 import axios from "axios";
 import { User } from "../types/User.types";
 import { API_URL } from "../constants/api-constants";
+import { MSW_URL } from "../constants/api-constants";
+
 
 const LOGIN_API_URL = `${API_URL}/login`;
 const REGISTER_API_URL = `${API_URL}/register`;

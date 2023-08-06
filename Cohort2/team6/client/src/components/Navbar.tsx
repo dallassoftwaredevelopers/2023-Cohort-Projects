@@ -20,7 +20,6 @@ import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { v4 as uuidv4 } from "uuid";
 
 import { Link as ReactRouterLink } from "react-router-dom";
-import { Link as ChakraLink, LinkProps } from "@chakra-ui/react";
 
 const links = {
   notLoggedIn: [
@@ -33,26 +32,11 @@ const links = {
   ],
 };
 
-const NavLink = ({ children }: { children: ReactNode }) => (
-  <Link
-    textAlign={"center"}
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: "#149a9a",
-      textColor: "white",
-    }}
-    href={"/login"}
-  >
-    {children}
-  </Link>
-);
+
 
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -111,7 +95,7 @@ export default function Simple() {
           </HStack>
           {/* hamburger menu */}
           {/* only show if logged in, will contain logout which resets state persistence store and redirect to home */}
-          {isLoggedIn && (
+          {isLoggedIn? (
             <Flex alignItems={"center"}>
               <Menu>
                 <MenuButton
@@ -160,11 +144,11 @@ export default function Simple() {
                 </MenuList>
               </Menu>
             </Flex>
-          )}
+          ): <div style={{height: '20px', width: '20px'}}></div>}
         </Flex>
         {/* hamburg menu small res */}
         {isOpen && (
-          <Box pb={4} display={{ md: "none" }}>
+          <Box pb={4} display={{ md: "none" }} >
             <Stack as={"nav"} spacing={4}>
               {(isLoggedIn ? links.loggedIn : links.notLoggedIn).map((link) => (
                 <Link
