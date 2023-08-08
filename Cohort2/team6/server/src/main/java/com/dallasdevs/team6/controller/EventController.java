@@ -25,7 +25,7 @@ public class EventController {
         this.eventMapper = eventMapper;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/create-event")
     public ResponseEntity<?> createEvent(@RequestBody CreateEventPost eventPost) {
         try {
             EventEntity eventEntity = eventMapper.postToEntity(eventPost);
@@ -53,7 +53,7 @@ public class EventController {
         }
     }
 
-    @GetMapping("/attending/{uuid}")
+    @GetMapping("/events-attending/{uuid}")
     public ResponseEntity<?> getEventsAttendedByUser(@PathVariable String uuid) {
         try {
             List<EventEntity> events = eventDao.getEventsAttendedByUser(uuid);
